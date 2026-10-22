@@ -354,8 +354,21 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   .many .stackzone{height:28px; margin-top:6px} .many .have .n{font-size:18px}
 }
 @media (max-width:520px) and (max-height:700px){
-  .weight,.who .rk{display:none}
   .stackzone{height:28px; margin-top:6px}
+}
+/* very short phones (small iPhone with browser bars): keep everything, just tighter */
+@media (max-width:520px) and (max-height:600px){
+  .console{gap:7px; padding-top:11px}
+  .who > div:first-child{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+  .who .rk{margin-top:0}
+  .weight{margin-top:-3px}
+  .mode{padding:5px 4px}
+  .big{font-size:40px}
+  .sub{margin-top:0}
+  .dial{padding:6px 4px 5px; gap:2px}
+  .face{width:min(52px,14vw)}
+  .stackzone{height:26px; margin-top:5px}
+  .slider{height:50px} .knob{width:42px; height:42px}
 }
 @media (prefers-reduced-motion: reduce){ .console.shake,.chip.pulse,.toast,.big.pop,.have.bump .n,.stk.drop,.slider .txt{animation:none} }
 </style>
