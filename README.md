@@ -101,12 +101,12 @@ The round button with the character and pouch (left of the amount) opens the rec
 
 The ledger then reads like a sentence: *Player 1 to the blacksmith for a longsword*.
 
-When the receipt is closed but something is filled in, its button shows a gold ring and a small dot.
+When the receipt is closed but something is filled in, its button shows a pale ring and a small dot.
 
 ### More for the Game Master
 
 - **Several players.** Hold a name in the tags to add or remove more players.
-- **Split or Each.** With several players chosen, *Split* divides the amount between them and *Each* gives the full amount to every one of them. What doesn't divide evenly stays in the coffers.
+- **Split or Each.** A switch next to Mixed bag. With several players chosen, *Split* divides the amount between them and *Each* gives the full amount to every one of them. What doesn't divide evenly stays in the coffers.
 - **Mixed bag.** Pays treasure out as a random mix of coin types with exactly the same value, like a real hoard. Off by default.
 - **Repeat.** After a payout, a **↻ Repeat** button appears under the empty amount. One tap sets up the same payout again.
 - **The Game Master's book.** Shown under the GM's purse and in the ledger: how much the players paid in, how much the GM paid out, and every player's current purse.
@@ -137,7 +137,7 @@ The **Ledger** tab shows the latest entries: who paid whom, what for, and how mu
 - **123** opens fields to type the amount. Handy for big treasure.
 - **Swipe** across the Pay | Receive switch (or the GM's Give | Take), or sideways across the amount, to change sides.
 
-**The round buttons.** Receipt (left top), 123 (left bottom), pencil to edit coins (right top), ✕ to clear (right bottom). A button turns bronze with a gold icon while it is open.
+**The round buttons.** Receipt (left top), 123 (left bottom), pencil to edit coins (right top), ✕ to clear (right bottom). A button glows pale silver while it is open.
 
 **Stacks.** Every coin in the purse is drawn, ten to a stack. Every full fifty goes into a small pouch with a count, so 137 silver shows two pouches (×2) and 37 loose coins. While you count an amount, coins that will leave fade out, change you get back shows as dashed coins, and the number below shows the change, for example **10 → 9**.
 
@@ -151,7 +151,7 @@ The **Ledger** tab shows the latest entries: who paid whom, what for, and how mu
 
 Under the **Party** tab:
 
-- **Who's at the table.** Rename or remove players. Leave the name empty when adding to get *Player 4*, *Player 5* and so on. Removing asks twice.
+- **Who's at the table.** Rename or remove players. Tap a character's round picture to give them an icon (warrior, wizard, thief, sword, dragon…) and a colour; the letter stays the default. Leave the name empty when adding to get *Player 4*, *Player 5* and so on. Removing asks twice.
 - **+ Add a party purse.** See [The party purse](#6-the-party-purse).
 - **Starting purse.** What new players start with. Set everything to 0 for empty purses. **Give everyone the starting purse** sets every player's purse to it (asks twice, and can be undone).
 - **Name of the NPC tag.** Change "NPC" to something that fits your world, for example *The Realm* or *Merchants*.
@@ -160,12 +160,11 @@ Under the **Party** tab:
 
 Under the **Customize** tab, or the pencil next to the amount:
 
-**Coins.** Up to six coin types. For each coin: name, short name (used in amounts like *6g 2s*), colour, shape (round, holed, square, triangle, hexagon, diamond) and worth. The cheapest coin is the base and is always worth 1. Every other coin is worth a whole number of base coins, so uneven systems like 12 pence to the shilling work too. Removing a coin (tap × twice), or resetting to gold, silver and copper, changes everyone's coins at their value, so nobody gets richer or poorer.
+**Coins.** Up to six coin types. For each coin: name, short name (used in amounts like *6g 2s*), colour, shape (round, holed, square, triangle, hexagon, diamond), face (its letters, a number, or an emblem like a crown, dragon, eagle or fleur-de-lis) and worth. The cheapest coin is the base and is always worth 1. Enter every other coin's worth in any cheaper coin, for example a platinum worth *20 Gold* (the base coin is the default). It has to come out as a whole number of base coins, so uneven systems like 12 pence to the shilling work too. The worth is kept in base coins, so if you later change gold's worth, the platinum keeps its value in copper. Removing a coin (tap × twice), or resetting to gold, silver and copper, changes everyone's coins at their value, so nobody gets richer or poorer.
 
-**Wealth & weight.**
+**Purse weight** (on by default, under Coins). Weight, description and belt bar. Set grams or ounces per coin and when the belt is full.
 
-- **Wealth title** (on by default). A ladder of titles from *Penniless* to *Wealthy*. Rename the steps and set the amounts to fit your campaign.
-- **Purse weight** (on by default). Weight, description and belt bar. Set grams or ounces per coin and when the belt is full.
+**Wealth.** The wealth title (on by default): a ladder of titles from *Penniless* to *Wealthy*. Rename the steps and set the amounts to fit your campaign.
 
 **Deeds** (off by default). Six small achievements per character, such as *First Purchase* or *Dragon's Hoard*, each with its own lute tune.
 

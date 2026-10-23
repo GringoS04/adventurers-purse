@@ -61,7 +61,6 @@ button{cursor:pointer}
 /* ---------- Header & party ---------- */
 header{display:flex; align-items:center; justify-content:space-between; gap:10px}
 h1{font-family:var(--f-display); font-weight:700; font-size:28px; margin:0; line-height:1}
-h1 span{color:var(--brass)}
 .logo{line-height:0; display:flex; align-items:center; gap:6px}
 .logo .pi{height:34px; width:auto}   /* the pouch from the app icon, beside the wordmark */
 .logo img{height:30px; width:auto; display:block; filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
@@ -73,6 +72,9 @@ h1 span{color:var(--brass)}
 .chip{display:flex; align-items:center; gap:8px; padding:5px 14px 5px 5px; border-radius:999px; border:1px solid var(--line); background:var(--table-2)}
 .chip .av,.recip .av,.prow .av{border-radius:50%; display:grid; place-items:center; font-family:var(--f-display); font-weight:800; background:var(--leather-2); color:var(--brass)}
 .chip .av{width:32px; height:32px; font-size:19px}
+.party{align-items:center}
+/* the GM: a thin divider before them in the character row */
+.pdiv{flex:none; width:1px; align-self:stretch; margin:6px 2px; background:linear-gradient(180deg,transparent,rgba(255,220,170,.28),transparent)}
 .chip .nm{font-weight:700}
 .chip[aria-current="true"]{border-color:var(--brass); background:#2c2016}
 .chip.gm .av,.prow.gm .av{background:#2a2a36; color:#c8c6ff}
@@ -135,7 +137,6 @@ h1 span{color:var(--brass)}
 .who .gmmodes .mode{display:flex; align-items:center; justify-content:center; padding:0 16px; font-size:15.5px}
 @media (max-width:400px){ .who .gmmodes .mode{padding:0 11px; font-size:14.5px; letter-spacing:.03em} }
 .who{flex-wrap:nowrap; align-items:stretch} .who > div:first-child{min-width:0} .who .nm{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.ptab{overflow-wrap:break-word; hyphens:auto} html[lang=de] .ptab{letter-spacing:0; font-size:12.5px; padding-left:0; padding-right:0}
 .modes{display:grid; grid-template-columns:repeat(2,1fr); border-radius:14px; padding:4px; gap:4px; background:rgba(0,0,0,.35)}
 .mode{background:none; border:0; padding:11px 4px; border-radius:11px; font-family:var(--f-sc); font-weight:700; letter-spacing:.08em; color:var(--muted); font-size:16px}
 .mode[aria-selected="true"]{background:var(--leather-2); color:var(--ink); box-shadow:inset 0 0 0 1px rgba(255,220,170,.14)}
@@ -207,6 +208,10 @@ h1 span{color:var(--brass)}
 .face::before{content:""; position:absolute; inset:0; border-radius:var(--rad,50%); clip-path:var(--clip,none); -webkit-mask:var(--mask,none); mask:var(--mask,none);
   background:radial-gradient(circle at 35% 30%, var(--hi), var(--base) 48%, var(--lo));
   box-shadow:inset 0 0 0 4px var(--edge), inset 0 0 0 7px rgba(255,255,255,.18)}
+.face .emb{position:relative; width:56%; height:56%; transform:translateY(var(--ty,0)); opacity:var(--lt,1); fill:var(--lc,rgba(40,20,5,.55)); filter:drop-shadow(0 1px 0 var(--ls,rgba(255,255,255,.35)))}
+.bc{display:inline-grid; place-items:center} .bc .emb{width:66%; height:66%; fill:var(--lc,rgba(40,20,5,.55)); opacity:var(--lt,1)}
+.mc{display:grid; place-items:center} .mc .emb{width:68%; height:68%; fill:var(--lc,rgba(40,20,5,.6)); opacity:var(--lt,1)}
+.crow .opt .fnumin{flex:0 0 64px; width:64px; text-align:center}
 .face b{position:relative; transform:translateY(var(--ty,0)); opacity:var(--lt,1); font-family:var(--f-display); font-weight:800; font-size:clamp(26px,8vw,36px); color:var(--lc,rgba(40,20,5,.55)); text-shadow:0 1px 0 var(--ls,rgba(255,255,255,.35))}
 .dial.tap .face{transform:translateY(4px) scale(.96)}
 .sel{position:absolute; top:-6px; right:-10px; min-width:34px; height:34px; padding:0 8px; border-radius:999px; display:grid; place-items:center;
@@ -234,6 +239,7 @@ h1 span{color:var(--brass)}
 .many .dial{padding:10px 6px 8px; gap:4px}
 .many .face{width:min(60px,16vw)}
 .many .face b{font-size:clamp(20px,6vw,26px)}
+.face b.l3{font-size:clamp(19px,5.6vw,26px)} .many .face b.l3{font-size:clamp(15px,4.5vw,20px)}
 .many .stackzone{height:38px; margin-top:9px}
 .many .have .n{font-size:clamp(22px,6.5vw,28px)}
 .gesture-hint{text-align:center; font-size:13px; color:var(--faint); margin:-4px 0 0}
@@ -254,13 +260,16 @@ h1 span{color:var(--brass)}
 .mixsw{flex:none; display:inline-flex; align-items:center; gap:8px; margin-left:auto; border:1.5px solid rgba(255,220,170,.12); border-radius:999px; padding:5px 12px 5px 6px; background:rgba(0,0,0,.28); color:var(--muted); font-size:14px}
 .mixsw .knobx{width:30px; height:18px; border-radius:99px; background:rgba(255,220,170,.15); position:relative; transition:background .15s}
 .mixsw .knobx::after{content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%; background:var(--muted); transition:transform .15s, background .15s}
-.mixsw[aria-checked="true"]{color:var(--ink); border-color:var(--brass)}
+.mixsw[aria-checked="true"]{color:var(--ink)}
 .mixsw[aria-checked="true"] .knobx{background:var(--brass)}
 .mixsw[aria-checked="true"] .knobx::after{transform:translateX(12px); background:var(--brass-ink)}
 .holdhint{align-self:center; font-size:12px; color:var(--faint); font-style:italic}
-.eachsw{flex:none; display:inline-flex; border:1.5px solid rgba(255,220,170,.12); border-radius:999px; padding:2px; background:rgba(0,0,0,.28)}
-.eachsw button{border:0; background:none; color:var(--muted); border-radius:999px; padding:4px 12px; font-family:var(--f-sc); font-weight:700; letter-spacing:.06em; font-size:13px}
-.eachsw button[aria-pressed="true"]{background:var(--brass); color:var(--brass-ink)}
+/* Split | Each: a two-sided switch in the same style as Mixed bag; both sides are valid, so the track stays neutral and the chosen word lights up */
+.eachtog{flex:none; display:inline-flex; align-items:center; gap:8px; border:1.5px solid rgba(255,220,170,.12); border-radius:999px; padding:5px 12px; background:rgba(0,0,0,.28); color:var(--muted); font-size:14px}
+.eachtog .lb{transition:color .15s} .eachtog .lb.on{color:var(--ink); font-weight:700}
+.eachtog .knobx{width:30px; height:18px; border-radius:99px; background:rgba(255,220,170,.15); position:relative}
+.eachtog .knobx::after{content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%; background:var(--sel,#ecdfc6); transition:transform .15s}
+.eachtog[aria-checked="true"] .knobx::after{transform:translateX(12px)}
 .recip.pot .av,.chip.pot .av,.prow.pot .av{background:#3a2a10; color:var(--gold); font-family:var(--f-body); font-weight:700}
 .recip.party .av{background:var(--brass); color:var(--brass-ink); font-family:var(--f-body); font-weight:700}
 
@@ -285,13 +294,14 @@ h1 span{color:var(--brass)}
 .tname .field{font-family:var(--f-body); letter-spacing:0; font-size:16px; padding:10px 12px}
 .backup{margin:0; font-size:14px; color:var(--ink)} .backup.due{color:var(--brass)}
 /* a small dot on the Save & load tab while there are payments that aren't in a backup yet */
-.ptab{position:relative} .ptab.due::after{content:""; position:absolute; top:7px; left:calc(50% + 10px); width:7px; height:7px; border-radius:50%; background:var(--brass); box-shadow:0 0 0 2px var(--table-2)}
+.ptab.due::after{content:""; position:absolute; top:7px; left:calc(50% + 10px); width:7px; height:7px; border-radius:50%; background:var(--brass); box-shadow:0 0 0 2px var(--table-2)}
 .ptab .ti{width:17px; height:17px; flex:none; opacity:.85} .ptab[aria-selected="true"] .ti{opacity:1; color:var(--brass)}
 .foot{display:flex; flex-direction:column; align-items:center; gap:6px; padding:18px 8px 8px; font-size:12.5px; color:var(--faint,#7d6a58); text-align:center}
 .foot .frow{display:flex; flex-wrap:wrap; justify-content:center; gap:4px 14px}
 .foot a{color:var(--muted); text-decoration:none; border-bottom:1px solid rgba(255,220,170,.2)} .foot a:hover{color:var(--ink)}
 .ptabs{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; padding:4px; background:var(--table-2); border:1px solid var(--line); border-radius:14px}
-.ptab{display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:0; border-radius:10px; padding:7px 2px 8px; font-family:var(--f-sc); font-weight:700; letter-spacing:.02em; font-size:12.5px; line-height:1.15; color:var(--muted)}
+.ptab{position:relative; display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:0; border-radius:10px; padding:7px 2px 8px; font-family:var(--f-sc); font-weight:700; letter-spacing:.02em; font-size:12.5px; line-height:1.15; color:var(--muted); overflow-wrap:break-word; hyphens:auto}
+html[lang=de] .ptab{letter-spacing:0; font-size:12.5px; padding-left:0; padding-right:0}
 .ptab[aria-selected="true"]{background:var(--leather-2); color:var(--ink); box-shadow:inset 0 0 0 1px rgba(255,220,170,.14)}
 .panel{background:var(--table-2); border:1px solid var(--line); border-radius:16px; padding:12px 16px; margin-top:-6px}
 /* GM's book */
@@ -365,6 +375,18 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
 /* party rows */
 .prow{display:grid; grid-template-columns:32px minmax(0,1fr) auto; gap:8px; align-items:center}
 .prow .av{width:32px; height:32px; font-size:19px}
+.av svg{width:66%; height:66%; fill:currentColor; display:block}
+.recip[aria-pressed="true"] .av svg{display:none}
+.prow .avbtn{border:0; padding:0; cursor:pointer; box-shadow:0 0 0 1px rgba(255,220,170,.18)} .prow .avbtn[aria-expanded="true"]{box-shadow:0 0 0 2px var(--brass)}
+.avpick{grid-column:1 / -1; background:var(--well); border:1px solid var(--line); border-radius:12px; padding:10px 10px 12px; display:flex; flex-direction:column; gap:7px; margin:2px 0 6px}
+.ap-l{font-family:var(--f-sc); font-size:11px; letter-spacing:.12em; color:var(--muted)}
+.ap-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(38px,1fr)); gap:6px}
+.ap-grid button{aspect-ratio:1; border-radius:50%; border:1px solid var(--line); background:var(--leather-2); color:var(--brass); display:grid; place-items:center; padding:0; font-family:var(--f-display); font-weight:800; font-size:17px}
+.ap-grid button svg{width:62%; height:62%; fill:currentColor}
+.ap-grid button[aria-pressed="true"]{border-color:var(--brass); box-shadow:0 0 0 2px var(--brass)}
+.ap-cols{display:flex; flex-wrap:wrap; gap:8px}
+.ap-cols button{width:30px; height:30px; border-radius:50%; border:1px solid rgba(255,220,170,.25); padding:0}
+.ap-cols button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--table-2), 0 0 0 4px var(--brass)}
 .prow .keep{font-size:12px; color:var(--faint); padding:0 6px}
 /* coin rows */
 .crow{display:grid; grid-template-columns:28px minmax(0,1fr) 64px 34px; grid-template-areas:"ic name tag x" "ic opt opt opt"; gap:6px; align-items:center; padding:8px 0; border-top:1px solid var(--rule)}
@@ -374,6 +396,8 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
 .crow .opt select{flex:1 1 110px}
 .crow .val{display:flex; align-items:center; gap:4px; font-size:13px; color:var(--muted); flex:1 1 120px; min-width:0}
 .crow .val input{text-align:right}
+.crow .worthv{flex:1 1 100%; flex-wrap:wrap} .crow .worthv input{flex:0 0 76px; width:76px} .crow .worthv select{flex:0 1 auto; width:auto; min-width:0}
+.crow .worthv .eq{font-size:12.5px; color:var(--faint); white-space:nowrap}
 .crow .base{font-size:13px; color:var(--muted); flex:1 1 120px; text-align:right}
 .x{width:34px; height:34px; border-radius:8px; border:1px solid var(--line); background:var(--well); color:var(--muted)}
 .rmwarn{grid-column:1 / -1; margin:2px 0 0; font-size:13px; color:var(--bad)}
@@ -399,7 +423,6 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   padding:0 max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))}
 .toast{background:#0f0a08; border:1px solid var(--line-2); border-radius:12px; padding:10px 16px; box-shadow:0 10px 30px rgba(0,0,0,.5); max-width:440px; animation:tin .3s ease both; display:flex; align-items:center; gap:12px}
 .toast button{pointer-events:auto; border:1px solid var(--brass); background:transparent; color:var(--brass); border-radius:999px; padding:4px 12px; font-weight:700}
-.toast.err{border-color:var(--bad)}
 .toast.ach{border-color:var(--brass); background:linear-gradient(180deg,#2c2016,#140e0b); display:block}
 .toast.ach b{font-family:var(--f-display); font-size:19px; color:var(--brass); display:block; font-weight:800}
 .fly{position:fixed; left:0; top:0; width:26px; height:26px; z-index:40; pointer-events:none; border-radius:var(--rad,50%); clip-path:var(--clip,none); -webkit-mask:var(--mask,none); mask:var(--mask,none);
@@ -461,17 +484,16 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   .slider{height:60px} .knob{width:50px; height:50px} .slider .txt{padding-left:64px; font-size:16px}
   .is-gm .who .rk{display:none}
   .recips.multi{gap:5px} .gmrow{gap:5px} .recip{padding:2px 9px 2px 2px; font-size:13.5px} .recip .av{width:22px; height:22px; font-size:13px}
-  .eachsw button{padding:3px 10px} .mixsw{padding:3px 10px 3px 4px; font-size:13px}
+  .eachtog{padding:3px 10px; font-size:13px} .mixsw{padding:3px 10px 3px 4px; font-size:13px}
 }
 @media (prefers-reduced-motion: reduce){ .console.shake,.chip.pulse,.toast,.big.pop,.have.bump .n,.stk.drop,.slider .txt{animation:none} }
-@media (max-width:360px){ .ptab{font-size:11.5px; letter-spacing:0} html[lang=de] .ptab{font-size:11px} .who .gmmodes .mode{padding:0 9px; font-size:13.5px} .gmrow.how{flex-wrap:nowrap; gap:4px} .eachsw button{padding:3px 8px; font-size:12px; letter-spacing:.03em} .mixsw{padding:3px 8px 3px 4px; font-size:12.5px; gap:5px} .mixsw .knobx{width:26px} .slider .txt{padding-right:10px} }
+@media (max-width:360px){ .ptab{font-size:11.5px; letter-spacing:0} html[lang=de] .ptab{font-size:11px} .who .gmmodes .mode{padding:0 9px; font-size:13.5px} .gmrow.how{flex-wrap:nowrap; gap:4px} .eachtog{padding:3px 8px; font-size:12.5px; gap:5px} .eachtog .knobx{width:26px} .eachtog[aria-checked="true"] .knobx::after{transform:translateX(8px)} .mixsw{padding:3px 8px 3px 4px; font-size:12.5px; gap:5px} .mixsw .knobx{width:26px} .slider .txt{padding-right:10px} }
 /* iPhones zoom into any field with text under 16px: keep the small fields at 16px on touch screens */
 @supports (-webkit-touch-callout:none){ .note,.field,.code{font-size:16px!important} }
 @media (pointer:coarse){ .note,.field,.code{font-size:16px!important} }
-/* ===== Calm palette: gold for the payment (slide knob, Pay | Receive, who gets it), primary buttons, the round buttons,
-   the settings, the weight icon, the logo and deeds.
-   "Selected" is pale parchment, small accents are muted bronze. Metal colours otherwise mean coins.
-   Remove the class "calm" on <html> to go back to the all-gold look. ===== */
+/* ===== Palette, layered over the base colours (the class "calm" is always on and gives these rules priority):
+   gold for the payment itself (slide knob, Pay | Receive, who gets it), primary buttons, the settings, the weight icon,
+   the logo and deeds; pale parchment for selected things; muted bronze for small accents. ===== */
 html.calm{--sel:#ecdfc6; --sel-glow:rgba(236,223,198,.28); --sel-soft:rgba(236,223,198,.12); --acc:#c4956c; --acc-bg:#5e4130; --acc-ink:#f3dfc4}
 html.calm :focus-visible{outline-color:var(--sel)}
 html.calm .icon-btn[aria-pressed="true"]{color:var(--acc)}
@@ -483,10 +505,8 @@ html.calm .repeat{border-color:var(--acc); background:rgba(196,149,108,.10); col
 html.calm .quick button[aria-pressed="true"]{background:var(--sel-soft); color:var(--ink); border-color:var(--sel); font-weight:700}
 html.calm .recip.party .av{background:var(--acc-bg); color:var(--acc-ink)}
 html.calm .recip[aria-pressed="true"]:not(.npc) .av{background:var(--brass); color:var(--brass-ink)}
-html.calm .mixsw[aria-checked="true"]{border-color:var(--sel)}
 html.calm .mixsw[aria-checked="true"] .knobx{background:var(--sel)}
 html.calm .mixsw[aria-checked="true"] .knobx::after{background:#2a1d14}
-html.calm .eachsw button[aria-pressed="true"]{background:var(--sel); color:#2a1d14}
 html.calm .rbtn[aria-expanded="true"]{background:linear-gradient(180deg,#4a382c,#33251c); color:var(--sel); border-color:var(--sel); box-shadow:0 0 10px var(--sel-glow)}
 html.calm .noteBtn.has:not([aria-expanded="true"]){border-color:var(--sel); color:var(--sel)}
 html.calm .noteBtn.has:not([aria-expanded="true"])::after{background:var(--sel)}
@@ -614,6 +634,7 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
       </div>
       <div class="row"><button class="btn" id="addPot" type="button">+ Add a party purse</button></div>
       <p class="note-s">Leave the name empty to get "Player 4", "Player 5" and so on. You can also rename a character by tapping their name on the purse.</p>
+      <p class="note-s">Tap a picture to give the character an icon and a colour.</p>
       <h4>Starting purse</h4>
       <div class="startp" id="startFields"></div>
       <p class="note-s" id="startNote"></p>
@@ -628,7 +649,7 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
   <section class="panel" id="customPanel" role="tabpanel" hidden>
     <div class="settings">
       <details class="sgroup">
-        <summary><span class="st">Coins</span><span class="ss">Add, remove or edit coins · <span id="coinSummary"></span></span></summary>
+        <summary><span class="st">Coins</span><span class="ss">Add, remove or edit coins, purse weight · <span id="coinSummary"></span></span></summary>
         <div class="sbody">
           <div id="coinRows"></div>
           <p class="err-s" id="csErr"></p>
@@ -637,13 +658,20 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
             <button class="btn" id="resetCoins" type="button">Reset to Gold, Silver &amp; Copper</button>
           </div>
           <p class="warn-s" id="coinWarn" hidden>Back to Gold, Silver and Copper with their standard worth, weight, colour and shape. Everyone's coins are changed into the new coins at their value, so nobody gets richer or poorer. <b>Tap the button again to reset.</b></p>
-          <p class="note-s">Pick a colour and a shape for each coin. The cheapest coin is the base and is always worth 1. Every other coin is worth a whole number of base coins, so uneven systems like 12 pence to the shilling work too.</p>
+          <p class="note-s">Pick a colour and a shape for each coin. The cheapest coin is the base and is always worth 1. Enter the worth of every other coin in any cheaper coin, for example a platinum worth 20 gold. It has to come out as a whole number of base coins, so uneven systems like 12 pence to the shilling work too.</p>
+          <label class="tg" style="margin-top:12px"><input id="wShow" type="checkbox"> Purse weight <span>weight, status and belt bar</span></label>
+          <div class="sub-opts" id="weightOpts">
+            <div class="row">
+              <select class="field" id="wUnit" style="width:auto"><option value="metric">Grams &amp; kilos</option><option value="imperial">Ounces &amp; pounds</option></select>
+              <label class="row" style="gap:6px; color:var(--muted)">Belt is full at <input class="field" id="wMax" type="number" inputmode="decimal" min="0.1" step="0.5" style="width:80px"> <span id="wMaxU">kg</span></label>
+            </div>
+            <p class="note-s">Each coin's weight is set above. The bar fills up to the "full" weight, and the descriptions scale with it.</p>
+          </div>
         </div>
       </details>
 
-
       <details class="sgroup">
-        <summary><span class="st">Wealth &amp; weight</span><span class="ss">Wealth titles and purse weight for each character</span></summary>
+        <summary><span class="st">Wealth</span><span class="ss">Wealth titles for each character</span></summary>
         <div class="sbody">
           <label class="tg"><input id="tOn" type="checkbox"> Wealth title <span>like "Comfortable" or "Wealthy"</span></label>
           <div class="sub-opts" id="ladderOpts">
@@ -653,14 +681,6 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
               <button class="btn" type="button" id="resetSteps">Back to the default ladder</button>
             </div>
             <p class="note-s" id="ladderNote">A character gets the title of the highest step their total worth reaches. Set the amounts to fit your campaign's economy.</p>
-          </div>
-          <label class="tg" style="margin-top:6px"><input id="wShow" type="checkbox"> Purse weight <span>weight, status and belt bar</span></label>
-          <div class="sub-opts" id="weightOpts">
-            <div class="row">
-              <select class="field" id="wUnit" style="width:auto"><option value="metric">Grams &amp; kilos</option><option value="imperial">Ounces &amp; pounds</option></select>
-              <label class="row" style="gap:6px; color:var(--muted)">Belt is full at <input class="field" id="wMax" type="number" inputmode="decimal" min="0.1" step="0.5" style="width:80px"> <span id="wMaxU">kg</span></label>
-            </div>
-            <p class="note-s">Each coin's weight is set under Coins. The bar fills up to the "full" weight, and the descriptions scale with it.</p>
           </div>
         </div>
       </details>
@@ -710,8 +730,8 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
 <script>
 (() => {
 'use strict';
-const VERSION='0.2.4';   /* shown in the footer; matches CHANGELOG.md */
-document.documentElement.classList.add('calm');   /* calm palette; remove this line for the all-gold look */
+const VERSION='0.2.16';   /* shown in the footer; matches CHANGELOG.md */
+document.documentElement.classList.add('calm');   /* the palette layer, see the CSS */
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -721,7 +741,7 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
       tx('Slide to pay {amt}',{amt}) fills the {placeholders}.
    ===================================================================== */
 const LANGS={en:'English',de:'Deutsch'}, LKEY='lootpal-lang';
-let LANG=(()=>{ try{ const l=localStorage.getItem(LKEY)||localStorage.getItem('questpouch-lang'); if(LANGS[l]) return l; }catch(e){} return /^de\b/i.test(navigator.language||'')?'de':'en'; })();
+let LANG=(()=>{ try{ const l=localStorage.getItem(LKEY); if(LANGS[l]) return l; }catch(e){} return /^de\b/i.test(navigator.language||'')?'de':'en'; })();
 const DICT={de:{
 /* names the app gives */
 'Player {n}':'Spieler {n}', 'Game Master':'Spielleitung', 'Party purse':'Gruppenkasse', 'NPC':'NSC',
@@ -744,11 +764,9 @@ const DICT={de:{
 'Penniless':'Mittellos', 'Scraping by':'Knapp bei Kasse', 'Modest':'Bescheiden', 'Comfortable':'Gut versorgt', 'Prosperous':'Wohlhabend', 'Wealthy':'Reich', 'New title':'Neuer Titel',
 'Keeper of the Coffers':'Hütet die Schatzkammer', 'Shared by the party':'Gemeinsame Kasse', 'Unlimited':'Unbegrenzt', 'nothing':'nichts',
 /* purse */
-'Choose character':'Figur wählen', 'Tap to rename':'Tippen zum Umbenennen', 'Character name':'Name der Figur', 'Total worth':'Gesamtwert',
-'Give or take':'Geben oder nehmen', 'Give':'Geben', 'Take':'Nehmen', 'What happens':'Was passiert', 'Pay':'Zahlen', 'Receive':'Erhalten',
+'Choose character':'Figur wählen', 'Tap to rename':'Tippen zum Umbenennen', 'Character name':'Name der Figur', 'Give or take':'Geben oder nehmen', 'Give':'Geben', 'Take':'Nehmen', 'What happens':'Was passiert', 'Pay':'Zahlen', 'Receive':'Erhalten',
 'Coins weigh something. Copper is the heaviest to carry around.':'Münzen wiegen etwas. Kupfer ist am schwersten zu tragen.',
-'Type the amount':'Betrag eintippen', "Add what it's for and to whom":'Eintragen, wofür und an wen', "Add what it's for and to whom, for the ledger":'Eintragen, wofür und an wen, fürs Kassenbuch',
-'Edit or add coins':'Münzen bearbeiten oder hinzufügen', 'Clear amount':'Betrag löschen', 'Done':'Fertig', 'Slide to confirm':'Zum Bestätigen schieben',
+'Type the amount':'Betrag eintippen', 'Edit or add coins':'Münzen bearbeiten oder hinzufügen', 'Clear amount':'Betrag löschen', 'Done':'Fertig', 'Slide to confirm':'Zum Bestätigen schieben',
 'Tap a coin to add one. Drag up or down to wind the amount.':'Tippe auf eine Münze, um eine dazuzulegen. Zieh nach oben oder unten, um den Betrag zu drehen.',
 '+ Add':'+ Neu', 'Each pouch holds {n} coins':'Jeder Beutel fasst {n} Münzen', '{coin}: tap to add one, arrow keys to change':'{coin}: tippen für eine mehr, Pfeiltasten zum Ändern',
 "That's all {name} has":'Mehr hat {name} nicht',
@@ -764,8 +782,7 @@ const DICT={de:{
 '{name} keeps {amt}':'{name} behält {amt}', '{n} × {amt} · {sum} in all':'{n} × {amt} · {sum} insgesamt', 'Each of {n} pays {amt}':'{n} Personen zahlen je {amt}',
 'Paid out as a mixed bag of coins':'Wird als bunte Mischung ausgezahlt', 'Straight from the coffers, no change needed':'Direkt aus der Schatzkammer, ohne Wechselgeld',
 'Each of {n} gets {amt}':'{n} Personen bekommen je {amt}', ' · {amt} stays in the coffers':' · {amt} bleibt übrig', ' · mixed bag':' · bunte Mischung',
-' · {amt} stays in the purse':' · {amt} bleibt im Beutel', 'Too little to share among {n}':'Zu wenig, um es unter {n} aufzuteilen', '÷ Share out everything among {n}':'÷ Alles unter {n} aufteilen',
-'How much comes in?':'Wie viel kommt herein?', 'Worth {amt} in all':'Insgesamt {amt} wert',
+' · {amt} stays in the purse':' · {amt} bleibt im Beutel', 'Too little to share among {n}':'Zu wenig, um es unter {n} aufzuteilen', 'How much comes in?':'Wie viel kommt herein?', 'Worth {amt} in all':'Insgesamt {amt} wert',
 'Breaks a {coin} coin · {amt} change':'Eine Münze {coin} wird gewechselt · {amt} zurück', 'Exact coin · {amt} left':'Passend · {amt} übrig',
 '↻ Repeat: {x}':'↻ Wiederholen: {x}', 'the party':'der Gruppe', '{n} players':'{n} Spielern',
 'give {amt} to {who}':'{who} {amt} geben', 'give {amt} each to {who}':'{who} je {amt} geben', 'take {amt} from {who}':'{who} {amt} abnehmen', 'take {amt} each from {who}':'{who} je {amt} abnehmen',
@@ -796,7 +813,6 @@ const DICT={de:{
 /* bottom tabs */
 'More':'Mehr', 'Party':'Gruppe', 'Customize':'Anpassen', 'Save & load':'Speichern', 'Ledger':'Kassenbuch',
 /* save & load */
-'The purse saves itself in this browser, but browsers can forget. Make a backup after each session.':'Der Beutel speichert sich in diesem Browser, aber Browser können vergessen. Mach nach jeder Sitzung eine Sicherung.',
 'Save code':'Speichercode', 'Include the ledger':'Kassenbuch mitnehmen', 'makes the code longer':'macht den Code länger', 'Make a save code':'Speichercode erstellen', 'Copy':'Kopieren',
 'Your save code':'Dein Speichercode', 'Paste a save code here to load it':'Speichercode hier einfügen, um ihn zu laden', 'Paste a save code':'Speichercode einfügen', 'Load this code':'Diesen Code laden',
 'Save file':'Speicherdatei', 'Save to a file':'In eine Datei speichern', 'Load a file':'Datei laden', '{n} characters':'{n} Zeichen',
@@ -818,7 +834,6 @@ const DICT={de:{
 'Name of the NPC tag':'Name des NSC-Knopfs',
 'Only changes the label on the tag players pay to by default, for example "The Realm" or "Merchants". It doesn\'t change how payments work, and past ledger entries keep the name they had.':'Ändert nur die Beschriftung des Knopfs, an den Spieler standardmäßig zahlen, zum Beispiel „Das Reich“ oder „Händler“. Am Bezahlen ändert sich nichts, und alte Einträge im Kassenbuch behalten ihren Namen.',
 'Start a new table':'Neuen Tisch beginnen', 'Tap again to start over':'Nochmal tippen zum Neubeginn', 'A new table is ready.':'Ein neuer Tisch ist bereit.', 'A fresh table with Player 1–3, the standard coins and an empty ledger. Make a save code first if you might want this table back.':'Ein frischer Tisch mit Spieler 1–3, den Standardmünzen und leerem Kassenbuch. Mach vorher einen Speichercode, falls du diesen Tisch noch brauchst.',
-'Starts over with Player 1–3, the standard coins and an empty ledger.':'Beginnt neu mit Spieler 1–3, den Standardmünzen und einem leeren Kassenbuch.',
 'Name of {name}':'Name von {name}', 'Always here':'Immer dabei', 'Remove':'Entfernen', 'Tap again to remove':'Nochmal tippen zum Entfernen',
 'Party purse added. It gets no share of "Whole party" payouts and no starting purse.':'Gruppenkasse hinzugefügt. Sie bekommt keinen Anteil an Auszahlungen an die „Ganze Gruppe“ und keinen Startbeutel.',
 '{name} leaves the party. Their entries stay in the ledger.':'{name} verlässt die Gruppe. Die Einträge bleiben im Kassenbuch.',
@@ -826,23 +841,23 @@ const DICT={de:{
 'Starting {name}':'Start: {name}', 'New players start with {amt}. Set everything to 0 for empty purses.':'Neue Figuren beginnen mit {amt}. Setz alles auf 0 für leere Beutel.',
 'New players start with an empty purse.':'Neue Figuren beginnen mit leerem Beutel.', 'Starting purse for everyone':'Startbeutel für alle', 'Every player now holds {amt}.':'Jetzt hat jede Figur {amt}.',
 /* customize: coins */
-'Coins':'Münzen', 'Add, remove or edit coins ·':'Münzen hinzufügen, entfernen oder bearbeiten ·', '+ Add a coin':'+ Münze hinzufügen', '+ Add a coin ({n} is the maximum)':'+ Münze hinzufügen (höchstens {n})',
+'Coins':'Münzen', 'Add, remove or edit coins, purse weight ·':'Münzen hinzufügen, entfernen oder bearbeiten, Beutelgewicht ·', '+ Add a coin':'+ Münze hinzufügen', '+ Add a coin ({n} is the maximum)':'+ Münze hinzufügen (höchstens {n})',
 'Reset to Gold, Silver & Copper':'Zurück zu Gold, Silber & Kupfer', 'Tap again to reset the coins':'Nochmal tippen, um die Münzen zurückzusetzen',
 "Back to Gold, Silver and Copper with their standard worth, weight, colour and shape. Everyone's coins are changed into the new coins at their value, so nobody gets richer or poorer.":'Zurück zu Gold, Silber und Kupfer mit Standardwert, -gewicht, -farbe und -form. Alle Münzen werden zum vollen Wert umgetauscht, niemand wird reicher oder ärmer.',
 'Tap the button again to reset.':'Tippe noch einmal auf den Knopf zum Zurücksetzen.',
-'Pick a colour and a shape for each coin. The cheapest coin is the base and is always worth 1. Every other coin is worth a whole number of base coins, so uneven systems like 12 pence to the shilling work too.':'Wähle Farbe und Form für jede Münze. Die billigste Münze ist die Grundmünze und immer 1 wert. Jede andere Münze ist eine ganze Zahl Grundmünzen wert, also gehen auch krumme Systeme wie 12 Pfennig auf den Schilling.',
+'Pick a colour and a shape for each coin. The cheapest coin is the base and is always worth 1. Enter the worth of every other coin in any cheaper coin, for example a platinum worth 20 gold. It has to come out as a whole number of base coins, so uneven systems like 12 pence to the shilling work too.':'Wähle Farbe und Form für jede Münze. Die billigste Münze ist die Grundmünze und immer 1 wert. Den Wert jeder anderen Münze gibst du in einer beliebigen billigeren Münze an, zum Beispiel Platin im Wert von 20 Gold. Er muss eine ganze Zahl Grundmünzen ergeben, also gehen auch krumme Systeme wie 12 Pfennig auf den Schilling.',
 'Tap to change colour':'Tippen, um die Farbe zu ändern', 'Change colour, now {c}':'Farbe ändern, jetzt {c}', 'Coin name':'Münzname', 'Name':'Name', 'Short name':'Kürzel', 'Short':'Kürzel',
 'Remove {name}':'{name} entfernen', 'Colour':'Farbe', 'Shape':'Form', 'Weighs':'Wiegt', 'Weight of one {name}':'Gewicht einer Münze {name}',
-'Base coin · worth 1':'Grundmünze · Wert 1', 'Worth':'Wert', 'Worth in {name}':'Wert in {name}',
+'Base coin · worth 1':'Grundmünze · Wert 1', 'Worth':'Wert', 'Worth in {name}':'Wert in {name}', 'Count the worth in':'Wert angeben in', 'The worth has to come out as a whole number of {name}. Try counting it in {name}.':'Der Wert muss eine ganze Zahl {name} ergeben. Gib ihn am besten in {name} an.',
 'Each coin needs its own worth of at least 2 base coins.':'Jede Münze braucht einen eigenen Wert von mindestens 2 Grundmünzen.',
 'Coins reset to Gold, Silver and Copper. Everyone kept their wealth.':'Münzen auf Gold, Silber und Kupfer zurückgesetzt. Alle haben ihren Reichtum behalten.',
 /* customize: wealth & weight */
-'Wealth & weight':'Reichtum & Gewicht', 'Wealth titles and purse weight for each character':'Reichtumstitel und Beutelgewicht für jede Figur',
+'Wealth titles for each character':'Reichtumstitel für jede Figur',
 'Wealth title':'Reichtumstitel', 'like "Comfortable" or "Wealthy"':'wie „Gut versorgt“ oder „Reich“', '+ Add a step':'+ Stufe hinzufügen', 'Back to the default ladder':'Zurück zur Standardleiter',
 "A character gets the title of the highest step their total worth reaches. Set the amounts to fit your campaign's economy.":'Eine Figur bekommt den Titel der höchsten Stufe, die ihr Gesamtwert erreicht. Passe die Beträge an die Wirtschaft deiner Kampagne an.',
 'Title':'Titel', 'from':'ab', 'nothing at all':'gar nichts', 'Starts at':'Beginnt bei', 'Coin':'Münze', 'Remove step':'Stufe entfernen',
 'Purse weight':'Beutelgewicht', 'weight, status and belt bar':'Gewicht, Zustand und Gürtelbalken', 'Grams & kilos':'Gramm & Kilo', 'Ounces & pounds':'Unzen & Pfund', 'Belt is full at':'Gürtel ist voll bei',
-'Each coin\'s weight is set under Coins. The bar fills up to the "full" weight, and the descriptions scale with it.':'Das Gewicht jeder Münze stellst du unter Münzen ein. Der Balken füllt sich bis zum „vollen“ Gewicht, die Beschreibungen passen sich daran an.',
+'Each coin\'s weight is set above. The bar fills up to the "full" weight, and the descriptions scale with it.':'Das Gewicht jeder Münze stellst du oben ein. Der Balken füllt sich bis zum „vollen“ Gewicht, die Beschreibungen passen sich daran an.',
 /* customize: deeds and sound */
 'Deeds':'Taten', 'Small achievements players can earn':'Kleine Erfolge, die Spieler verdienen können', 'Award deeds':'Taten vergeben', 'like First Purchase or Pack Mule':'wie Erster Kauf oder Packesel',
 "When on, each character can earn six deeds once, shown in the ledger with a lute tune. Deeds already earned are kept if you switch it off again.":'Wenn an, kann jede Figur sechs Taten je einmal verdienen, angezeigt im Kassenbuch mit einer Lautenmelodie. Verdiente Taten bleiben erhalten, wenn du es wieder ausschaltest.',
@@ -853,7 +868,12 @@ const DICT={de:{
 /* language */
 'Who and what for':'Wer und wofür', 'Who and what for, for the ledger':'Wer und wofür, fürs Kassenbuch', 'Which NPC?':'Welcher NSC?',
 '{npc} unless you pick someone':'{npc}, wenn du niemanden wählst', 'Split in party ({n})':'In der Gruppe teilen ({n})',
-'Language':'Sprache', 'By Mapventures · Grímur Fjeldsted · 2026':'Von Mapventures · Grímur Fjeldsted · 2026', 'early alpha':'frühe Alpha', "What's new":'Neuigkeiten', 'just now':'gerade eben', 'Table name':'Name des Tisches', 'e.g. Curse of the Crimson Crown':'z. B. Der Fluch der Purpurkrone', 'No backup yet':'Noch keine Sicherung', 'Last backup: {when}':'Letzte Sicherung: {when}', ' · 1 payment since':' · seitdem 1 Buchung', ' · {n} payments since':' · seitdem {n} Buchungen',
+'Language':'Sprache', 'Picture':'Bild', 'Letter':'Buchstabe', 'Change picture of {name}':'Bild von {name} ändern', 'Tap a picture to give the character an icon and a colour.':'Tippe auf ein Bild, um der Figur ein Symbol und eine Farbe zu geben.',
+'Warrior':'Krieger', 'Wizard':'Magier', 'Cleric':'Kleriker', 'Priest':'Priester', 'Thief':'Dieb', 'Ranger':'Waldläufer', 'Bard':'Barde', 'Druid':'Druide', 'Barbarian':'Barbar', 'Alchemist':'Alchemist',
+'Sword':'Schwert', 'Dagger':'Dolch', 'Bow':'Bogen', 'Staff':'Stab', 'Spear':'Speer', 'War hammer':'Kriegshammer',
+'Leather':'Leder', 'Ember':'Glut', 'Forest':'Wald', 'Teal':'Petrol', 'Navy':'Marine', 'Violet':'Violett', 'Slate':'Schiefer', 'Bone':'Knochen', 'Onyx':'Onyx', 'Face':'Prägung', 'Number':'Zahl', 'Letters':'Buchstaben', 'Number on the coin':'Zahl auf der Münze',
+'Crown':'Krone', 'Star':'Stern', 'Sun':'Sonne', 'Moon':'Mond', 'Heads (profile)':'Kopf (Profil)', 'Tails (wreath)':'Rückseite (Kranz)', 'Dragon':'Drache', 'Eagle':'Adler', 'Lion':'Löwe',
+'Tower':'Turm', 'Shield':'Schild', 'Crossed swords':'Gekreuzte Schwerter', 'Key':'Schlüssel', 'Anchor':'Anker', 'Ship':'Schiff', 'Tree':'Baum', 'Wheat':'Weizen', 'Fleur-de-lis':'Lilie', 'Skull':'Totenkopf', 'Anvil':'Amboss', 'Double axe':'Doppelaxt', 'By Mapventures · Grímur Fjeldsted · 2026':'Von Mapventures · Grímur Fjeldsted · 2026', 'early alpha':'frühe Alpha', "What's new":'Neuigkeiten', 'just now':'gerade eben', 'Table name':'Name des Tisches', 'e.g. Curse of the Crimson Crown':'z. B. Der Fluch der Purpurkrone', 'No backup yet':'Noch keine Sicherung', 'Last backup: {when}':'Letzte Sicherung: {when}', ' · 1 payment since':' · seitdem 1 Buchung', ' · {n} payments since':' · seitdem {n} Buchungen',
 'A save holds the whole table: players, purses, coins, settings and the ledger. LootPal saves itself in this browser, but browsers can forget, so make a backup after each session.':'Eine Sicherung enthält den ganzen Tisch: Spieler, Beutel, Münzen, Einstellungen und das Kassenbuch. LootPal speichert sich in diesem Browser, aber Browser können vergessen. Mach deshalb nach jeder Sitzung eine Sicherung.',
 'This replaces the current table with {table}: {names}, {c} coin types, {l} ledger entries.':'Das ersetzt den aktuellen Tisch durch {table}: {names}, {c} Münzarten, {l} Einträge im Kassenbuch.', 'Tap again to remove {name}':'Nochmal tippen, um {name} zu entfernen', "Tap × again to remove {name}. Everyone's {name} is changed into the other coins at its value.":'Tippe noch einmal auf ×, um {name} zu entfernen. Alle {name}-Münzen werden zum vollen Wert in die anderen Münzen getauscht.', 'Wealth':'Reichtum', 'Weight':'Gewicht', 'Status':'Status',
 'Names LootPal gave, like "Player 1" or "Gold", change with the language. Names you chose stay as they are.':'Namen, die LootPal vergeben hat, wie „Spieler 1“ oder „Gold“, wechseln mit der Sprache. Selbst gewählte Namen bleiben, wie sie sind.'
@@ -892,6 +912,69 @@ const SHAPES={
   hexagon: {label:'Hexagon',  css:'--rad:0;--clip:polygon(25% 4%,75% 4%,99% 50%,75% 96%,25% 96%,1% 50%);--mask:none;--ty:0;--lt:1'},
   diamond: {label:'Diamond',  css:'--rad:0;--clip:polygon(50% 1%,99% 50%,50% 99%,1% 50%);--mask:none;--ty:0;--lt:1'}
 };
+/* coin faces: simple embossed emblems, 24×24, one colour. Labels are English keys (translated with tx). */
+const EMBLEMS={
+  crown:  {label:'Crown',   d:'M3.5 17.5 2.5 7.5l5 4.2L12 4.5l4.5 7.2 5-4.2-1 10zM3.5 19h17v2.2h-17z'},
+  star:   {label:'Star',    d:'M12 2.2l2.9 6.4 7 .7-5.2 4.7 1.5 6.9L12 17.4 5.8 20.9l1.5-6.9L2.1 9.3l7-.7z'},
+  sun:    {label:'Sun',     d:'M12 7.2a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6zM11 1.5h2l-.3 3.6h-1.4zM11 22.5h2l-.3-3.6h-1.4zM1.5 13v-2l3.6.3v1.4zM22.5 13v-2l-3.6.3v1.4zM4.2 5.6l1.4-1.4 2.4 2.7-1 1zM19.8 18.4l-1.4 1.4-2.4-2.7 1-1zM5.6 19.8l-1.4-1.4 2.7-2.4 1 1zM18.4 4.2l1.4 1.4-2.7 2.4-1-1z'},
+  moon:   {label:'Moon',    d:'M15.5 2.6A9.6 9.6 0 1 0 21.4 17 8 8 0 0 1 15.5 2.6z'},
+  heads:  {label:'Heads (profile)', d:'M13.6 2.5c-3.6 0-6.4 2.7-6.4 6.3 0 .9.2 1.7.4 2.4L6 14l1.8.5-.4 1.3 1 .5-.1 1.4c.1 1 .9 1.6 1.9 1.5l1.7-.3.5 2.6h7.4v-3.2c1.3-1.4 2-3.3 2-5.5V9.2c0-3.9-2.9-6.7-7-6.7zM15 8.2c.5 0 .9.4.9.9s-.4.9-.9.9-.9-.4-.9-.9.4-.9.9-.9z'},
+  tails:  {label:'Tails (wreath)', d:'M12 20.6c-4.9 0-8.6-3.8-8.6-8.6 0-2.4.9-4.6 2.5-6.2l1.1 1.1A7.2 7.2 0 0 0 4.9 12c0 4 3.2 7.1 7.1 7.1S19.1 16 19.1 12c0-1.9-.8-3.7-2.1-5.1l1.1-1.1a8.6 8.6 0 0 1 2.5 6.2c0 4.8-3.7 8.6-8.6 8.6zM5.2 9.8c1 .1 1.9.8 2.1 1.8-1-.1-1.9-.8-2.1-1.8zM4.9 13.4c1-.3 2.1.1 2.6 1-1 .3-2.1-.1-2.6-1zM6.3 16.6c.9-.5 2.1-.4 2.8.4-.9.5-2.1.4-2.8-.4zM18.8 9.8c-1 .1-1.9.8-2.1 1.8 1-.1 1.9-.8 2.1-1.8zM19.1 13.4c-1-.3-2.1.1-2.6 1 1 .3 2.1-.1 2.6-1zM17.7 16.6c-.9-.5-2.1-.4-2.8.4.9.5 2.1.4 2.8-.4zM6.6 6.6c.8.6 1.1 1.7.7 2.6-.8-.6-1.1-1.7-.7-2.6zM17.4 6.6c-.8.6-1.1 1.7-.7 2.6.8-.6 1.1-1.7.7-2.6z'},
+  dragon: {label:'Dragon', d:'M4 20.5 6 14.2c-1-2.1-.6-4.6 1.2-6.2L4.4 1.8l5.2 4.8c1-.4 2-.6 3-.5l2.6-4.6.2 5.1c2.2.8 4 2.6 5.2 5l1.6.8-1.4 1-2.4-.2 2.2 2-3.2.4c-1.2 0-2.2-.4-3-1l-1.8 2.6 1.2 2.8zM15.4 8.4a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM6.5 16.5l-1.8.6.6-1.6zM5.6 19l-1.8.4.8-1.5z'},
+  eagle:  {label:'Eagle',   d:'M12 3.6c1.1 0 1.8.9 1.7 1.9l-.4 2.4 8.2-3.1-2.9 4 2.9.1-3.3 3.1h-3.6l-.9 1.9 2.3 4.8h-2.3l-1.1-2.3-.6 4.1h-.1l-.6-4.1-1.1 2.3H7.9l2.3-4.8-.9-1.9H5.7L2.4 8.9l2.9-.1-2.9-4 8.2 3.1-.4-2.4c-.1-1 .6-1.9 1.8-1.9z'},
+  lion:   {label:'Lion',    d:'M12 2.4c1.4 1.1 3.3.6 4.4 2 .9 1.1 2.6 1.2 3.2 2.9.5 1.4 1.9 2.3 1.6 4-.2 1.3.6 2.8-.4 4-1 1.2-1 2.9-2.5 3.6-1.3.6-2.1 2.1-3.7 2.1-1 0-1.8.7-2.6.7s-1.6-.7-2.6-.7c-1.6 0-2.4-1.5-3.7-2.1-1.5-.7-1.5-2.4-2.5-3.6-1-1.2-.2-2.7-.4-4-.3-1.7 1.1-2.6 1.6-4 .6-1.7 2.3-1.8 3.2-2.9 1.1-1.4 3-.9 4.4-2zM9.3 10.6a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm5.4 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM10.6 15h2.8L12 16.6z'},
+  tower:  {label:'Tower',   d:'M5 21V9.5h1.8V6.2h2.4v1.9h1.6V6.2h2.4v1.9h1.6V6.2h2.4v3.3H19V21h-4.8v-4.2a2.2 2.2 0 0 0-4.4 0V21zM11 10.5h2v2.6h-2z'},
+  shield: {label:'Shield',  d:'M12 2l8.2 3.1v5.8c0 5.2-3.5 9.2-8.2 11.1C7.3 20.1 3.8 16.1 3.8 10.9V5.1zm0 2.3v15.3c3.4-1.7 5.9-4.9 5.9-8.7V6.6z'},
+  swords: {label:'Crossed swords', d:'M4.2 2.8 12 10.6l7.8-7.8 2 .1.1 2-7.8 7.8 2.4 2.4 1.3-1.3 1.4 1.4-1.3 1.3 2.6 2.6-1.4 1.4-2.6-2.6-1.3 1.3-1.4-1.4 1.3-1.3L12 14.4l-2.4 2.4 1.3 1.3-1.4 1.4-1.3-1.3-2.6 2.6-1.4-1.4 2.6-2.6-1.3-1.3 1.4-1.4 1.3 1.3 2.4-2.4-7.8-7.8.1-2z'},
+  key:    {label:'Key',     d:'M7.5 3a4.5 4.5 0 0 1 4.3 5.9l9.7 9.7v2.9h-3v-1.7h-1.7v-1.7h-1.7l-5.3-5.3A4.5 4.5 0 1 1 7.5 3zm-.6 2.6a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z'},
+  anchor: {label:'Anchor',  d:'M12 2a2.6 2.6 0 0 1 1 5v1.9h3.4v2H13v8.2c2.9-.4 5.1-2.4 5.6-5.1l-1.9.4 2.9-3.9 2.2 4.3-1.7-.5c-.7 4.2-4 7.2-8.1 7.2s-7.4-3-8.1-7.2l-1.7.5 2.2-4.3 2.9 3.9-1.9-.4c.5 2.7 2.7 4.7 5.6 5.1v-8.2H7.6v-2H11V7a2.6 2.6 0 0 1 1-5zm0 1.7a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8z'},
+  ship:   {label:'Ship',    d:'M11 2.5h1.4v1.6l6.2 7.4h-6.2v1.8h8.8l-2.7 5.4c-1.1.6-2.4.7-3.6.3-1.1-.4-2.3-.4-3.4 0s-2.4.4-3.4 0-2.3-.4-3.4 0c-.5.2-1 .3-1.5.3L2.1 13.3H11V11.5H6.4L11 4.2zM2 20.2c1.2 0 2.3-.6 3.4-.6s2.3.6 3.4.6 2.3-.6 3.4-.6 2.3.6 3.4.6 2.3-.6 3.4-.6 2 .5 3 .6v1.6c-1.1-.1-2-.6-3-.6s-2.3.6-3.4.6-2.3-.6-3.4-.6-2.3.6-3.4.6-2.3-.6-3.4-.6S3.2 21.8 2 21.8z'},
+  tree:   {label:'Tree',    d:'M12 2c2.4 0 4.3 1.7 4.7 4 2 .4 3.5 2.2 3.5 4.3 0 2.4-2 4.4-4.4 4.4h-2.6V19l3 1.8v1.4H7.8v-1.4l3-1.8v-4.3H8.2c-2.4 0-4.4-2-4.4-4.4 0-2.1 1.5-3.9 3.5-4.3.4-2.3 2.3-4 4.7-4z'},
+  wheat:  {label:'Wheat',   d:'M11.3 22V8.4h1.4V22zM12 2.2c1 1.1 1.2 2.6.6 3.9h-1.2c-.6-1.3-.4-2.8.6-3.9zM11.3 9.6c-1.6.1-3-.8-3.6-2.3 1.6-.1 3 .8 3.6 2.3zm1.4 0c.6-1.5 2-2.4 3.6-2.3-.6 1.5-2 2.4-3.6 2.3zM11.3 13.2c-1.6.1-3-.8-3.6-2.3 1.6-.1 3 .8 3.6 2.3zm1.4 0c.6-1.5 2-2.4 3.6-2.3-.6 1.5-2 2.4-3.6 2.3zM11.3 16.8c-1.6.1-3-.8-3.6-2.3 1.6-.1 3 .8 3.6 2.3zm1.4 0c.6-1.5 2-2.4 3.6-2.3-.6 1.5-2 2.4-3.6 2.3z'},
+  lily: {label:'Fleur-de-lis', d:'M12 2c-1.8 2-2.4 4.8-1.4 7.6L11 12H9.2c.4-2-.6-4-2.6-4.4S3 8.8 3 10.6c0 2 1.8 3.2 3.6 2.8-1-.4-1.4-1.2-1.2-2 .4-1.2 2-1.4 2.6-.2.3.6.4 1.2.3 1.8h3.1l-.2 1.2h2.4l-.2-1.2h3.1c-.1-.6 0-1.2.3-1.8.6-1.2 2.2-1 2.6.2.2.8-.2 1.6-1.2 2 1.8.4 3.6-.8 3.6-2.8 0-1.8-1.6-3.4-3.6-3-2 .4-3 2.4-2.6 4.4H13l.4-2.4c1-2.8.4-5.6-1.4-7.6zM7.5 14.6h9v1.6h-9zM10.6 16.6h2.8l1.2 4.6H9.4z'},
+  skull:  {label:'Skull',   d:'M12 2.5c4.6 0 8 3.2 8 7.6 0 2.6-1.2 4.4-2.8 5.4V19h-2.1v-1.7h-1.6V19h-3v-1.7H8.9V19H6.8v-3.5C5.2 14.5 4 12.7 4 10.1c0-4.4 3.4-7.6 8-7.6zM8.6 9.2a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zm6.8 0a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zM12 13.4l-1.2 2h2.4z'},
+  hammer: {label:'Anvil', d:'M2.5 8h13.5c.4 2.4 2.4 3.6 5.5 3.6v1.3c-2.7 0-4.1 1-4.4 2.4H14l.9 3h2.6V20H6.5v-1.7h2.6l.9-3H8.2C4.8 15.3 2.5 12.6 2.5 8z'},
+  axe: {label:'Double axe', d:'M11.2 2h1.6v20h-1.6zM12.8 4.5c3.6-.2 6.6 2 7.7 5.5-1.1 3.4-4.1 5.6-7.7 5.4zM11.2 4.5C7.6 4.3 4.6 6.5 3.5 10c1.1 3.4 4.1 5.6 7.7 5.4z'}
+};
+/* what is struck on a coin: its letters (default), a number, or an emblem */
+function faceHTML(c,mini){ const f=c.face||'letters';
+  if(EMBLEMS[f]) return `<svg class="emb" viewBox="0 0 24 24" aria-hidden="true"><path d="${EMBLEMS[f].d}" fill-rule="evenodd"/></svg>`;
+  if(mini) return '';
+  if(f==='number'){ const n=String(c.faceNum||'1').slice(0,3); return `<b class="fnum${n.length>2?' l3':''}">${esc(n)}</b>`; }
+  return `<b>${esc(String(c.tag||c.id).slice(0,2).toUpperCase())}</b>`; }
+/* character pictures: classes and weapons (24×24, one colour), plus some coin emblems. Letters stay the default. */
+const AVICONS={
+  warrior:   {label:'Warrior',   d:'M12 2C7.6 2 4.5 5.4 4.5 9.8V20l3.5 2h8l3.5-2V9.8C19.5 5.4 16.4 2 12 2zM7 11h10v2.2h-3.8V20h-2.4v-6.8H7z'},
+  wizard:    {label:'Wizard',    d:'M12 1.5l3.8 10.5c3 .5 5.7 1.5 6.7 2.8-1.6 2-6.2 3.2-10.5 3.2S3.1 16.8 1.5 14.8c1-1.3 3.7-2.3 6.7-2.8zM11 6.4l.6 1.4 1.5.1-1.2 1 .4 1.5-1.3-.8-1.3.8.4-1.5-1.2-1 1.5-.1z'},
+  cleric:    {label:'Cleric',    d:'M12 1.5l2 2.3 3 .3-.3 3L19 9.1l-2.3 2 .3 3-3-.3-2 2.3-2-2.3-3 .3.3-3L5 9.1l2.3-2-.3-3 3-.3zM11 16.6h2V23h-2z'},
+  priest:    {label:'Priest',    d:'M3 4.5c2.8-.6 5.9-.3 8.2 1.3V20c-2.3-1.5-5.4-1.8-8.2-1.2zM21 4.5c-2.8-.6-5.9-.3-8.2 1.3V20c2.3-1.5 5.4-1.8 8.2-1.2z'},
+  thief:     {label:'Thief',     d:'M12 2c-4.6 0-8 4.2-8 9.6V22h16V11.6C20 6.2 16.6 2 12 2zm0 5.5c-2.6 0-4.4 2.5-4.4 5.6 0 1.8.6 3.4 1.6 4.4h5.6c1-1 1.6-2.6 1.6-4.4 0-3.1-1.8-5.6-4.4-5.6zM9.4 12.4h2v1.1h-2zm3.2 0h2v1.1h-2z'},
+  ranger:    {label:'Ranger',    d:'M6 2.5c5.4 2.3 8.6 5.9 9.6 9.5-1 3.6-4.2 7.2-9.6 9.5l-.6-1.4c4.3-1.9 7-4.8 8-8.1-1-3.3-3.7-6.2-8-8.1zM6.3 3.8h1.1v16.4H6.3zM2.5 11.4h3.6v1.2H2.5zm5.1 0h10.2l-1.5-1.9h1.8l2.7 2.5-2.7 2.5h-1.8l1.5-1.9H7.6z'},
+  bard:      {label:'Bard',      d:'M15.5 2.5l2 2-1 1 1.5 1.5-1 1-1.5-1.5L12 10.2c.6 1 .7 2.2.3 3.4-.5 1.2-1.6 1.9-2.8 2.1-.2 1.2-.8 2.3-1.8 3.1-2 1.6-4.9 1.3-6.4-.7s-1-4.9 1-6.4c.9-.7 2-1 3-.9.3-1.3 1.1-2.4 2.3-2.9 1.1-.4 2.3-.3 3.3.3l3.5-3.6-1.5-1.5 1-1 1.5 1.5zM7.6 13.4a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2z'},
+  druid:     {label:'Druid',     d:'M20.5 3.5C12 3.5 5 7.5 5 15c0 1.3.3 2.4.8 3.4L3.5 21l1.2 1 2.3-2.4c1 .6 2.2.9 3.5.9 7.5 0 10-8.5 10-17zM7.4 17.4l8.4-8.6.9.9-8.4 8.6z'},
+  barbarian: {label:'Barbarian', d:'M12 7c-3.9 0-7 3-7 7v6h3v-4h8v4h3v-6c0-4-3.1-7-7-7zM2 3c0 4 1.4 6.6 3.8 7.9l1-1.6C5 8.4 3.8 6.2 4 3zm20 0c0 4-1.4 6.6-3.8 7.9l-1-1.6C19 8.4 20.2 6.2 20 3z'},
+  alchemist: {label:'Alchemist', d:'M9 2h6v1.6h-1v4.3c3 1.1 5 3.9 5 7.1 0 4.1-3.4 7-7 7s-7-2.9-7-7c0-3.2 2-6 5-7.1V3.6H9z'},
+  sword:     {label:'Sword',     d:'M12 1l1.4 2v12.2h-2.8V3zM7 15.8h10v1.8H7zM11.1 18.4h1.8v2.6h-1.8zM12 21.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z'},
+  dagger:    {label:'Dagger',    d:'M12 4l1.6 2.2v8.6h-3.2V6.2zM7.5 15.6h9v1.8h-9zM11.1 18.2h1.8v2.6h-1.8zM12 21a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z'},
+  bow:       {label:'Bow',       d:'M5 2c7.2 2.4 11.4 6 11.4 10S12.2 19.6 5 22l-.5-1.5C10.9 18.3 14.6 15.2 14.6 12S10.9 5.7 4.5 3.5zM5.6 3.6h1.1v16.8H5.6z'},
+  staff:     {label:'Staff',     d:'M11.2 8.6h1.6V23h-1.6zM12 1a3.6 3.6 0 1 1 0 7.2A3.6 3.6 0 0 1 12 1z'},
+  spear:     {label:'Spear',     d:'M12 1l2.4 5.5-1.6 1.2V23h-1.6V7.7L9.6 6.5z'},
+  warhammer: {label:'War hammer', d:'M11.2 9h1.6v14h-1.6zM4.5 2.5h15v6h-15z'}
+};
+/* coin emblems that also make good pictures */
+const AV_FROM_COINS=['crown','star','moon','skull','dragon','eagle','lion','shield','swords','key','anchor','tree','lily'];
+/* background colours; the picture or letter takes the light/dark colour that reads best on it */
+const AVCOLORS={
+  leather:{bg:'#4b2f20',fg:'#e3b33f'}, crimson:{bg:'#7d2323',fg:'#ffd9cc'}, ember:{bg:'#b5541c',fg:'#fff0dc'}, gold:{bg:'#c9952c',fg:'#2a1a08'},
+  forest:{bg:'#2f5d3a',fg:'#e3f2d8'}, teal:{bg:'#1f5f61',fg:'#d9f3f0'}, navy:{bg:'#23396b',fg:'#dfe8ff'}, violet:{bg:'#5b3a7a',fg:'#efe0ff'},
+  slate:{bg:'#4a5560',fg:'#eef2f5'}, bone:{bg:'#e7dcc4',fg:'#3a2a1a'}, onyx:{bg:'#141414',fg:'#e9dcc4'}
+};
+const avPath=k=>(AVICONS[k]||EMBLEMS[k]||{}).d;
+/* the inside of a character's round picture: an icon, or the letter/number as before */
+function avInner(c){ const d=c.avIcon&&c.avIcon!=='letter'?avPath(c.avIcon):null;
+  return d?`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${d}" fill-rule="evenodd"/></svg>`:esc(initialOf(c)); }
+function avStyle(c){ const k=AVCOLORS[c.avColor]; return k?` style="background:${k.bg};color:${k.fg}"`:''; }
+const avSpan=(c,cls='av')=>`<span class="${cls}"${avStyle(c)}>${avInner(c)}</span>`;
 const ACH={
   first:{n:'First Purchase', d:'Spent your first coin.',                     h:'Pay an NPC anything'},
   open: {n:'Open Hand',      d:'Paid a companion.',                          h:'Pay another player'},
@@ -1150,7 +1233,7 @@ function checkPurse(ch){ if(ch.gm) return;
 let amt=blank(), recip=null;          /* the amount being counted, and who gets it (null = NPC) */
 let lastHave={};
 function renderParty(){
-  $('party').innerHTML=S.chars.map(c=>`<button class="chip${c.gm?' gm':''}${c.pot?' pot':''}" data-id="${c.id}" aria-current="${c.id===S.active}"><span class="av">${esc(initialOf(c))}</span><span class="nm">${esc(c.name)}</span></button>`).join('')
+  $('party').innerHTML=S.chars.map(c=>`${c.gm?'<span class="pdiv" aria-hidden="true"></span>':''}<button class="chip${c.gm?' gm':''}${c.pot?' pot':''}" data-id="${c.id}" aria-current="${c.id===S.active}">${avSpan(c)}<span class="nm">${esc(c.name)}</span></button>`).join('')
     +`<button class="chip add" id="addChip" type="button">${tx('+ Add')}</button>`; }
 function renderHeader(){
   const c=cur();
@@ -1180,7 +1263,7 @@ function renderDials(bump){
   if(!$('dials').children.length){
     $('dials').innerHTML=D.map(d=>`<button class="dial d-${d}" data-d="${d}" aria-label="${esc(tx('{coin}: tap to add one, arrow keys to change',{coin:COINS[d].name}))}">
       <span class="arrows" aria-hidden="true">▲<br>▼</span>
-      <span class="face"><b>${esc(tagOf(d).slice(0,2).toUpperCase())}</b><span class="sel" id="sel-${d}"></span></span>
+      <span class="face">${faceHTML(COINS[d])}<span class="sel" id="sel-${d}"></span></span>
       <span class="stackzone" id="stk-${d}"></span>
       <span class="have" id="have-${d}"><span class="n" id="n-${d}">0</span><span class="to" id="to-${d}"></span></span>
       <span class="lbl">${esc(COINS[d].name)}</span></button>`).join(''); }
@@ -1200,7 +1283,7 @@ function flashCap(){ const sub=$('sub'), c=cur(); sub.textContent=tx("That's all
 function renderReadout(pop){
   const cost=total(amt), big=$('big'), c=cur(), sub=$('sub');
   big.classList.toggle('zero',!cost);
-  big.innerHTML=cost ? D.filter(d=>amt[d]).map(d=>`<span class="amt-part">${amt[d]}<span class="bc d-${d}" role="img" aria-label="${esc(COINS[d].name)}"></span></span>`).join('') : '0';
+  big.innerHTML=cost ? D.filter(d=>amt[d]).map(d=>`<span class="amt-part">${amt[d]}<span class="bc d-${d}" role="img" aria-label="${esc(COINS[d].name)}">${faceHTML(COINS[d],true)}</span></span>`).join('') : '0';
   if(pop&&!reduce){ big.classList.remove('pop'); void big.offsetWidth; big.classList.add('pop'); }
   $('clearBtn').hidden=!cost; syncUndoQuick();
   sub.classList.remove('bad');
@@ -1250,7 +1333,8 @@ function renderMode(){
   const others=S.chars.filter(c=>c.id!==S.active&&!c.gm);
   const canSplit=cur().pot&&players().length>1;
   if(!G&&recip&&!(recip==='split'&&canSplit)&&!others.find(o=>o.id===recip)) recip=null;
-  const tag=(to,cls,av,label,on)=>`<button class="recip${cls}" type="button" data-to="${to}" aria-pressed="${on}"><span class="av">${av}</span>${label}</button>`;
+  /* av: a character (their picture) or plain text; a chosen tag shows a check instead */
+  const tag=(to,cls,av,label,on)=>`<button class="recip${cls}" type="button" data-to="${to}" aria-pressed="${on}">${typeof av==="object"?(on?`<span class="av">${avInner(av)}</span>`:avSpan(av)):`<span class="av">${av}</span>`}${label}</button>`;
   $('recips').classList.toggle('multi',!!G);
   if(G){
     /* whole party (default), or one character; holding a name adds or removes more (rare) */
@@ -1258,16 +1342,16 @@ function renderMode(){
     /* row 1: who gets it. row 2: how it is paid out */
     const pl=others.filter(o=>!o.pot), pt=others.find(o=>o.pot);
     $('recips').innerHTML=`<div class="gmrow">${(pl.length>1?tag('party',' party','÷',tx('Whole party ({n})',{n:pl.length}),whole):'')
-      +pl.map(o=>tag(o.id,'',esc(initialOf(o)),esc(o.name),!whole&&ch.has(o.id))).join('')
+      +pl.map(o=>tag(o.id,'',o,esc(o.name),!whole&&ch.has(o.id))).join('')
       +(pt?tag(pt.id,' pot','¤',esc(pt.name),!whole&&ch.has(pt.id)):'')}</div>
-      <div class="gmrow how">${many?`<span class="eachsw" role="group" aria-label="${tx('With several players')}"><button type="button" data-each="0" aria-pressed="${!gmEach}">${tx('Split')}</button><button type="button" data-each="1" aria-pressed="${gmEach}">${tx('Each')}</button></span>`
+      <div class="gmrow how">${many?`<button type="button" class="eachtog" data-eachtog role="switch" aria-checked="${gmEach}" aria-label="${tx('With several players')}: ${tx(gmEach?'Each':'Split')}"><span class="lb${gmEach?'':' on'}">${tx('Split')}</span><span class="knobx" aria-hidden="true"></span><span class="lb${gmEach?' on':''}">${tx('Each')}</span></button>`
         :(gmSel&&gmSel.size===1&&others.length>2?`<span class="holdhint">${tx('Hold a name to add more')}</span>`:'')}
       ${gmTake?'':`<button type="button" class="mixsw" data-mix role="switch" aria-checked="${!!S.gmMixed}" title="${tx('Pay out a random mix of coins with the same value')}"><span class="knobx" aria-hidden="true"></span>${tx('Mixed bag')}</button>`}</div>`;
     return; }
   /* players choose who gets it inside the receipt panel: NPC by default, or a companion */
   $('toTags').innerHTML=tag('',' npc',esc(npc()[0]||'N'),esc(npc()),!recip)
     +(canSplit?tag('split',' party','÷',esc(tx('Split in party ({n})',{n:players().length})),recip==='split'):'')
-    +others.map(o=>tag(o.id,o.pot?' pot':'',esc(initialOf(o)),esc(o.name),o.id===recip)).join(''); }
+    +others.map(o=>tag(o.id,o.pot?' pot':'',o,esc(o.name),o.id===recip)).join(''); }
 function renderSlider(){
   if(typeof syncNote==='function') syncNote();
   const cost=total(amt), c=cur(), M=mode();
@@ -1559,8 +1643,7 @@ $('toTags').addEventListener('click',e=>{ const b=e.target.closest('[data-to]');
   });
 $('recips').addEventListener('click',e=>{
   if(e.target.closest('[data-mix]')){ heldTag=false; S.gmMixed=!S.gmMixed; save(); S.gmMixed?chink(D[D.length-1]):tick(); renderMode(); renderReadout(false); renderSlider(); return; }
-  const sw=e.target.closest('[data-each]');
-  if(sw){ gmEach=sw.dataset.each==='1'; tick(); renderMode(); renderReadout(false); renderSlider(); return; }
+  if(e.target.closest('[data-eachtog]')){ heldTag=false; gmEach=!gmEach; tick(); renderMode(); renderReadout(false); renderSlider(); return; }
   const b=e.target.closest('[data-to]'); if(!b) return;
   if(cur().gm){
     if(heldTag){ heldTag=false; return; }          /* a long press already handled this tap */
@@ -1589,9 +1672,16 @@ function rename(id,name){
   c.name=name; save(); return true; }
 function renderPartyRows(){
   $('addPot').hidden=!!pot();
-  $('partyRows').innerHTML=S.chars.map(c=>`<div class="prow${c.gm?' gm':''}${c.pot?' pot':''}" data-id="${c.id}"><span class="av">${esc(initialOf(c))}</span>
+  $('partyRows').innerHTML=S.chars.map(c=>`<div class="prow${c.gm?' gm':''}${c.pot?' pot':''}" data-id="${c.id}"><button type="button" class="av avbtn" data-avpick="${c.id}" aria-expanded="${openAv===c.id}" aria-label="${esc(tx('Change picture of {name}',{name:c.name}))}"${avStyle(c)}>${avInner(c)}</button>
     <input class="field" data-pname value="${esc(c.name)}" maxlength="24" aria-label="${esc(tx('Name of {name}',{name:c.name}))}">
-    ${c.gm?`<span class="keep">${tx('Always here')}</span>`:`<button class="btn" type="button" data-prm="${c.id}">${tx('Remove')}</button>`}</div>`).join(''); }
+    ${c.gm?`<span class="keep">${tx('Always here')}</span>`:`<button class="btn" type="button" data-prm="${c.id}">${tx('Remove')}</button>`}${openAv===c.id?avPicker(c):''}</div>`).join(''); }
+/* picture picker: letter or an icon, and a colour */
+let openAv=null;
+function avPicker(c){ const cur=c.avIcon||'letter', col=c.avColor||'leather';
+  const ic=[['letter',null],...Object.keys(AVICONS).map(k=>[k,AVICONS[k]]),...AV_FROM_COINS.map(k=>[k,EMBLEMS[k]])];
+  return `<div class="avpick"><div class="ap-l">${tx('Picture')}</div><div class="ap-grid">${ic.map(([k,e])=>`<button type="button" data-avi="${k}" aria-pressed="${cur===k}" title="${esc(tx(e?e.label:'Letter'))}" aria-label="${esc(tx(e?e.label:'Letter'))}">${e?`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${e.d}" fill-rule="evenodd"/></svg>`:esc(initialOf(c))}</button>`).join('')}</div>
+    <div class="ap-l">${tx('Colour')}</div><div class="ap-cols">${Object.entries(AVCOLORS).map(([k,v])=>`<button type="button" data-avc="${k}" aria-pressed="${col===k}" title="${esc(tx(AVCOLOR_NAMES[k]))}" aria-label="${esc(tx(AVCOLOR_NAMES[k]))}" style="background:${v.bg};color:${v.fg}"></button>`).join('')}</div></div>`; }
+const AVCOLOR_NAMES={leather:'Leather',crimson:'Crimson',ember:'Ember',gold:'Gold',forest:'Forest',teal:'Teal',navy:'Navy',violet:'Violet',slate:'Slate',bone:'Bone',onyx:'Onyx'};
 $('addPot').addEventListener('click',()=>{ if(pot()) return;
   const id='pot'+Date.now().toString(36); S.chars.splice(S.chars.findIndex(c=>c.gm),0,{id,name:tx('Party purse'),pot:true,coins:blank(),ach:[]});
   save(); renderPartyRows(); renderAll(false); chink(D[0]);
@@ -1599,7 +1689,12 @@ $('addPot').addEventListener('click',()=>{ if(pot()) return;
 $('partyRows').addEventListener('change',e=>{ const row=e.target.closest('.prow'); if(!row) return;
   if(!rename(row.dataset.id,e.target.value)) e.target.value=byId(row.dataset.id).name; renderPartyRows(); renderAll(false); });
 let armedPlayer=null, armT;
-$('partyRows').addEventListener('click',e=>{ const b=e.target.closest('[data-prm]'); if(!b) return; const c=byId(b.dataset.prm);
+$('partyRows').addEventListener('click',e=>{
+  const pk=e.target.closest('[data-avpick]'); if(pk){ openAv=openAv===pk.dataset.avpick?null:pk.dataset.avpick; tick(); renderPartyRows(); return; }
+  const ai=e.target.closest('[data-avi]'), ac=e.target.closest('[data-avc]');
+  if(ai||ac){ const c=byId(e.target.closest('.prow').dataset.id); if(ai) c.avIcon=ai.dataset.avi==='letter'?undefined:ai.dataset.avi; if(ac) c.avColor=ac.dataset.avc==='leather'?undefined:ac.dataset.avc;
+    save(); chink(D[0]); renderPartyRows(); renderParty(); renderMode(); return; }
+  const b=e.target.closest('[data-prm]'); if(!b) return; const c=byId(b.dataset.prm);
   if(armedPlayer!==c.id){ armedPlayer=c.id; renderPartyRows(); const nb=document.querySelector(`[data-prm="${c.id}"]`); nb.classList.add('armed'); nb.textContent=tx('Tap again to remove');
     clearTimeout(armT); armT=setTimeout(()=>{ armedPlayer=null; renderPartyRows(); },3000); return; }
   armedPlayer=null; S.chars=S.chars.filter(x=>x.id!==c.id); if(S.active===c.id) S.active=(players()[0]||S.chars[0]).id; if(recip===c.id) recip=null;
@@ -1635,17 +1730,26 @@ function renderCoinRows(){
   const list=[...S.coinset].sort((a,b)=>b.value-a.value), base=list[list.length-1], imp=W().unit==='imperial';
   $('coinSummary').textContent=list.map(c=>c.name).join(', ');
   $('coinRows').innerHTML=list.map(c=>`<div class="crow" data-id="${c.id}">
-    <button type="button" class="mc d-${c.id}" data-cycle="${c.id}" title="${tx('Tap to change colour')}" aria-label="${esc(tx('Change colour, now {c}',{c:tx(METALS[c.metal].label)}))}"></button>
+    <button type="button" class="mc d-${c.id}" data-cycle="${c.id}" title="${tx('Tap to change colour')}" aria-label="${esc(tx('Change colour, now {c}',{c:tx(METALS[c.metal].label)}))}">${faceHTML(c,true)}</button>
     <input class="field" data-f="name" value="${esc(c.name)}" maxlength="16" aria-label="${tx('Coin name')}" placeholder="${tx('Name')}">
     <input class="field" data-f="tag" value="${esc(c.tag)}" maxlength="3" aria-label="${tx('Short name')}" placeholder="${tx('Short')}">
     ${list.length>1?`<button class="x" type="button" data-rm="${c.id}" aria-label="${esc(tx('Remove {name}',{name:c.name}))}">×</button>`:'<span class="xs"></span>'}
     <div class="opt">
       <select class="field" data-f="metal" aria-label="${tx('Colour')}">${Object.entries(METALS).map(([k,m])=>`<option value="${k}"${k===c.metal?' selected':''}>${tx(m.label)}</option>`).join('')}</select>
       <select class="field" data-f="shape" aria-label="${tx('Shape')}">${Object.entries(SHAPES).map(([k,v])=>`<option value="${k}"${k===(c.shape||'round')?' selected':''}>${tx(v.label)}</option>`).join('')}</select>
+      <select class="field" data-f="face" aria-label="${tx('Face')}"><option value="letters"${(c.face||'letters')==='letters'?' selected':''}>${tx('Letters')}</option><option value="number"${c.face==='number'?' selected':''}>${tx('Number')}</option>${Object.entries(EMBLEMS).map(([k,e])=>`<option value="${k}"${c.face===k?' selected':''}>${tx(e.label)}</option>`).join('')}</select>
+      ${c.face==='number'?`<input class="field fnumin" data-f="faceNum" value="${esc(c.faceNum||'1')}" maxlength="3" inputmode="numeric" aria-label="${tx('Number on the coin')}" placeholder="5">`:''}
       ${W().show?`<span class="val">${tx('Weighs')} <input class="field" data-f="grams" type="number" inputmode="decimal" min="0" step="${imp?0.01:0.5}" value="${imp?+(gramsOf(c.id)/OZ).toFixed(2):gramsOf(c.id)}" aria-label="${esc(tx('Weight of one {name}',{name:c.name}))}"><span>${imp?'oz':'g'}</span></span>`:''}
-      ${c===base?`<span class="base">${tx('Base coin · worth 1')}</span>`:`<span class="val">${tx('Worth')} <input class="field" data-f="value" type="number" inputmode="numeric" min="2" value="${c.value}" aria-label="${esc(tx('Worth in {name}',{name:base.name}))}"><span>${esc(base.tag)}</span></span>`}
+      ${c===base?`<span class="base">${tx('Base coin · worth 1')}</span>`:worthField(c,list,base)}
     </div></div>`).join('');
   const full=list.length>=MAXC; $('addCoin').disabled=full; $('addCoin').textContent=full?tx('+ Add a coin ({n} is the maximum)',{n:MAXC}):tx('+ Add a coin'); }
+/* a coin's worth can be entered in any cheaper coin (base coin by default); it is still stored in base coins */
+function unitOf(c,list,base){ const u=list.find(x=>x.id===c.per); return u&&u.value<c.value?u:base; }
+const num=v=>String(+v.toFixed(3)).replace('.',LANG==='de'?',':'.');
+function worthField(c,list,base){ const u=unitOf(c,list,base), cheaper=list.filter(x=>x.value<c.value);
+  return `<span class="val worthv">${tx('Worth')} <input class="field" data-f="value" type="text" inputmode="decimal" value="${num(c.value/u.value)}" aria-label="${esc(tx('Worth in {name}',{name:u.name}))}">`
+    +`<select class="field" data-f="per" aria-label="${esc(tx('Count the worth in'))}">${cheaper.map(x=>`<option value="${x.id}"${x===u?' selected':''}>${esc(x.name)}</option>`).join('')}</select>`
+    +(u!==base?`<span class="eq">= ${c.value.toLocaleString(LANG==='de'?'de-DE':'en-US')} ${esc(base.tag)}</span>`:'')+`</span>`; }
 /* anything about the coins changed: rebuild what depends on them */
 function coinsChanged(){ applyCoins(); $('dials').innerHTML=''; buildTyper(); amt=blank(); UNDO.length=0; save(); renderCoinRows(); renderLadder(); renderStartPurse(); renderAll(false); }
 $('coinRows').addEventListener('change',e=>{
@@ -1654,9 +1758,14 @@ $('coinRows').addEventListener('change',e=>{
   else if(f==='tag') c.tag=e.target.value.trim()||c.tag;
   else if(f==='metal') c.metal=e.target.value;
   else if(f==='shape') c.shape=e.target.value;
+  else if(f==='face'){ c.face=e.target.value; if(c.face==='number'&&!c.faceNum) c.faceNum=String(c.value); }
+  else if(f==='faceNum') c.faceNum=e.target.value.trim()||c.faceNum;
   else if(f==='grams'){ const v=parseFloat(String(e.target.value).replace(',','.')); if(!(v>=0)){ renderCoinRows(); return; } c.grams=W().unit==='imperial'?Math.round(v*OZ*10)/10:v; }
-  else if(f==='value'){ const v=parseInt(e.target.value,10);
-    if(!(v>=2)||S.coinset.some(x=>x!==c&&x.value===v)){ $('csErr').textContent=tx('Each coin needs its own worth of at least 2 base coins.'); e.target.value=c.value; return; }
+  else if(f==='per'){ c.per=e.target.value; renderCoinRows(); save(); return; }   /* only how the worth is shown changes */
+  else if(f==='value'){ const list=[...S.coinset].sort((a,b)=>b.value-a.value), base=list[list.length-1], u=unitOf(c,list,base);
+    const raw=parseFloat(String(e.target.value).replace(',','.')), v=Math.round(raw*u.value*1000)/1000;
+    if(!(raw>0)||v!==Math.round(v)){ $('csErr').textContent=tx('The worth has to come out as a whole number of {name}. Try counting it in {name}.',{name:base.name}); e.target.value=num(c.value/u.value); return; }
+    if(!(v>=2)||S.coinset.some(x=>x!==c&&x.value===v)){ $('csErr').textContent=tx('Each coin needs its own worth of at least 2 base coins.'); e.target.value=num(c.value/u.value); return; }
     c.value=v; }
   coinsChanged(); });
 let armedCoin=null, armCoinT;

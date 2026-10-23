@@ -6,6 +6,94 @@ LootPal is in **early alpha**. The middle number marks milestones (for example s
 
 ---
 
+## 0.2.16 · 2026-10-23
+
+### Added
+- **Worth in any coin.** Under **Customize → Coins**, each coin's worth can be entered in any cheaper coin, for example a platinum worth *20 Gold*. It starts on the base coin, as before. When another coin is picked, the worth in base coins is shown beside it (*= 2,000 c*). Halves work too (*12.5 Silver*), as long as it comes out as whole base coins.
+
+---
+
+## 0.2.15 · 2026-10-23
+
+### Changed
+- **Customize:** purse weight moved into **Coins**, below the coins, since each coin's weight is set there too. Wealth titles have their own group, **Wealth**, right below Coins.
+
+---
+
+## 0.2.14 · 2026-10-23
+
+### Removed
+- The Deeds tile in the status card. Deeds stay at the top of the Ledger, as before.
+
+---
+
+## 0.2.13 · 2026-10-23
+
+### Added
+- **Deeds tile** in the status card, when deeds are on: a star for each deed, how many are earned, and the latest one. Tap it to jump to all deeds in the Ledger.
+
+### Changed
+- Mixed bag no longer gets an outline when it's on, so it matches the Split | Each switch beside it.
+
+---
+
+## 0.2.12 · 2026-10-23
+
+### Changed
+- **Split | Each** on the Game Master's purse is now a switch like Mixed bag, with *Split* on the left and *Each* on the right. The chosen side is written in bold.
+
+---
+
+## 0.2.11 · 2026-10-23
+
+### Changed
+- Tidy-up, no visible changes: removed leftover translations and unused styles from removed features, merged the bottom-tab styles into one place, removed the fallback for the language setting from the app's old name.
+- README checked against the app and corrected (colours of open buttons and the receipt marker).
+
+---
+
+## 0.2.10 · 2026-10-23
+
+### Removed
+- The GM badge above the GM's picture, and its setting. The thin divider before the GM in the character row stays.
+
+---
+
+## 0.2.9 · 2026-10-23
+
+### Changed
+- The GM badge is simpler: flat and pale instead of shiny gold, so it no longer looks like a coin. The d20 is drawn as a line icon.
+
+---
+
+## 0.2.8 · 2026-10-23
+
+### Added
+- **GM badge** setting under **Customize → Game Master**: a twenty-sided die (new default), book, crown, eye, quill, or none.
+
+---
+
+## 0.2.7 · 2026-10-23
+
+### Changed
+- The Game Master stands out in the character row: a small gold crown sits on their picture (whatever picture they chose), and a thin divider separates them from the players. The crown also shows in the Party tab.
+
+---
+
+## 0.2.6 · 2026-10-23
+
+### Added
+- **Character pictures.** Tap a character's picture under **Party** to give them an icon and a colour. Icons: warrior, wizard, cleric, priest, thief, ranger, bard, druid, barbarian, alchemist, sword, dagger, bow, staff, spear, war hammer, plus crown, star, moon, skull, dragon, eagle, lion, shield, crossed swords, key, anchor, tree and fleur-de-lis. The letter or number stays the default. The picture shows in the character row, on the tags and in the Party tab.
+
+---
+
+## 0.2.5 · 2026-10-23
+
+### Added
+- **Coin faces.** Each coin can show its letters (as before), a number of your choice, or an emblem struck into the metal: crown, star, sun, moon, heads (profile), tails (wreath), dragon, eagle, lion, tower, shield, crossed swords, key, anchor, ship, tree, wheat, fleur-de-lis, skull, anvil or double axe. Set it under **Customize → Coins → Face**. Emblems also show on the small coins in the amount.
+
+---
+
 ## 0.2.4 · 2026-10-23
 
 ### Changed
