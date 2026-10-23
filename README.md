@@ -79,7 +79,7 @@ LootPal saves itself in the browser it runs in, but browsers can forget, for exa
 
 Save codes and files also move a table to another phone or browser.
 
-**Start a new table.** At the bottom of **Save & load**: wipes the table and starts fresh with Player 1–3, the standard coins and an empty ledger. Asks twice. Make a save code first if you might want the old table back.
+**Start a new table.** At the bottom of **Save & load**: wipes the table and starts fresh with Player 1–3, the standard coins, an empty ledger and no deeds earned. The first tap lists everything that will be deleted; tap again to go ahead. Undo can't bring it back. Make a save code first if you might want the old table back.
 
 ---
 
@@ -164,9 +164,9 @@ Under the **Customize** tab, or the pencil next to the amount:
 
 **Purse weight** (on by default, under Coins). Weight, description and belt bar. Set grams or ounces per coin and when the belt is full.
 
-**Wealth.** The wealth title (on by default): a ladder of titles from *Penniless* to *Wealthy*. Rename the steps and set the amounts to fit your campaign.
+**Wealth.** The wealth title (on by default): a ladder of titles from *Penniless* to *Filthy rich*. Rename the steps and set the amounts to fit your campaign.
 
-**Deeds** (off by default). Six small achievements per character, such as *First Purchase* or *Dragon's Hoard*, each with its own lute tune.
+**Deeds** (on by default). Six small achievements per character, such as *First Purchase* or *Dragon's Hoard*, each with its own lute tune.
 
 **Language.** English or German. See [Good to know](#11-good-to-know).
 

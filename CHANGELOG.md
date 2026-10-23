@@ -6,6 +6,23 @@ LootPal is in **early alpha**. The middle number marks milestones (for example s
 
 ---
 
+## 0.2.18 · 2026-10-23
+
+### Added
+- New top wealth title: **Filthy rich**, from 1000 gold. Tables still on the standard ladder get it automatically; a ladder you've changed stays as it is.
+
+### Changed
+- **Start a new table** warns more clearly. The first tap shows a red box listing everything that will be deleted, and that Undo can't bring it back. Tap again within six seconds to go ahead.
+
+---
+
+## 0.2.17 · 2026-10-23
+
+### Changed
+- **Deeds are on** for new tables, including **Start a new table**, which also clears every deed already earned. Existing tables keep their setting.
+
+---
+
 ## 0.2.16 · 2026-10-23
 
 ### Added

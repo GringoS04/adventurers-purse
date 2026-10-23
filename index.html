@@ -620,7 +620,8 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
       <p class="err-s" id="saveMsg"></p>
       <p class="warn-s" id="loadWarn" hidden></p>
       <h4>Start a new table</h4>
-      <div class="danger"><button class="btn warn" id="resetBtn" type="button">Start a new table</button><span>A fresh table with Player 1–3, the standard coins and an empty ledger. Make a save code first if you might want this table back.</span></div>
+      <div class="danger"><button class="btn warn" id="resetBtn" type="button">Start a new table</button><span>Deletes this table and starts fresh with Player 1–3. Make a save code first if you might want it back.</span></div>
+      <p class="warn-s" id="resetWarn" hidden><b>This deletes everything:</b> all players and their purses, your coins, the wealth titles, deeds, settings, the table name and the whole ledger. It can't be undone, not even with Undo. Only a save code or save file brings it back. <b>Tap the button again to delete it all.</b></p>
     </div>
   </section>
 
@@ -730,7 +731,7 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
 <script>
 (() => {
 'use strict';
-const VERSION='0.2.16';   /* shown in the footer; matches CHANGELOG.md */
+const VERSION='0.2.18';   /* shown in the footer; matches CHANGELOG.md */
 document.documentElement.classList.add('calm');   /* the palette layer, see the CSS */
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -761,7 +762,7 @@ const DICT={de:{
 /* weight and wealth */
 'Not a jingle':'Kein Klimpern', 'Light as a feather':'Federleicht', 'Jingles softly':'Klimpert leise', 'A satisfying weight':'Ein angenehmes Gewicht',
 'Tugs at your belt':'Zieht am Gürtel', 'You walk with a lean':'Du gehst schon schief', 'Needs its own mule':'Braucht einen eigenen Esel',
-'Penniless':'Mittellos', 'Scraping by':'Knapp bei Kasse', 'Modest':'Bescheiden', 'Comfortable':'Gut versorgt', 'Prosperous':'Wohlhabend', 'Wealthy':'Reich', 'New title':'Neuer Titel',
+'Penniless':'Mittellos', 'Scraping by':'Knapp bei Kasse', 'Modest':'Bescheiden', 'Comfortable':'Gut versorgt', 'Prosperous':'Wohlhabend', 'Wealthy':'Reich', 'Filthy rich':'Stinkreich', 'New title':'Neuer Titel',
 'Keeper of the Coffers':'Hütet die Schatzkammer', 'Shared by the party':'Gemeinsame Kasse', 'Unlimited':'Unbegrenzt', 'nothing':'nichts',
 /* purse */
 'Choose character':'Figur wählen', 'Tap to rename':'Tippen zum Umbenennen', 'Character name':'Name der Figur', 'Give or take':'Geben oder nehmen', 'Give':'Geben', 'Take':'Nehmen', 'What happens':'Was passiert', 'Pay':'Zahlen', 'Receive':'Erhalten',
@@ -833,7 +834,7 @@ const DICT={de:{
 'Tap the button again to do it.':'Tippe noch einmal auf den Knopf, um es zu tun.',
 'Name of the NPC tag':'Name des NSC-Knopfs',
 'Only changes the label on the tag players pay to by default, for example "The Realm" or "Merchants". It doesn\'t change how payments work, and past ledger entries keep the name they had.':'Ändert nur die Beschriftung des Knopfs, an den Spieler standardmäßig zahlen, zum Beispiel „Das Reich“ oder „Händler“. Am Bezahlen ändert sich nichts, und alte Einträge im Kassenbuch behalten ihren Namen.',
-'Start a new table':'Neuen Tisch beginnen', 'Tap again to start over':'Nochmal tippen zum Neubeginn', 'A new table is ready.':'Ein neuer Tisch ist bereit.', 'A fresh table with Player 1–3, the standard coins and an empty ledger. Make a save code first if you might want this table back.':'Ein frischer Tisch mit Spieler 1–3, den Standardmünzen und leerem Kassenbuch. Mach vorher einen Speichercode, falls du diesen Tisch noch brauchst.',
+'Start a new table':'Neuen Tisch beginnen', 'Tap again to start over':'Nochmal tippen zum Neubeginn', 'A new table is ready.':'Ein neuer Tisch ist bereit.', 'Deletes this table and starts fresh with Player 1–3. Make a save code first if you might want it back.':'Löscht diesen Tisch und beginnt neu mit Spieler 1–3. Mach vorher einen Speichercode, falls du ihn noch brauchst.', 'This deletes everything:':'Das löscht alles:', 'all players and their purses, your coins, the wealth titles, deeds, settings, the table name and the whole ledger. It can\'t be undone, not even with Undo. Only a save code or save file brings it back.':'alle Spieler und ihre Beutel, deine Münzen, die Reichtumstitel, Taten, Einstellungen, den Tischnamen und das ganze Kassenbuch. Es lässt sich nicht rückgängig machen, auch nicht mit Rückgängig. Nur ein Speichercode oder eine Speicherdatei holt ihn zurück.', 'Tap the button again to delete it all.':'Tippe noch einmal auf den Knopf, um alles zu löschen.', 'Tap again to delete everything':'Nochmal tippen: alles löschen',
 'Name of {name}':'Name von {name}', 'Always here':'Immer dabei', 'Remove':'Entfernen', 'Tap again to remove':'Nochmal tippen zum Entfernen',
 'Party purse added. It gets no share of "Whole party" payouts and no starting purse.':'Gruppenkasse hinzugefügt. Sie bekommt keinen Anteil an Auszahlungen an die „Ganze Gruppe“ und keinen Startbeutel.',
 '{name} leaves the party. Their entries stay in the ledger.':'{name} verlässt die Gruppe. Die Einträge bleiben im Kassenbuch.',
@@ -992,7 +993,7 @@ const defaultCoins=()=>[{id:'g',name:tx('Gold'),tag:'g',metal:'gold',value:100},
 const GM_PURSE={g:50,s:40,c:60};
 /* every new player starts with this purse */
 const START_PURSE={g:5,s:10,c:25};
-const example=()=>({weight:{show:true, unit:'metric', maxKg:3}, coinset:defaultCoins(), startPurse:{...START_PURSE}, sound:true, tab:'pay', active:'p1', log:[], chars:[
+const example=()=>({weight:{show:true, unit:'metric', maxKg:3}, coinset:defaultCoins(), startPurse:{...START_PURSE}, sound:true, deeds:true, tab:'pay', active:'p1', log:[], chars:[
   {id:'p1',name:pname(1),coins:{...START_PURSE},ach:[]}, {id:'p2',name:pname(2),coins:{...START_PURSE},ach:[]},
   {id:'p3',name:pname(3),coins:{...START_PURSE},ach:[]}, {id:'gm',name:tx('Game Master'),gm:true,coins:{...GM_PURSE},ach:[]}]});
 
@@ -1072,12 +1073,17 @@ const heft=kg=>{ const f=kg/W().maxKg; return tx(kg<=0?'Not a jingle':f<.033?'Li
 
 /* Wealth titles: an editable ladder, each step starting at an amount in base coins */
 function defaultLadder(){ const t=topV(), b=D[D.length-1], top=D[0];
-  return [{label:tx('Penniless'),from:0,coin:b},{label:tx('Scraping by'),from:1,coin:b},{label:tx('Modest'),from:t,coin:top},{label:tx('Comfortable'),from:5*t,coin:top},{label:tx('Prosperous'),from:20*t,coin:top},{label:tx('Wealthy'),from:100*t,coin:top}]; }
-const LADDER_KEYS=['Penniless','Scraping by','Modest','Comfortable','Prosperous','Wealthy','New title'];
+  return [{label:tx('Penniless'),from:0,coin:b},{label:tx('Scraping by'),from:1,coin:b},{label:tx('Modest'),from:t,coin:top},{label:tx('Comfortable'),from:5*t,coin:top},{label:tx('Prosperous'),from:20*t,coin:top},{label:tx('Wealthy'),from:100*t,coin:top},{label:tx('Filthy rich'),from:1000*t,coin:top}]; }
+const LADDER_KEYS=['Penniless','Scraping by','Modest','Comfortable','Prosperous','Wealthy','Filthy rich','New title'];
+/* tables still on the old six-step default ladder get the new top step, Filthy rich (1000 top coins) */
+function addFilthyRich(s){ const st=s.titles&&s.titles.steps; if(!st||st.length!==6) return;
+  const old=LADDER_KEYS.slice(0,6); if(!st.every((x,i)=>x.label===old[i]||x.label===tx(old[i])||x.label===(DICT.de[old[i]]))) return;
+  st.push({label:tx('Filthy rich'),from:1000*topV(),coin:D[0]}); }
 const rank=co=>{ const w=total(co), st=[...S.titles.steps].sort((a,b)=>a.from-b.from); let r=st[0]?.label||''; for(const x of st) if(w>=x.from) r=x.label; return r; };
 
 applyCoins();
 if(!S.titles) S.titles={mode:'ladder', steps:defaultLadder()};
+addFilthyRich(S);
 
 /* Characters */
 /* avatar letter: the initial, or the number for names like "Player 2" */
@@ -1875,7 +1881,7 @@ async function decode(code){
 function looksLikeTable(d){ return d&&typeof d==='object'&&Array.isArray(d.chars)&&d.chars.length&&Array.isArray(d.coinset)&&d.coinset.length; }
 /* replace the whole table (load, reset) and refresh everything */
 function replaceTable(next){
-  S=migrate(next); applyCoins(); if(!S.titles) S.titles={mode:'ladder', steps:defaultLadder()};
+  S=migrate(next); applyCoins(); if(!S.titles) S.titles={mode:'ladder', steps:defaultLadder()}; addFilthyRich(S);
   amt=blank(); recip=null; UNDO.length=0; $('dials').innerHTML=''; buildTyper(); closeTyper(); save();
   syncSettings(); renderAll(false); }
 /* backups: when the last one was made, and how many payments happened since */
@@ -1924,7 +1930,7 @@ $('loadFile').addEventListener('change',async e=>{
   catch(err){ msg(tx('That file is not a LootPal save.'),true); thud(); } });
 
 /* --- reset the example table --- */
-const fullReset=guard($('resetBtn'),'Tap again to start over',null,null,3000);
+const fullReset=guard($('resetBtn'),'Tap again to delete everything',()=>{ $('resetWarn').hidden=false; thud(); },()=>$('resetWarn').hidden=true,6000);
 $('resetBtn').addEventListener('click',()=>fullReset(()=>{ replaceTable(example()); toast(esc(tx('A new table is ready.'))); }));
 
 /* bottom tabs */
