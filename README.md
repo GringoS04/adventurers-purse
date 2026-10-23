@@ -55,7 +55,7 @@ Choose **Pay** or **Receive** next to the character's name.
 
 Players pay an NPC by default. To pay another player instead, see [The receipt](#5-the-receipt-who-and-what-for).
 
-**Made a mistake?** Every transaction shows a message with **Undo**.
+**Made a mistake?** Tap the round **↶** button on the purse (bottom right, when no amount is counted), or **Undo** in the message after each transaction. Undo still works after the page reloads.
 
 ## 3. The Game Master
 
@@ -124,7 +124,7 @@ A shared purse for the group. Add it under **Party → + Add a party purse**.
 
 The **Ledger** tab shows the latest entries: who paid whom, what for, and how much. Rename a character and their old entries follow.
 
-**Undo.** Besides the message after each transaction, the ledger has an undo button for the latest transactions. Undo lasts until you reload the page.
+**Undo.** Besides the ↶ button on the purse and the message after each transaction, the ledger has an undo button for the latest transactions. The last ten transactions can be undone, even after a reload.
 
 **Deeds.** When deeds are on, each character's deeds are shown at the top of the ledger. Tap an earned deed to hear its tune.
 
@@ -181,7 +181,7 @@ Under the **Customize** tab, or the pencil next to the amount:
 - **Your data stays with you.** Nothing is sent anywhere. The only thing loaded from the internet is the font.
 - **Online and claude.ai versions are separate.** Tables don't carry over between them, except through a save code or file.
 - **Shorter save codes.** Untick *Include the ledger* when making a save code.
-- **Older saves.** Save codes and files from earlier versions, including the time LootPal was called QuestPouch, still load.
+- **Older saves.** Save codes and files from earlier versions still load.
 
 ## 12. Put it online with GitHub Pages
 

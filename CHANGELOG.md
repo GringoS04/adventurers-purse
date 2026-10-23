@@ -6,6 +6,23 @@ LootPal is in **early alpha**. The middle number marks milestones (for example s
 
 ---
 
+## 0.2.2 · 2026-10-23
+
+### Added
+- **Undo on the purse:** a round ↶ button where the ✕ sits while counting. It shows whenever there's something to undo and no amount is being counted. The ledger keeps its undo too.
+
+### Changed
+- Undo survives a reload: the last few transactions can still be undone after the page reloads or the phone locks.
+
+---
+
+## 0.2.1 · 2026-10-23
+
+### Added
+- Footer credit: By Mapventures · Grímur Fjeldsted · 2026.
+
+---
+
 ## 0.2.0 · 2026-10-23
 
 ### Added

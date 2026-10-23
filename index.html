@@ -168,6 +168,7 @@ h1 span{color:var(--brass)}
 .editBtn{right:0; top:10px}
 .editBtn svg{width:16px; height:16px; display:block; margin:auto}
 .clear{right:0; top:56px; font-size:20px}
+.undoQ{font-size:21px}
 .typer{display:grid; grid-template-columns:repeat(var(--n,3),minmax(0,1fr)); gap:8px; align-items:end; margin-top:10px}
 .typer label{display:flex; flex-direction:column; gap:4px; align-items:center; font-family:var(--f-sc); font-size:11px; letter-spacing:.1em; color:var(--muted)}
 .typer .f{display:flex; align-items:center; gap:6px; width:100%; background:rgba(0,0,0,.35); border:1px solid rgba(255,220,170,.15); border-radius:12px; padding:6px 8px}
@@ -285,6 +286,9 @@ h1 span{color:var(--brass)}
 /* a small dot on the Save & load tab while there are payments that aren't in a backup yet */
 .ptab{position:relative} .ptab.due::after{content:""; position:absolute; top:7px; left:calc(50% + 10px); width:7px; height:7px; border-radius:50%; background:var(--brass); box-shadow:0 0 0 2px var(--table-2)}
 .ptab .ti{width:17px; height:17px; flex:none; opacity:.85} .ptab[aria-selected="true"] .ti{opacity:1; color:var(--brass)}
+.foot{display:flex; flex-direction:column; align-items:center; gap:6px; padding:18px 8px 8px; font-size:12.5px; color:var(--faint,#7d6a58); text-align:center}
+.foot .frow{display:flex; flex-wrap:wrap; justify-content:center; gap:4px 14px}
+.foot a{color:var(--muted); text-decoration:none; border-bottom:1px solid rgba(255,220,170,.2)} .foot a:hover{color:var(--ink)}
 .ptabs{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; padding:4px; background:var(--table-2); border:1px solid var(--line); border-radius:14px}
 .ptab{display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:0; border-radius:10px; padding:7px 2px 8px; font-family:var(--f-sc); font-weight:700; letter-spacing:.02em; font-size:12.5px; line-height:1.15; color:var(--muted)}
 .ptab[aria-selected="true"]{background:var(--leather-2); color:var(--ink); box-shadow:inset 0 0 0 1px rgba(255,220,170,.14)}
@@ -518,6 +522,7 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
       <button class="rbtn noteBtn" id="noteBtn" type="button" aria-expanded="false" aria-label="Who and what for" title="Who and what for, for the ledger"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="7" cy="6" r="2.8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.8 17c0-3.3 2.3-5.6 5.2-5.6 1.6 0 3 .7 3.9 1.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14.2 10.6c-1.7 1.3-2.4 3.2-2 4.9.4 1.3 1.6 2 3.2 2s2.8-.7 3.2-2c.4-1.7-.3-3.6-2-4.9z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13.6 9.4l1.8 1.1 1.8-1.1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="rbtn editBtn" id="editCoins" type="button" aria-expanded="false" aria-label="Edit or add coins" title="Edit or add coins"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13.5 3.5l3 3L7 16H4v-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M11.5 5.5l3 3" stroke="currentColor" stroke-width="1.6"/></svg></button>
       <button class="rbtn clear" id="clearBtn" type="button" aria-label="Clear amount" hidden>×</button>
+      <button class="rbtn clear undoQ" id="undoQuick" type="button" hidden>↶</button>
       <div class="typer" id="typer" hidden>
         <span id="typerFields" style="display:contents"></span>
         <button class="done" id="typerDone" type="button">Done</button>
@@ -693,6 +698,10 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
 
     </div>
   </section>
+  <footer class="foot" id="foot">
+    <div class="frow"><span class="ver">LootPal <span id="verNo"></span> · <span>early alpha</span></span><a href="https://github.com/gringos04/lootpal/blob/main/CHANGELOG.md" target="_blank" rel="noopener">What's new</a></div>
+    <div class="frow by">By Mapventures · Grímur Fjeldsted · 2026</div>
+  </footer>
 </div>
 <div class="till" id="till"></div>
 <div class="toasts" id="toasts"></div>
@@ -700,6 +709,7 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
 <script>
 (() => {
 'use strict';
+const VERSION='0.2.2';   /* shown in the footer; matches CHANGELOG.md */
 document.documentElement.classList.add('calm');   /* calm palette; remove this line for the all-gold look */
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -842,7 +852,7 @@ const DICT={de:{
 /* language */
 'Who and what for':'Wer und wofür', 'Who and what for, for the ledger':'Wer und wofür, fürs Kassenbuch', 'Which NPC?':'Welcher NSC?',
 '{npc} unless you pick someone':'{npc}, wenn du niemanden wählst', 'Split in party ({n})':'In der Gruppe teilen ({n})',
-'Language':'Sprache', 'just now':'gerade eben', 'Table name':'Name des Tisches', 'e.g. Curse of the Crimson Crown':'z. B. Der Fluch der Purpurkrone', 'No backup yet':'Noch keine Sicherung', 'Last backup: {when}':'Letzte Sicherung: {when}', ' · 1 payment since':' · seitdem 1 Buchung', ' · {n} payments since':' · seitdem {n} Buchungen',
+'Language':'Sprache', 'By Mapventures · Grímur Fjeldsted · 2026':'Von Mapventures · Grímur Fjeldsted · 2026', 'early alpha':'frühe Alpha', "What's new":'Neuigkeiten', 'just now':'gerade eben', 'Table name':'Name des Tisches', 'e.g. Curse of the Crimson Crown':'z. B. Der Fluch der Purpurkrone', 'No backup yet':'Noch keine Sicherung', 'Last backup: {when}':'Letzte Sicherung: {when}', ' · 1 payment since':' · seitdem 1 Buchung', ' · {n} payments since':' · seitdem {n} Buchungen',
 'A save holds the whole table: players, purses, coins, settings and the ledger. LootPal saves itself in this browser, but browsers can forget, so make a backup after each session.':'Eine Sicherung enthält den ganzen Tisch: Spieler, Beutel, Münzen, Einstellungen und das Kassenbuch. LootPal speichert sich in diesem Browser, aber Browser können vergessen. Mach deshalb nach jeder Sitzung eine Sicherung.',
 'This replaces the current table with {table}: {names}, {c} coin types, {l} ledger entries.':'Das ersetzt den aktuellen Tisch durch {table}: {names}, {c} Münzarten, {l} Einträge im Kassenbuch.', 'Tap again to remove {name}':'Nochmal tippen, um {name} zu entfernen', "Tap × again to remove {name}. Everyone's {name} is changed into the other coins at its value.":'Tippe noch einmal auf ×, um {name} zu entfernen. Alle {name}-Münzen werden zum vollen Wert in die anderen Münzen getauscht.', 'Wealth':'Reichtum', 'Weight':'Gewicht', 'Status':'Status',
 'Names LootPal gave, like "Player 1" or "Gold", change with the language. Names you chose stay as they are.':'Namen, die LootPal vergeben hat, wie „Spieler 1“ oder „Gold“, wechseln mit der Sprache. Selbst gewählte Namen bleiben, wie sie sind.'
@@ -1191,7 +1201,7 @@ function renderReadout(pop){
   big.classList.toggle('zero',!cost);
   big.innerHTML=cost ? D.filter(d=>amt[d]).map(d=>`<span class="amt-part">${amt[d]}<span class="bc d-${d}" role="img" aria-label="${esc(COINS[d].name)}"></span></span>`).join('') : '0';
   if(pop&&!reduce){ big.classList.remove('pop'); void big.offsetWidth; big.classList.add('pop'); }
-  $('clearBtn').hidden=!cost;
+  $('clearBtn').hidden=!cost; syncUndoQuick();
   sub.classList.remove('bad');
   if(c.gm){
     const po=payout(cost);
@@ -1324,12 +1334,18 @@ function renderAll(bump){ renderParty(); renderHeader(); renderMode(); renderCon
 /* =====================================================================
    7. Transactions, with undo
    ===================================================================== */
-const UNDO=[];                         /* in memory: the last few transactions, newest last */
+/* the last few transactions, newest last; kept on this device so a reload doesn't lose them */
+const UNDO=[], UKEY='lootpal-undo';
+try{ const u=JSON.parse(localStorage.getItem(UKEY)||'[]'); if(Array.isArray(u)) UNDO.push(...u.slice(-10)); }catch(e){}
+const keepUndo=()=>{ try{ localStorage.setItem(UKEY,JSON.stringify(UNDO)); }catch(e){} };
+/* the round ↶ on the purse: shown while no amount is being counted (the ✕ takes that spot while counting) */
+function syncUndoQuick(){ const u=UNDO[UNDO.length-1], b=$('undoQuick'); b.hidden=!u||total(amt)>0;
+  if(u){ const l=tx('Undo: {x}',{x:u.label}); b.title=l; b.setAttribute('aria-label',l); } }
 function snapshot(label){ UNDO.push({label, chars:JSON.stringify(S.chars), log:JSON.stringify(S.log), active:S.active}); if(UNDO.length>10) UNDO.shift(); }
 function undo(){ const u=UNDO.pop(); if(!u) return;
   S.chars=JSON.parse(u.chars); S.log=JSON.parse(u.log); if(!byId(S.active)) S.active=u.active; save(); tick();
   renderAll(false); toast(esc(tx('Undone: {x}',{x:u.label}))); }
-function renderUndo(){ const u=UNDO[UNDO.length-1]; $('undoRow').hidden=!u; if(u) $('undoWhat').textContent=u.label; }
+function renderUndo(){ const u=UNDO[UNDO.length-1]; $('undoRow').hidden=!u; if(u) $('undoWhat').textContent=u.label; keepUndo(); syncUndoQuick(); }
 function log(e){ S.txCount=(S.txCount||0)+1; S.log.push(e); if(S.log.length>200) S.log.splice(0,S.log.length-200); }
 /* remember the GM's last payout so it can be repeated with one tap */
 function rememberGM(note,from){ S.lastGM={amt:Object.fromEntries(D.map(d=>[d,amt[d]])), sel:gmSel?[...gmSel]:null, each:gmEach, mixed:!!S.gmMixed, take:gmTake, note, from}; }
@@ -1558,6 +1574,7 @@ $('party').addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!
   el.addEventListener('blur',()=>{ if(rename(cur().id,el.textContent)){ renderPartyRows(); renderParty(); renderHeader(); renderMode(); renderLedger(); } else el.textContent=cur().name; }); })();
 $('deeds').addEventListener('click',e=>{ const b=e.target.closest('.deed.got'); if(b&&S.sound) playMotif(b.dataset.deed); });
 $('undoBtn').addEventListener('click',undo);
+$('undoQuick').addEventListener('click',undo);
 $('soundBtn').addEventListener('click',()=>{ S.sound=!S.sound; save(); syncSoundUI(); if(S.sound) clink(D[0]); });
 
 /* =====================================================================
@@ -1838,6 +1855,7 @@ $('langSel').innerHTML=Object.entries(LANGS).map(([k,v])=>`<option value="${k}">
 $('langSel').value=LANG;
 $('langSel').addEventListener('change',e=>setLang(e.target.value));
 
+$('verNo').textContent=VERSION;
 applyStatic(); buildTyper(); syncSettings(); renderAll(false);
 })();
 </script>
