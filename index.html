@@ -90,16 +90,30 @@ h1 span{color:var(--brass)}
 .who .nm{font-family:var(--f-display); font-weight:800; font-size:clamp(28px,8vw,36px); line-height:1; letter-spacing:.005em; cursor:text}
 .who .nm:focus{outline:none; box-shadow:0 2px 0 var(--brass)}
 .who .rk{display:inline-block; margin-top:6px; font-family:var(--f-sc); font-size:10.5px; line-height:1.4; letter-spacing:.08em; color:var(--brass-ink); background:var(--brass); padding:1px 8px; border-radius:999px}
-.strip{display:flex; flex-direction:column; gap:8px; padding:2px 14px 4px}
-.worth{display:flex; flex-direction:column; align-items:flex-start; gap:6px}
-.worth .l{font-family:var(--f-sc); font-size:12px; letter-spacing:.12em; color:var(--muted)}
+.status{background:var(--table-2); border:1px solid var(--line); border-radius:20px; padding:14px 14px 16px}
+.st-h{margin:0 2px 10px; font-family:var(--f-sc); font-weight:700; font-size:13px; letter-spacing:.1em; color:var(--muted); display:flex; gap:7px; align-items:baseline; min-width:0}
+.st-tog{all:unset; box-sizing:border-box; display:flex; align-items:baseline; gap:7px; width:100%; cursor:pointer; min-width:0}
+.st-tog:focus-visible{outline:2px solid var(--brass); outline-offset:3px; border-radius:6px}
+.st-tog .chev{width:16px; height:16px; margin-left:auto; flex:none; align-self:center; color:var(--muted); transition:transform .25s}
+.st-sum{display:none; margin-left:10px; font-family:var(--f-body); letter-spacing:0; white-space:nowrap; overflow:hidden}
+.st-sum .wc{font-size:14px; margin-right:6px; gap:2px} .st-sum .wc .bc{width:11px; height:11px}
+/* collapsed: only the headline, with the total worth beside it */
+.status.closed{padding-bottom:14px} .status.closed .st-h{margin-bottom:0}
+.status.closed .tiles{display:none} .status.closed .st-sum{display:inline-flex; align-items:center} .status.closed .chev{transform:rotate(-90deg)}
+.st-h #stName{color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
+.st-h .dot{opacity:.6}
+/* tiles: one topic each; more can be added later (deeds, session...). One tile alone takes the full width */
+.tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px}
+.tile{background:var(--well); border:1px solid var(--rule); border-radius:14px; padding:11px 12px 12px; display:flex; flex-direction:column; gap:7px; min-width:0}
+.tile .tl{font-family:var(--f-sc); font-size:11px; letter-spacing:.12em; color:var(--muted)}
 .worth .v{display:flex; flex-wrap:wrap; align-items:center; row-gap:6px; position:relative}
-
-.weight{display:grid; grid-template-columns:auto auto minmax(0,1fr); align-items:center; column-gap:10px; row-gap:7px; font-size:14px; color:var(--muted)}
-.weight svg{width:16px; height:16px; flex:none; color:var(--brass)}
-.weight .kg{font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; white-space:nowrap}
-.weight .say{font-style:italic; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.sag{grid-column:1 / -1; height:8px; border-radius:99px; background:rgba(0,0,0,.4); box-shadow:inset 0 0 0 1px rgba(255,220,170,.10); overflow:hidden}
+.tsub{font-size:13px; font-style:italic; color:var(--acc,var(--muted)); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.weight{font-size:14px; color:var(--muted)}
+.weight .wrow{display:flex; align-items:center; gap:7px}
+.weight svg{width:17px; height:17px; flex:none; color:var(--brass)}
+.weight .kg{font-size:20px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; white-space:nowrap; line-height:1}
+.weight .say{font-style:italic; font-size:13px; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.sag{display:block; margin-top:auto; height:8px; border-radius:99px; background:rgba(0,0,0,.4); box-shadow:inset 0 0 0 1px rgba(255,220,170,.10); overflow:hidden}
 .sag i{display:block; height:100%; width:0; border-radius:99px; background:linear-gradient(90deg, var(--good), var(--brass) 55%, var(--bad)); background-size:var(--sagw,340px) 100%; transition:width .5s cubic-bezier(.3,1.3,.5,1)}
 
 .repeat{border:1px dashed var(--brass); background:rgba(217,164,65,.1); color:var(--brass); border-radius:999px; padding:3px 12px; font-size:13.5px; max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
@@ -131,8 +145,8 @@ h1 span{color:var(--brass)}
 .big{display:flex; justify-content:center; align-items:center; flex-wrap:wrap; column-gap:.28em}
 .am{white-space:nowrap; font-weight:700; font-variant-numeric:tabular-nums}
 .am i{font-style:normal; font-size:.82em; margin-left:.04em; opacity:.85}
-.wc{display:inline-flex; align-items:center; gap:4px; font-size:22px; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink); margin-right:14px; line-height:1}
-.wc::before{content:attr(data-n)} .wc .bc{width:17px; height:17px; transform:none}
+.wc{display:inline-flex; align-items:center; gap:3px; font-size:19px; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink); margin-right:9px; line-height:1}
+.wc::before{content:attr(data-n)} .wc .bc{width:15px; height:15px; transform:none}
 .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
 .amt-part{display:inline-flex; align-items:center; gap:.1em; white-space:nowrap}
 /* a small coin in the coin's own colour and shape, standing in for the letter */
@@ -265,6 +279,11 @@ h1 span{color:var(--brass)}
 /* ---------- Folding panels: ledger and settings ---------- */
 
 /* Bottom tabs: Ledger / Save & load / Settings. Tap the open tab again to fold it away. */
+.tname{display:flex; flex-direction:column; gap:6px; font-family:var(--f-sc); font-size:12px; letter-spacing:.1em; color:var(--muted)}
+.tname .field{font-family:var(--f-body); letter-spacing:0; font-size:16px; padding:10px 12px}
+.backup{margin:0; font-size:14px; color:var(--ink)} .backup.due{color:var(--brass)}
+/* a small dot on the Save & load tab while there are payments that aren't in a backup yet */
+.ptab{position:relative} .ptab.due::after{content:""; position:absolute; top:7px; left:calc(50% + 10px); width:7px; height:7px; border-radius:50%; background:var(--brass); box-shadow:0 0 0 2px var(--table-2)}
 .ptab .ti{width:17px; height:17px; flex:none; opacity:.85} .ptab[aria-selected="true"] .ti{opacity:1; color:var(--brass)}
 .ptabs{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; padding:4px; background:var(--table-2); border:1px solid var(--line); border-radius:14px}
 .ptab{display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:0; border-radius:10px; padding:7px 2px 8px; font-family:var(--f-sc); font-weight:700; letter-spacing:.02em; font-size:12.5px; line-height:1.15; color:var(--muted)}
@@ -352,6 +371,8 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
 .crow .val input{text-align:right}
 .crow .base{font-size:13px; color:var(--muted); flex:1 1 120px; text-align:right}
 .x{width:34px; height:34px; border-radius:8px; border:1px solid var(--line); background:var(--well); color:var(--muted)}
+.rmwarn{grid-column:1 / -1; margin:2px 0 0; font-size:13px; color:var(--bad)}
+.x.armed{border-color:var(--bad); color:#fff; background:var(--bad); font-weight:700}
 /* wealth ladder rows */
 .ladder{display:flex; flex-direction:column; gap:6px}
 .lrow{display:grid; grid-template-columns:minmax(80px,1fr) auto 46px 68px 30px; gap:6px 4px; align-items:center}
@@ -392,7 +413,6 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   .console::before{inset:5px; border-radius:15px}
   .who .nm{font-size:24px}
   .who .rk{margin-top:3px; font-size:9.5px; padding:0 7px}
-  .worth .l{font-size:11px}
   .weight{font-size:13px} .sag{height:6px}
   .mode{padding:7px 4px; font-size:14px}
   .readout{padding:0 36px}
@@ -462,6 +482,9 @@ html.calm .mixsw[aria-checked="true"]{border-color:var(--sel)}
 html.calm .mixsw[aria-checked="true"] .knobx{background:var(--sel)}
 html.calm .mixsw[aria-checked="true"] .knobx::after{background:#2a1d14}
 html.calm .eachsw button[aria-pressed="true"]{background:var(--sel); color:#2a1d14}
+html.calm .rbtn[aria-expanded="true"]{background:linear-gradient(180deg,#4a382c,#33251c); color:var(--sel); border-color:var(--sel); box-shadow:0 0 10px var(--sel-glow)}
+html.calm .noteBtn.has:not([aria-expanded="true"]){border-color:var(--sel); color:var(--sel)}
+html.calm .noteBtn.has:not([aria-expanded="true"])::after{background:var(--sel)}
 html.calm .toast button{border-color:var(--sel); color:var(--sel)}
 
 </style>
@@ -516,13 +539,22 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
     </div>
   </section>
 
-  <div class="strip" id="strip">
-    <div class="worth" id="worthBox"><span class="l">Total worth</span><span class="v" id="pWorth"></span></div>
-    <div class="weight" id="weight" title="Coins weigh something. Copper is the heaviest to carry around.">
-      <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M8 2v12M4 14h8M3 4h10M3 4l-2 5h4zM13 4l-2 5h4z"/></svg>
-      <span class="kg" id="pKg"></span><span class="say" id="pSay"></span><span class="sag" aria-hidden="true"><i id="pSag"></i></span>
+  <section class="status" id="strip" aria-labelledby="stHead">
+    <h3 class="st-h"><button type="button" class="st-tog" id="stHead" aria-expanded="true" aria-controls="stTiles"><span id="stName"></span><span class="dot">·</span><span>Status</span><span class="st-sum" id="stSum" aria-hidden="true"></span><svg class="chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></h3>
+    <div class="tiles" id="stTiles">
+      <div class="tile worth" id="worthBox">
+        <div class="tl">Wealth</div>
+        <div class="v" id="pWorth"></div>
+        <div class="tsub" id="stTitle"></div>
+      </div>
+      <div class="tile weight" id="weight" title="Coins weigh something. Copper is the heaviest to carry around.">
+        <div class="tl">Weight</div>
+        <div class="wrow"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M8 2v12M4 14h8M3 4h10M3 4l-2 5h4zM13 4l-2 5h4z"/></svg><span class="kg" id="pKg"></span></div>
+        <div class="say" id="pSay"></div>
+        <span class="sag" aria-hidden="true"><i id="pSag"></i></span>
+      </div>
     </div>
-  </div>
+  </section>
 
   <section class="gmbook" id="gmBook" hidden>
     <h2>The Game Master's book</h2>
@@ -545,7 +577,9 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
 
   <section class="panel" id="savePanel" role="tabpanel" hidden>
     <div class="sbody flat">
-      <p class="note-s">The purse saves itself in this browser, but browsers can forget. Make a backup after each session.</p>
+      <label class="tname"><span>Table name</span><input class="field" id="tableName" maxlength="40" placeholder="e.g. Curse of the Crimson Crown" autocomplete="off"></label>
+      <p class="note-s">A save holds the whole table: players, purses, coins, settings and the ledger. LootPal saves itself in this browser, but browsers can forget, so make a backup after each session.</p>
+      <p class="backup" id="backupInfo"></p>
       <h4>Save code</h4>
       <label class="tg"><input id="codeLedger" type="checkbox" checked> Include the ledger <span>makes the code longer</span></label>
       <div class="row"><button class="btn primary" id="makeCode" type="button">Make a save code</button><button class="btn" id="copyCode" type="button" hidden>Copy</button><span class="note-s" id="codeLen"></span></div>
@@ -559,6 +593,8 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
       </div>
       <p class="err-s" id="saveMsg"></p>
       <p class="warn-s" id="loadWarn" hidden></p>
+      <h4>Start a new table</h4>
+      <div class="danger"><button class="btn warn" id="resetBtn" type="button">Start a new table</button><span>A fresh table with Player 1–3, the standard coins and an empty ledger. Make a save code first if you might want this table back.</span></div>
     </div>
   </section>
 
@@ -580,8 +616,6 @@ html.calm .toast button{border-color:var(--sel); color:var(--sel)}
       <h4>Name of the NPC tag</h4>
       <input class="field" id="npcName" maxlength="20" placeholder="NPC" style="max-width:260px" aria-describedby="npcNote">
       <p class="note-s" id="npcNote">Only changes the label on the tag players pay to by default, for example "The Realm" or "Merchants". It doesn't change how payments work, and past ledger entries keep the name they had.</p>
-      <h4>Start over</h4>
-      <div class="danger"><button class="btn warn" id="resetBtn" type="button">Reset example table</button><span>Starts over with Player 1–3, the standard coins and an empty ledger.</span></div>
     </div>
   </section>
 
@@ -772,7 +806,7 @@ const DICT={de:{
 'Tap the button again to do it.':'Tippe noch einmal auf den Knopf, um es zu tun.',
 'Name of the NPC tag':'Name des NSC-Knopfs',
 'Only changes the label on the tag players pay to by default, for example "The Realm" or "Merchants". It doesn\'t change how payments work, and past ledger entries keep the name they had.':'Ändert nur die Beschriftung des Knopfs, an den Spieler standardmäßig zahlen, zum Beispiel „Das Reich“ oder „Händler“. Am Bezahlen ändert sich nichts, und alte Einträge im Kassenbuch behalten ihren Namen.',
-'Start over':'Neu anfangen', 'Reset example table':'Beispieltisch zurücksetzen', 'Tap again to reset everything':'Nochmal tippen, um alles zurückzusetzen',
+'Start a new table':'Neuen Tisch beginnen', 'Tap again to start over':'Nochmal tippen zum Neubeginn', 'A new table is ready.':'Ein neuer Tisch ist bereit.', 'A fresh table with Player 1–3, the standard coins and an empty ledger. Make a save code first if you might want this table back.':'Ein frischer Tisch mit Spieler 1–3, den Standardmünzen und leerem Kassenbuch. Mach vorher einen Speichercode, falls du diesen Tisch noch brauchst.',
 'Starts over with Player 1–3, the standard coins and an empty ledger.':'Beginnt neu mit Spieler 1–3, den Standardmünzen und einem leeren Kassenbuch.',
 'Name of {name}':'Name von {name}', 'Always here':'Immer dabei', 'Remove':'Entfernen', 'Tap again to remove':'Nochmal tippen zum Entfernen',
 'Party purse added. It gets no share of "Whole party" payouts and no starting purse.':'Gruppenkasse hinzugefügt. Sie bekommt keinen Anteil an Auszahlungen an die „Ganze Gruppe“ und keinen Startbeutel.',
@@ -808,7 +842,9 @@ const DICT={de:{
 /* language */
 'Who and what for':'Wer und wofür', 'Who and what for, for the ledger':'Wer und wofür, fürs Kassenbuch', 'Which NPC?':'Welcher NSC?',
 '{npc} unless you pick someone':'{npc}, wenn du niemanden wählst', 'Split in party ({n})':'In der Gruppe teilen ({n})',
-'Language':'Sprache',
+'Language':'Sprache', 'just now':'gerade eben', 'Table name':'Name des Tisches', 'e.g. Curse of the Crimson Crown':'z. B. Der Fluch der Purpurkrone', 'No backup yet':'Noch keine Sicherung', 'Last backup: {when}':'Letzte Sicherung: {when}', ' · 1 payment since':' · seitdem 1 Buchung', ' · {n} payments since':' · seitdem {n} Buchungen',
+'A save holds the whole table: players, purses, coins, settings and the ledger. LootPal saves itself in this browser, but browsers can forget, so make a backup after each session.':'Eine Sicherung enthält den ganzen Tisch: Spieler, Beutel, Münzen, Einstellungen und das Kassenbuch. LootPal speichert sich in diesem Browser, aber Browser können vergessen. Mach deshalb nach jeder Sitzung eine Sicherung.',
+'This replaces the current table with {table}: {names}, {c} coin types, {l} ledger entries.':'Das ersetzt den aktuellen Tisch durch {table}: {names}, {c} Münzarten, {l} Einträge im Kassenbuch.', 'Tap again to remove {name}':'Nochmal tippen, um {name} zu entfernen', "Tap × again to remove {name}. Everyone's {name} is changed into the other coins at its value.":'Tippe noch einmal auf ×, um {name} zu entfernen. Alle {name}-Münzen werden zum vollen Wert in die anderen Münzen getauscht.', 'Wealth':'Reichtum', 'Weight':'Gewicht', 'Status':'Status',
 'Names LootPal gave, like "Player 1" or "Gold", change with the language. Names you chose stay as they are.':'Namen, die LootPal vergeben hat, wie „Spieler 1“ oder „Gold“, wechseln mit der Sprache. Selbst gewählte Namen bleiben, wie sie sind.'
 }};
 const trIn=(s,l)=>(l!=='en'&&DICT[l]&&DICT[l][s])||s;
@@ -862,7 +898,7 @@ const defaultCoins=()=>[{id:'g',name:tx('Gold'),tag:'g',metal:'gold',value:100},
 const GM_PURSE={g:50,s:40,c:60};
 /* every new player starts with this purse */
 const START_PURSE={g:5,s:10,c:25};
-const example=()=>({weight:{show:false, unit:'metric', maxKg:3}, coinset:defaultCoins(), startPurse:{...START_PURSE}, sound:true, tab:'pay', active:'p1', log:[], chars:[
+const example=()=>({weight:{show:true, unit:'metric', maxKg:3}, coinset:defaultCoins(), startPurse:{...START_PURSE}, sound:true, tab:'pay', active:'p1', log:[], chars:[
   {id:'p1',name:pname(1),coins:{...START_PURSE},ach:[]}, {id:'p2',name:pname(2),coins:{...START_PURSE},ach:[]},
   {id:'p3',name:pname(3),coins:{...START_PURSE},ach:[]}, {id:'gm',name:tx('Game Master'),gm:true,coins:{...GM_PURSE},ach:[]}]});
 
@@ -877,7 +913,7 @@ function migrate(s){
   if(!s.chars.some(c=>c.id===s.active)) s.active=(s.chars.find(c=>!c.gm)||s.chars[0]).id;
   if(!Array.isArray(s.log)) s.log=[];
   if(!['pay','get'].includes(s.tab)) s.tab='pay';
-  if(!s.weight) s.weight={show:false, unit:'metric', maxKg:3};   /* weight is an extra: off for a new table */
+  if(!s.weight) s.weight={show:true, unit:'metric', maxKg:3};   /* on for a new table; the status card can be folded away */
   /* one switch for the whole weight line (weight, status and belt bar) */
   if(s.weight.show==null) s.weight.show=!!(s.weight.showKg||s.weight.showSay||s.weight.showBar);
   delete s.weight.showKg; delete s.weight.showSay; delete s.weight.showBar;
@@ -1111,6 +1147,7 @@ function renderHeader(){
   $('pRank').textContent=c.gm?tx('Keeper of the Coffers'):c.pot?tx('Shared by the party'):rank(c.coins); $('pRank').hidden=!c.gm&&!c.pot&&S.titles.mode==='off';
   $('pWorth').innerHTML=c.gm?esc(tx('Unlimited')):fmtCoins(total(c.coins));
   $('weight').hidden=!!c.gm||!W().show;
+  $('stName').textContent=c.name; $('stSum').innerHTML=fmtCoins(total(c.coins)); $('stTitle').textContent=$('pRank').textContent; $('stTitle').hidden=$('pRank').hidden||!!c.gm;
   const kg=weight(c.coins); $('pKg').textContent=kgTxt(kg); $('pSay').textContent=heft(kg);
   $('pSag').style.width=Math.min(100,kg/W().maxKg*100)+'%';
   const tw=$('pSag').parentElement.clientWidth; if(tw) $('pSag').style.setProperty('--sagw',tw+'px'); }   /* green to red along the whole belt */
@@ -1182,6 +1219,13 @@ function renderReadout(pop){
 function fitName(){ const el=$('pName'); el.style.fontSize=''; let fs=parseFloat(getComputedStyle(el).fontSize);
   while(el.scrollWidth>el.clientWidth+1&&fs>18){ fs-=1; el.style.fontSize=fs+'px'; } }
 addEventListener('resize',()=>fitName());
+/* the status card can be folded away; remembered on this device */
+const SKEY='lootpal-status-closed';
+function syncStatus(){ let closed=false; try{ closed=localStorage.getItem(SKEY)==='1'; }catch(e){}
+  $('strip').classList.toggle('closed',closed); $('stHead').setAttribute('aria-expanded',!closed); }
+$('stHead').addEventListener('click',()=>{ const closed=!$('strip').classList.contains('closed');
+  try{ localStorage.setItem(SKEY,closed?'1':'0'); }catch(e){} $('strip').classList.toggle('closed',closed); $('stHead').setAttribute('aria-expanded',!closed); tick(); });
+syncStatus();
 function renderMode(){
   const G=cur().gm, M=mode();
   $('modes').hidden=G; $('gmModes').hidden=!G; $('strip').hidden=G; $('console').classList.toggle('is-gm',!!G); fitName(); $('console').classList.toggle('is-gm',!!G);
@@ -1272,7 +1316,7 @@ function renderLedger(){
       return `<button type="button" class="deed${got?' got':''}" data-deed="${id}" ${got?'':'tabindex="-1"'}><span class="star">${got?'★':'☆'}</span><span class="dn">${esc(tx(a.n))}</span><span class="dh">${esc(tx(got?a.d:a.h))}</span></button>`; }).join('');
   const L=S.log.slice(-30).reverse();
   $('ledger').innerHTML=L.length?L.map(ledgerLine).join(''):`<li class="empty">${tx('Nothing spent yet. The night is young.')}</li>`;
-  renderUndo(); }
+  renderUndo(); if(typeof renderBackup==='function') renderBackup(); }
 function syncTyper(){ if(!$('typer').hidden) for(const d of D){ const f=$('t'+d); if(document.activeElement!==f) f.value=amt[d]||''; } }
 function renderConsole(pop,bump){ renderDials(bump); renderReadout(pop); renderSlider(); syncTyper(); }
 function renderAll(bump){ renderParty(); renderHeader(); renderMode(); renderConsole(false,bump); renderLedger(); }
@@ -1286,7 +1330,7 @@ function undo(){ const u=UNDO.pop(); if(!u) return;
   S.chars=JSON.parse(u.chars); S.log=JSON.parse(u.log); if(!byId(S.active)) S.active=u.active; save(); tick();
   renderAll(false); toast(esc(tx('Undone: {x}',{x:u.label}))); }
 function renderUndo(){ const u=UNDO[UNDO.length-1]; $('undoRow').hidden=!u; if(u) $('undoWhat').textContent=u.label; }
-function log(e){ S.log.push(e); if(S.log.length>200) S.log.splice(0,S.log.length-200); }
+function log(e){ S.txCount=(S.txCount||0)+1; S.log.push(e); if(S.log.length>200) S.log.splice(0,S.log.length-200); }
 /* remember the GM's last payout so it can be repeated with one tap */
 function rememberGM(note,from){ S.lastGM={amt:Object.fromEntries(D.map(d=>[d,amt[d]])), sel:gmSel?[...gmSel]:null, each:gmEach, mixed:!!S.gmMixed, take:gmTake, note, from}; }
 function repeatLabel(){ const L=S.lastGM; if(!L) return '';
@@ -1511,7 +1555,7 @@ $('party').addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!
   if(b.dataset.id===S.active) return; S.active=b.dataset.id; recip=null; rustle(); save(); renderAll(false); });
 (()=>{ const el=$('pName');
   el.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); el.blur(); } if(e.key==='Escape'){ el.textContent=cur().name; el.blur(); } });
-  el.addEventListener('blur',()=>{ if(rename(cur().id,el.textContent)){ renderPartyRows(); renderParty(); renderMode(); renderLedger(); } else el.textContent=cur().name; }); })();
+  el.addEventListener('blur',()=>{ if(rename(cur().id,el.textContent)){ renderPartyRows(); renderParty(); renderHeader(); renderMode(); renderLedger(); } else el.textContent=cur().name; }); })();
 $('deeds').addEventListener('click',e=>{ const b=e.target.closest('.deed.got'); if(b&&S.sound) playMotif(b.dataset.deed); });
 $('undoBtn').addEventListener('click',undo);
 $('soundBtn').addEventListener('click',()=>{ S.sound=!S.sound; save(); syncSoundUI(); if(S.sound) clink(D[0]); });
@@ -1596,11 +1640,17 @@ $('coinRows').addEventListener('change',e=>{
     if(!(v>=2)||S.coinset.some(x=>x!==c&&x.value===v)){ $('csErr').textContent=tx('Each coin needs its own worth of at least 2 base coins.'); e.target.value=c.value; return; }
     c.value=v; }
   coinsChanged(); });
+let armedCoin=null, armCoinT;
 $('coinRows').addEventListener('click',e=>{
   const cy=e.target.closest('[data-cycle]');
   if(cy){ const c=S.coinset.find(x=>x.id===cy.dataset.cycle), ks=Object.keys(METALS); c.metal=ks[(ks.indexOf(c.metal)+1)%ks.length]; coinsChanged(); chink(c.id); return; }
   const b=e.target.closest('[data-rm]'); if(!b) return;
   const gone=S.coinset.find(x=>x.id===b.dataset.rm);
+  /* removing a coin asks twice: first tap arms the ×, second tap removes */
+  if(armedCoin!==gone.id){ armedCoin=gone.id; renderCoinRows(); const nb=document.querySelector(`[data-rm="${gone.id}"]`); nb.classList.add('armed'); nb.setAttribute('aria-label',tx('Tap again to remove {name}',{name:gone.name}));
+    const w=document.createElement('p'); w.className='rmwarn'; w.textContent=tx("Tap × again to remove {name}. Everyone's {name} is changed into the other coins at its value.",{name:gone.name}); nb.closest('.crow').appendChild(w); thud();
+    clearTimeout(armCoinT); armCoinT=setTimeout(()=>{ armedCoin=null; renderCoinRows(); },5000); return; }
+  armedCoin=null; clearTimeout(armCoinT);
   const held=S.chars.map(ch=>{ const w=(ch.coins[gone.id]||0)*gone.value; ch.coins[gone.id]=0; return w; });
   const heldStart=(S.startPurse[gone.id]||0)*gone.value; S.startPurse[gone.id]=0;
   S.coinset=S.coinset.filter(x=>x!==gone);
@@ -1700,11 +1750,20 @@ function replaceTable(next){
   S=migrate(next); applyCoins(); if(!S.titles) S.titles={mode:'ladder', steps:defaultLadder()};
   amt=blank(); recip=null; UNDO.length=0; $('dials').innerHTML=''; buildTyper(); closeTyper(); save();
   syncSettings(); renderAll(false); }
+/* backups: when the last one was made, and how many payments happened since */
+function markBackup(){ S.backup={at:Date.now(), tx:S.txCount||0}; save(); renderBackup(); }
+function ago(t){ const sec=(Date.now()-t)/1000, rf=new Intl.RelativeTimeFormat(LANG,{numeric:'auto'});
+  return sec<60?tx('just now'):sec<3600?rf.format(-Math.round(sec/60),'minute'):sec<86400?rf.format(-Math.round(sec/3600),'hour'):rf.format(-Math.round(sec/86400),'day'); }
+function renderBackup(){ const since=(S.txCount||0)-(S.backup?S.backup.tx:0), due=since>0;
+  $('backupInfo').textContent=(S.backup?tx('Last backup: {when}',{when:ago(S.backup.at)}):tx('No backup yet'))+(since>0?(since===1?tx(' · 1 payment since'):tx(' · {n} payments since',{n:since})):'');
+  $('backupInfo').classList.toggle('due',due); document.querySelector('.ptab[data-panel="savePanel"]').classList.toggle('due',due); }
+const slug=t=>String(t||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+$('tableName').addEventListener('input',e=>{ S.tableName=e.target.value.trim(); save(); });
 const msg=(t,bad)=>{ $('saveMsg').textContent=t; $('saveMsg').style.color=bad?'var(--bad)':'var(--good)'; };
 $('makeCode').addEventListener('click',async()=>{
   const code=await encode(tableData($('codeLedger').checked));
   $('codeOut').value=code; $('codeOut').hidden=false; $('copyCode').hidden=false;
-  $('codeLen').textContent=tx('{n} characters',{n:code.length}); msg(''); chink(D[0]); });
+  $('codeLen').textContent=tx('{n} characters',{n:code.length}); msg(''); chink(D[0]); markBackup(); });
 $('copyCode').addEventListener('click',async()=>{
   try{ await navigator.clipboard.writeText($('codeOut').value); msg(tx('Copied. Keep it somewhere safe, like a note or a message to yourself.')); }
   catch(e){ $('codeOut').focus(); $('codeOut').select(); msg(tx("Selected. Copy it with your device's copy command.")); } });
@@ -1712,35 +1771,36 @@ $('copyCode').addEventListener('click',async()=>{
 let pending=null;
 const loadGuard=guard($('loadCode'),'Tap again to replace this table',null,()=>{ $('loadWarn').hidden=true; });
 function preview(d){ const names=d.chars.filter(c=>!c.gm).map(c=>c.name).join(', ')||tx('no players');
-  $('loadWarn').innerHTML=tx('This replaces the current table with: {names}, {c} coin types, {l} ledger entries.',{names:`<b>${esc(names)}</b>`,c:d.coinset.length,l:(d.log||[]).length}); $('loadWarn').hidden=false; }
+  const info={names:`<b>${esc(names)}</b>`,c:d.coinset.length,l:(d.log||[]).length,table:`<b>${esc(d.tableName||'')}</b>`};
+  $('loadWarn').innerHTML=d.tableName?tx('This replaces the current table with {table}: {names}, {c} coin types, {l} ledger entries.',info):tx('This replaces the current table with: {names}, {c} coin types, {l} ledger entries.',info); $('loadWarn').hidden=false; }
 $('loadCode').addEventListener('click',async()=>{
   if(!$('loadCode').classList.contains('armed')){
     try{ const d=await decode($('codeIn').value); if(!looksLikeTable(d)) throw new Error(tx('The code is readable, but it holds no table.')); pending=d; preview(d); msg(''); }
     catch(e){ pending=null; msg(e.message||tx('That code could not be read. Check that it was copied completely.'),true); thud(); return; } }
-  loadGuard(()=>{ if(!pending) return; replaceTable(pending); pending=null; $('codeIn').value=''; $('loadWarn').hidden=true; msg(tx('Table loaded.')); jingle({[D[0]]:3}); }); });
+  loadGuard(()=>{ if(!pending) return; replaceTable(pending); markBackup(); pending=null; $('codeIn').value=''; $('loadWarn').hidden=true; msg(tx('Table loaded.')); jingle({[D[0]]:3}); }); });
 /* files: a plain .json of the table */
 $('saveFile').addEventListener('click',async()=>{
-  const text=JSON.stringify(tableData(true),null,1), name=`lootpal-${new Date().toLocaleDateString('sv-SE')}.json`;
+  const text=JSON.stringify(tableData(true),null,1), name=`lootpal-${slug(S.tableName)?slug(S.tableName)+'-':''}${new Date().toLocaleDateString('sv-SE')}.json`;
   try{
     const dl=window.claude?.use?await window.claude.use('downloads'):null;
-    if(dl){ await dl.save({filename:name,data:text}); msg(tx('Saved.')); return; }
+    if(dl){ await dl.save({filename:name,data:text}); msg(tx('Saved.')); markBackup(); return; }
     const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:'application/json'})); a.download=name;
-    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000); msg(tx('Saved to your downloads.'));
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000); msg(tx('Saved to your downloads.')); markBackup();
   }catch(e){ if(e&&e.code==='declined') msg(tx('Not saved.'),true); else msg(tx('Saving a file does not work here. Use a save code instead.'),true); } });
 $('loadFile').addEventListener('change',async e=>{
   const f=e.target.files[0]; e.target.value=''; if(!f) return;
   try{ const d=JSON.parse(await f.text()); if(!looksLikeTable(d)) throw 0; pending=d; preview(d);
     $('loadWarn').innerHTML+=` <button class="btn armed" type="button" id="confirmFile">${tx('Replace this table')}</button>`;
-    $('confirmFile').onclick=()=>{ replaceTable(pending); pending=null; $('loadWarn').hidden=true; msg(tx('Table loaded.')); jingle({[D[0]]:3}); };
+    $('confirmFile').onclick=()=>{ replaceTable(pending); markBackup(); pending=null; $('loadWarn').hidden=true; msg(tx('Table loaded.')); jingle({[D[0]]:3}); };
     msg(''); }
   catch(err){ msg(tx('That file is not a LootPal save.'),true); thud(); } });
 
 /* --- reset the example table --- */
-const fullReset=guard($('resetBtn'),'Tap again to reset everything',null,null,3000);
-$('resetBtn').addEventListener('click',()=>fullReset(()=>{ replaceTable(example()); toast(esc(tx('Back to the example table.'))); }));
+const fullReset=guard($('resetBtn'),'Tap again to start over',null,null,3000);
+$('resetBtn').addEventListener('click',()=>fullReset(()=>{ replaceTable(example()); toast(esc(tx('A new table is ready.'))); }));
 
 /* bottom tabs */
-function openPanel(id){ document.querySelectorAll('.ptab').forEach(t=>{ const on=t.dataset.panel===id; t.setAttribute('aria-selected',on); $(t.dataset.panel).hidden=!on; });
+function openPanel(id){ if(id==='savePanel') renderBackup(); document.querySelectorAll('.ptab').forEach(t=>{ const on=t.dataset.panel===id; t.setAttribute('aria-selected',on); $(t.dataset.panel).hidden=!on; });
   $('editCoins').setAttribute('aria-expanded',id==='customPanel'); }
 document.querySelector('.ptabs').addEventListener('click',e=>{ const t=e.target.closest('.ptab'); if(!t) return; tick();
   openPanel(t.getAttribute('aria-selected')==='true'?null:t.dataset.panel); if(!$(t.dataset.panel).hidden) t.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'}); });
@@ -1748,7 +1808,7 @@ document.querySelector('.ptabs').addEventListener('click',e=>{ const t=e.target.
 /* =====================================================================
    11. Start
    ===================================================================== */
-function syncSettings(){ $('npcName').value=S.npcName||''; renderPartyRows(); renderStartPurse(); renderCoinRows(); syncDeedsUI(); syncSoundUI(); syncWeightUI(); renderLadder(); }
+function syncSettings(){ $('npcName').value=S.npcName||''; $('tableName').value=S.tableName||''; renderBackup(); renderPartyRows(); renderStartPurse(); renderCoinRows(); syncDeedsUI(); syncSoundUI(); syncWeightUI(); renderLadder(); }
 /* --- language --- */
 /* the page's own labels: remember each English original once, then show it in the current language */
 const STATIC=[];

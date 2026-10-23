@@ -71,11 +71,15 @@ More GM tools (Split or Each, Mixed bag, Repeat, the GM's book) are described in
 
 LootPal saves itself in the browser it runs in, but browsers can forget, for example when you clear your history. **Make a backup after each session** under the **Save & load** tab:
 
+- **Table name.** Give the table a name, for example *Curse of the Crimson Crown*. It's used in the save file's name and shown when you load a code or file, so you know which campaign it is.
+- **Last backup.** The tab shows when the last backup was made and how many payments happened since. A small gold dot on the Save & load tab means there are payments that aren't backed up yet.
 - **Save code.** A line of letters and numbers holding the whole table. Copy it into a note or a message to yourself.
 - **Save file.** Downloads the table as a small `.json` file.
 - **Load.** Paste a code or pick a file. LootPal shows what it holds and asks before replacing the current table.
 
 Save codes and files also move a table to another phone or browser.
+
+**Start a new table.** At the bottom of **Save & load**: wipes the table and starts fresh with Player 1–3, the standard coins and an empty ledger. Asks twice. Make a save code first if you might want the old table back.
 
 ---
 
@@ -141,7 +145,7 @@ The **Ledger** tab shows the latest entries: who paid whom, what for, and how mu
 
 **Title.** The small label under the name is the wealth title, for example *Comfortable*.
 
-**Below the purse.** Under the leather card you find the purse's **total worth**, shown as small coins, and, if purse weight is switched on, the weight, a description like *Tugs at your belt* and a belt bar that fills from green to red.
+**Status.** Under the leather card, each character has a small status card with tiles: **Wealth** (total worth as small coins, plus the wealth title) and, if purse weight is switched on, **Weight** (the weight, a description like *Tugs at your belt* and a belt bar that fills from green to red). Tap the card's headline to fold it away; folded, it still shows the total worth. The GM has the Game Master's book here instead.
 
 ## 9. Party settings
 
@@ -151,18 +155,17 @@ Under the **Party** tab:
 - **+ Add a party purse.** See [The party purse](#6-the-party-purse).
 - **Starting purse.** What new players start with. Set everything to 0 for empty purses. **Give everyone the starting purse** sets every player's purse to it (asks twice, and can be undone).
 - **Name of the NPC tag.** Change "NPC" to something that fits your world, for example *The Realm* or *Merchants*.
-- **Start over.** Back to the example table (asks twice).
 
 ## 10. Customize
 
 Under the **Customize** tab, or the pencil next to the amount:
 
-**Coins.** Up to six coin types. For each coin: name, short name (used in amounts like *6g 2s*), colour, shape (round, holed, square, triangle, hexagon, diamond) and worth. The cheapest coin is the base and is always worth 1. Every other coin is worth a whole number of base coins, so uneven systems like 12 pence to the shilling work too. Removing a coin, or resetting to gold, silver and copper, changes everyone's coins at their value, so nobody gets richer or poorer.
+**Coins.** Up to six coin types. For each coin: name, short name (used in amounts like *6g 2s*), colour, shape (round, holed, square, triangle, hexagon, diamond) and worth. The cheapest coin is the base and is always worth 1. Every other coin is worth a whole number of base coins, so uneven systems like 12 pence to the shilling work too. Removing a coin (tap × twice), or resetting to gold, silver and copper, changes everyone's coins at their value, so nobody gets richer or poorer.
 
 **Wealth & weight.**
 
 - **Wealth title** (on by default). A ladder of titles from *Penniless* to *Wealthy*. Rename the steps and set the amounts to fit your campaign.
-- **Purse weight** (off by default). Weight, description and belt bar. Set grams or ounces per coin and when the belt is full.
+- **Purse weight** (on by default). Weight, description and belt bar. Set grams or ounces per coin and when the belt is full.
 
 **Deeds** (off by default). Six small achievements per character, such as *First Purchase* or *Dragon's Hoard*, each with its own lute tune.
 

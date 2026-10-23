@@ -6,6 +6,37 @@ LootPal is in **early alpha**. Versions stay below 1.0 until the core is settled
 
 ---
 
+## 0.8.0 · 2026-10-23
+
+### Added
+- **Table name** in Save & load, for example *Curse of the Crimson Crown*. It's used in the save file's name and shown when loading, so you know which campaign a code or file belongs to.
+- **Last backup** reminder: Save & load shows when the last backup was made and how many payments happened since. A small gold dot on the tab means there are payments that aren't backed up yet.
+
+### Changed
+- Save & load explains that a save holds the whole table: players, purses, coins, settings and the ledger.
+
+---
+
+## 0.7.1 · 2026-10-23
+
+### Changed
+- Removing a coin now asks twice. The first tap on × turns it red and explains what happens; tap again within a few seconds to remove.
+- **Start a new table** (formerly *Reset example table*) moved from Party to **Save & load**, next to saving, with a reminder to make a save code first.
+
+---
+
+## 0.7.0 · 2026-10-23
+
+### Added
+- **Status card** under the purse: the character's name with tiles for **Wealth** (total worth as small coins, plus the wealth title) and **Weight** (weight, description, belt bar). With weight off, Wealth takes the full width. More tiles can follow.
+- The status card folds away with a tap on its headline. Folded, it still shows the total worth as small coins. Each device remembers it.
+- Purse weight is on again for new tables, since the status card can be folded away. Existing tables keep their setting.
+
+### Changed
+- The round buttons (receipt, 123, pencil) glow pale silver when open, so gold stays with the payment itself.
+
+---
+
 ## 0.6.1 · 2026-10-23
 
 ### Changed
