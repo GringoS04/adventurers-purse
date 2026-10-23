@@ -6,6 +6,20 @@ LootPal is in **early alpha**. The middle number marks milestones (for example s
 
 ---
 
+## 0.2.4 · 2026-10-23
+
+### Changed
+- The pouch is now oiled saddle-brown leather instead of red, in the header and in the app icon, so it sits calmly with the rest of the app.
+
+---
+
+## 0.2.3 · 2026-10-23
+
+### Added
+- The pouch from the app icon now sits beside the LootPal wordmark in the header.
+
+---
+
 ## 0.2.2 · 2026-10-23
 
 ### Added
