@@ -110,9 +110,10 @@ h1 span{color:var(--brass)}
 .who .gmmodes{position:relative; touch-action:pan-y}
 .who .gmmodes::before{content:""; position:absolute; top:3px; bottom:3px; left:3px; width:calc(50% - 4.5px); border-radius:11px;
   transform:translateX(calc(var(--on,0) * (100% + 3px))); transition:transform .3s cubic-bezier(.3,1.25,.5,1);
-  background:var(--leather-2); box-shadow:inset 0 0 0 1px rgba(255,220,170,.14)}
+  background:linear-gradient(180deg,#5a3a26,var(--leather-2)); box-shadow:inset 0 0 0 1.5px var(--brass), 0 0 12px rgba(227,179,63,.35), 0 0 3px rgba(227,179,63,.5)}
 .who .gmmodes .mode{position:relative; z-index:1; transition:color .3s}
-.who .gmmodes .mode[aria-selected="true"]{background:none; box-shadow:none}
+.who .gmmodes .mode[aria-selected="true"]{background:none; box-shadow:none; color:#fff3dc; text-shadow:0 0 8px rgba(227,179,63,.45)}
+.who .gmmodes .mode:not([aria-selected="true"]){opacity:.7}
 @media (prefers-reduced-motion: reduce){ .who .gmmodes::before{transition:none} }
 /* as tall as the name and title together */
 .who .gmmodes{align-self:stretch; align-items:stretch; min-height:46px; grid-template-columns:repeat(2,minmax(0,1fr))!important}   /* Pay and Give, the main actions, never narrower than Receive and Take */
@@ -159,7 +160,8 @@ h1 span{color:var(--brass)}
 .typer .f:focus-within{border-color:var(--brass)}
 .typer input{width:100%; min-width:0; background:transparent; border:0; font-size:22px; font-weight:700; text-align:right; font-variant-numeric:tabular-nums; outline:none; -moz-appearance:textfield}
 .typer input::-webkit-outer-spin-button,.typer input::-webkit-inner-spin-button{-webkit-appearance:none; margin:0}
-.typer .done{grid-column:1/-1; border:0; border-radius:12px; padding:12px 14px; font-weight:700; background:var(--brass); color:var(--brass-ink)}
+.typer .done{grid-column:1/-1; border:0; border-radius:12px; padding:12px 14px; font-family:var(--f-sc); font-weight:700; letter-spacing:.08em; font-size:16px;
+  background:linear-gradient(180deg,#5a3a26,var(--leather-2)); color:#fff3dc; text-shadow:0 0 8px rgba(227,179,63,.45); box-shadow:inset 0 0 0 1.5px var(--brass), 0 0 12px rgba(227,179,63,.35), 0 0 3px rgba(227,179,63,.5)}
 .notebox{display:flex; flex-direction:column; gap:6px}
 .noteBtn svg{width:19px; height:19px; display:block; margin:auto}
 .quick{display:flex; flex-wrap:wrap; gap:6px}
@@ -224,7 +226,7 @@ h1 span{color:var(--brass)}
 .recips{display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding:2px; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none}
 .recip{flex:none; display:flex; align-items:center; gap:8px; padding:5px 14px 5px 5px; border-radius:999px; background:rgba(0,0,0,.28); border:1.5px solid rgba(255,220,170,.12); color:var(--muted); transition:background .15s, border-color .15s, color .15s}
 .recip .av{width:30px; height:30px; font-size:18px; transition:background .15s, color .15s}
-.recip[aria-pressed="true"]{background:rgba(217,164,65,.22); border-color:var(--brass); color:var(--ink); box-shadow:0 0 0 3px rgba(217,164,65,.15)}
+.recip[aria-pressed="true"]{background:rgba(217,164,65,.22); border-color:var(--brass); color:var(--ink); box-shadow:0 0 0 3px rgba(217,164,65,.15), 0 0 12px rgba(227,179,63,.3)}
 .recip[aria-pressed="true"] .av{background:var(--brass); color:var(--brass-ink); font-size:0}
 .recip[aria-pressed="true"] .av::after{content:"✓"; font-family:var(--f-body); font-size:16px; font-weight:700}
 .recip.npc .av{background:#23404a; color:#9fd3e3}
@@ -441,6 +443,27 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
 /* iPhones zoom into any field with text under 16px: keep the small fields at 16px on touch screens */
 @supports (-webkit-touch-callout:none){ .note,.field,.code{font-size:16px!important} }
 @media (pointer:coarse){ .note,.field,.code{font-size:16px!important} }
+/* ===== Calm palette: gold for the payment (slide knob, Pay | Receive, who gets it), primary buttons, the round buttons,
+   the settings, the weight icon, the logo and deeds.
+   "Selected" is pale parchment, small accents are muted bronze. Metal colours otherwise mean coins.
+   Remove the class "calm" on <html> to go back to the all-gold look. ===== */
+html.calm{--sel:#ecdfc6; --sel-glow:rgba(236,223,198,.28); --sel-soft:rgba(236,223,198,.12); --acc:#c4956c; --acc-bg:#5e4130; --acc-ink:#f3dfc4}
+html.calm :focus-visible{outline-color:var(--sel)}
+html.calm .icon-btn[aria-pressed="true"]{color:var(--acc)}
+html.calm .chip .av, html.calm .recip .av, html.calm .prow .av{color:var(--acc)}
+html.calm .chip[aria-current="true"]{border-color:var(--sel); box-shadow:0 0 10px var(--sel-glow)}
+html.calm .who .nm:focus{box-shadow:0 2px 0 var(--sel)}
+html.calm .who .rk{background:var(--acc-bg); color:var(--acc-ink); box-shadow:inset 0 0 0 1px rgba(196,149,108,.45)}
+html.calm .repeat{border-color:var(--acc); background:rgba(196,149,108,.10); color:var(--acc-ink)}
+html.calm .quick button[aria-pressed="true"]{background:var(--sel-soft); color:var(--ink); border-color:var(--sel); font-weight:700}
+html.calm .recip.party .av{background:var(--acc-bg); color:var(--acc-ink)}
+html.calm .recip[aria-pressed="true"]:not(.npc) .av{background:var(--brass); color:var(--brass-ink)}
+html.calm .mixsw[aria-checked="true"]{border-color:var(--sel)}
+html.calm .mixsw[aria-checked="true"] .knobx{background:var(--sel)}
+html.calm .mixsw[aria-checked="true"] .knobx::after{background:#2a1d14}
+html.calm .eachsw button[aria-pressed="true"]{background:var(--sel); color:#2a1d14}
+html.calm .toast button{border-color:var(--sel); color:var(--sel)}
+
 </style>
 <style>:root{padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)} img{max-width:100%}</style>
 </head>
@@ -472,10 +495,10 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
       <button class="rbtn noteBtn" id="noteBtn" type="button" aria-expanded="false" aria-label="Who and what for" title="Who and what for, for the ledger"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="7" cy="6" r="2.8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.8 17c0-3.3 2.3-5.6 5.2-5.6 1.6 0 3 .7 3.9 1.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14.2 10.6c-1.7 1.3-2.4 3.2-2 4.9.4 1.3 1.6 2 3.2 2s2.8-.7 3.2-2c.4-1.7-.3-3.6-2-4.9z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13.6 9.4l1.8 1.1 1.8-1.1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="rbtn editBtn" id="editCoins" type="button" aria-expanded="false" aria-label="Edit or add coins" title="Edit or add coins"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13.5 3.5l3 3L7 16H4v-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M11.5 5.5l3 3" stroke="currentColor" stroke-width="1.6"/></svg></button>
       <button class="rbtn clear" id="clearBtn" type="button" aria-label="Clear amount" hidden>×</button>
-      <form class="typer" id="typer" hidden>
+      <div class="typer" id="typer" hidden>
         <span id="typerFields" style="display:contents"></span>
-        <button class="done" type="submit">Done</button>
-      </form>
+        <button class="done" id="typerDone" type="button">Done</button>
+      </div>
     </div>
     <div class="notebox" id="notebox" hidden>
       <div class="nf" id="toTagRow"><span>To whom?</span><div class="tocol"><div class="recips" id="toTags"></div><span class="tohint" id="toHint"></span></div></div>
@@ -543,10 +566,10 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
     <div class="sbody flat">
       <h4>Who's at the table</h4>
       <div id="partyRows" style="display:flex; flex-direction:column; gap:6px"></div>
-      <form id="addForm" class="row">
-        <input class="field" id="newName" placeholder="New player's name" maxlength="24" style="flex:1; width:auto">
-        <button class="btn" type="submit">+ Add</button>
-      </form>
+      <div id="addForm" class="row">
+        <input class="field" id="newName" placeholder="New player's name" maxlength="24" enterkeyhint="done" style="flex:1; width:auto">
+        <button class="btn" id="addBtn" type="button">+ Add</button>
+      </div>
       <div class="row"><button class="btn" id="addPot" type="button">+ Add a party purse</button></div>
       <p class="note-s">Leave the name empty to get "Player 4", "Player 5" and so on. You can also rename a character by tapping their name on the purse.</p>
       <h4>Starting purse</h4>
@@ -643,6 +666,7 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
 <script>
 (() => {
 'use strict';
+document.documentElement.classList.add('calm');   /* calm palette; remove this line for the all-gold look */
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1425,7 +1449,9 @@ function openTyper(){ if(!$('typer').hidden) return; $('typer').hidden=false; $(
 function closeTyper(){ $('typer').hidden=true; $('typeBtn').setAttribute('aria-expanded','false'); }
 $('typeBtn').addEventListener('click',()=>$('typer').hidden?openTyper():closeTyper());
 $('big').addEventListener('click',openTyper);
-$('typer').addEventListener('submit',e=>{ e.preventDefault(); closeTyper(); if(total(amt)) chink(D[0]); });
+function typerDone(){ closeTyper(); if(total(amt)) chink(D[0]); }
+$('typerDone').addEventListener('click',typerDone);
+$('typer').addEventListener('keydown',e=>{ if(e.key==='Enter'&&e.target.tagName==='INPUT'){ e.preventDefault(); typerDone(); } });
 $('clearBtn').addEventListener('click',()=>{ amt=blank(); for(const d of D) $('t'+d).value=''; tick(); renderConsole(false); });
 /* note */
 /* "For": what it's for, and to/from whom when the other side is an NPC */
@@ -1518,10 +1544,13 @@ $('partyRows').addEventListener('click',e=>{ const b=e.target.closest('[data-prm
 /* the starting purse is written in gold/silver/copper slots; if those coins were changed, it is converted by value */
 /* the starting purse is a count of each coin; only coins in use count */
 function startPurse(){ const o=blank(); for(const d of D) o[d]=S.startPurse[d]||0; return o; }
-$('addForm').addEventListener('submit',e=>{ e.preventDefault();
+function addPlayer(){
   let n=$('newName').value.trim(); if(!n){ let k=players().length+1; while(S.chars.some(c=>c.name===pname(k))) k++; n=pname(k); }
-  const id='c'+Date.now().toString(36); S.chars.splice(S.chars.findIndex(c=>c.gm),0,{id,name:n,coins:startPurse(),ach:[]});
-  S.active=id; $('newName').value=''; save(); renderPartyRows(); renderAll(false); toast(esc(total(startPurse())?tx('{name} joins the party with {amt}.',{name:n,amt:fmt(total(startPurse()))}):tx('{name} joins the party with an empty purse.',{name:n}))); });
+  /* new players line up after the other players, before the party purse and the GM */
+  const id='c'+Date.now().toString(36); S.chars.splice(S.chars.findIndex(c=>c.gm||c.pot),0,{id,name:n,coins:startPurse(),ach:[]});
+  S.active=id; $('newName').value=''; save(); renderPartyRows(); renderAll(false); toast(esc(total(startPurse())?tx('{name} joins the party with {amt}.',{name:n,amt:fmt(total(startPurse()))}):tx('{name} joins the party with an empty purse.',{name:n}))); }
+$('addBtn').addEventListener('click',addPlayer);
+$('newName').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); addPlayer(); } });
 $('npcName').addEventListener('input',e=>{ S.npcName=e.target.value.trim(); save(); renderMode(); });
 
 /* --- starting purse --- */

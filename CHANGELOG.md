@@ -6,6 +6,25 @@ LootPal is in **early alpha**. Versions stay below 1.0 until the core is settled
 
 ---
 
+## 0.6.1 · 2026-10-23
+
+### Changed
+- Gold is back on the payment itself: Pay | Receive and Give | Take, and the selected tag for who gets it (players, Whole party). Also on the round buttons (receipt, 123, pencil), the settings and the weight icon.
+- The **Done** button under the typed amount now looks like the Pay | Receive switch (leather with a glowing gold border) instead of solid gold.
+- New players are added after the other players, before the party purse.
+
+### Fixed
+- Adding a player did nothing in some browsers (including the claude.ai version). The same problem stopped **Done** from closing the typed amount. Both work now, by tap and by Enter.
+
+---
+
+## 0.6.0 · 2026-10-23
+
+### Changed
+- Calmer colours. Gold is kept for the main action (slide knob, Done, primary buttons), the logo and deeds. Selected things (character, Pay | Receive, tags, open buttons, active tab) glow pale parchment, and small accents like the wealth title are muted bronze. Gold, silver and copper on screen now mostly mean coins.
+
+---
+
 ## 0.5.0 · 2026-10-23
 
 ### Changed
@@ -13,7 +32,7 @@ LootPal is in **early alpha**. Versions stay below 1.0 until the core is settled
 - **Total worth** and **purse weight** moved out of the leather card into their own line below it. The belt bar now runs the full width.
 - Long names shrink a little to fit next to Pay | Receive.
 - Pay | Receive (and the GM's Give | Take) made bigger: as tall as the name and title together. Pay and Give, the actions used most, are never narrower than Receive and Take, in any language.
-- Pay | Receive and Give | Take now work like a switch: the highlight glides to the chosen side, and you can swipe across the switch as well as tap it.
+- Pay | Receive and Give | Take now work like a switch: the highlight glides to the chosen side with a glowing gold border, and you can swipe across the switch as well as tap it.
 - Total worth shown as small coins, like the big amount.
 - Amounts in the line under the amount, the ledger and the GM's book now show each coin in its own colour, so *6g 2s 15c* is easier to read.
 
