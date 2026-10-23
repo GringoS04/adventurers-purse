@@ -170,6 +170,7 @@ Under the **Customize** tab, or the pencil next to the amount:
 
 - **One table per device.** Each phone or browser keeps its own table. Syncing between phones is planned, but not there yet. Until then, move tables with a save code or file.
 - **Languages.** LootPal speaks English and German. It picks the language of the phone or browser, and you can switch under **Customize → Language**. The choice is kept per device, so a German player and an English GM can share a save code. Names LootPal gave, like *Player 1* or *Gold*, change with the language. Names you chose stay as they are.
+- **On your home screen.** Open LootPal in the browser and choose **Add to Home Screen** (iPhone: the share button in Safari; Android: the ⋮ menu in Chrome). It gets the LootPal icon and opens full screen like an app. On iPhone, the home-screen app keeps its own table, separate from Safari, so move an existing table over with a save code.
 - **Your data stays with you.** Nothing is sent anywhere. The only thing loaded from the internet is the font.
 - **Online and claude.ai versions are separate.** Tables don't carry over between them, except through a save code or file.
 - **Shorter save codes.** Untick *Include the ledger* when making a save code.
@@ -178,7 +179,7 @@ Under the **Customize** tab, or the pencil next to the amount:
 ## 12. Put it online with GitHub Pages
 
 1. Create a new repository on GitHub, for example `lootpal`.
-2. Click **Add file → Upload files** and upload `index.html`, `lootpal-logo.png` and this README. Commit.
+2. Click **Add file → Upload files** and upload all the files: `index.html`, `manifest.webmanifest`, the icons (`apple-touch-icon.png`, `favicon.png`, `icon-192.png`, `icon-512.png`, `icon-maskable-512.png`), `lootpal-logo.png`, this README and the CHANGELOG. Commit.
 3. Go to **Settings → Pages**.
 4. Under **Build and deployment**, set **Source** to *Deploy from a branch*, pick the `main` branch and the `/ (root)` folder, then **Save**.
 5. After a minute or two, LootPal is live at `https://<your-username>.github.io/lootpal/`.

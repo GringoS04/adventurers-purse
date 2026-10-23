@@ -6,6 +6,13 @@ LootPal is in **early alpha**. Versions stay below 1.0 until the core is settled
 
 ---
 
+## 0.4.0 · 2026-10-23
+
+### Added
+- App icon (leather pouch) for the home screen and the browser tab. Add LootPal to the home screen and it opens full screen like an app.
+
+---
+
 ## 0.3.0 · 2026-10-23
 
 ### Added
