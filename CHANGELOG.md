@@ -10,6 +10,7 @@ LootPal is in **early alpha**. The middle number marks milestones (for example s
 
 ### Changed
 - The pouch is now oiled saddle-brown leather instead of red, in the header and in the app icon, so it sits calmly with the rest of the app.
+- New app icon: the pouch on forest-green leather with gold-thread stitching, without the metal frame. It stands out on a home screen and fits every phone's icon shape.
 
 ---
 
