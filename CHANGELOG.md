@@ -6,6 +6,19 @@ LootPal is in **early alpha**. Versions stay below 1.0 until the core is settled
 
 ---
 
+## 0.5.0 · 2026-10-23
+
+### Changed
+- **Pay | Receive** moved up next to the character's name, like the GM's Give | Take. The slide bar sits higher, and small phones need less scrolling.
+- **Total worth** and **purse weight** moved out of the leather card into their own line below it. The belt bar now runs the full width.
+- Long names shrink a little to fit next to Pay | Receive.
+- Pay | Receive (and the GM's Give | Take) made bigger: as tall as the name and title together. Pay and Give, the actions used most, are never narrower than Receive and Take, in any language.
+- Pay | Receive and Give | Take now work like a switch: the highlight glides to the chosen side, and you can swipe across the switch as well as tap it.
+- Total worth shown as small coins, like the big amount.
+- Amounts in the line under the amount, the ledger and the GM's book now show each coin in its own colour, so *6g 2s 15c* is easier to read.
+
+---
+
 ## 0.4.0 · 2026-10-23
 
 ### Added

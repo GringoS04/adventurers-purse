@@ -46,7 +46,7 @@ To rename someone, tap their name on the purse and type. Add or remove players u
 
 ## 2. Paying and receiving
 
-Choose **Pay** or **Receive** above the amount.
+Choose **Pay** or **Receive** next to the character's name.
 
 - **Tap** a coin to add one. **✕** clears the amount.
 - **Slide** to confirm. Nothing happens until you slide all the way.
@@ -131,13 +131,17 @@ The **Ledger** tab shows the latest entries: who paid whom, what for, and how mu
 - **Hold** a coin to count up, faster and faster.
 - **Drag** up or down on a coin to wind the amount.
 - **123** opens fields to type the amount. Handy for big treasure.
-- **Swipe** sideways across the amount to switch between Pay and Receive.
+- **Swipe** across the Pay | Receive switch (or the GM's Give | Take), or sideways across the amount, to change sides.
 
 **The round buttons.** Receipt (left top), 123 (left bottom), pencil to edit coins (right top), ✕ to clear (right bottom). A button turns bronze with a gold icon while it is open.
 
 **Stacks.** Every coin in the purse is drawn, ten to a stack. Every full fifty goes into a small pouch with a count, so 137 silver shows two pouches (×2) and 37 loose coins. While you count an amount, coins that will leave fade out, change you get back shows as dashed coins, and the number below shows the change, for example **10 → 9**.
 
-**Title and weight.** The small label under the name is the wealth title, for example *Comfortable*. If purse weight is switched on, a line shows the weight, a description like *Tugs at your belt* and a belt bar.
+**Coloured amounts.** Amounts in text, such as the ledger, show each coin in its own colour, so *6g 2s 15c* is easy to read at a glance.
+
+**Title.** The small label under the name is the wealth title, for example *Comfortable*.
+
+**Below the purse.** Under the leather card you find the purse's **total worth**, shown as small coins, and, if purse weight is switched on, the weight, a description like *Tugs at your belt* and a belt bar that fills from green to red.
 
 ## 9. Party settings
 

@@ -90,21 +90,35 @@ h1 span{color:var(--brass)}
 .who .nm{font-family:var(--f-display); font-weight:800; font-size:clamp(28px,8vw,36px); line-height:1; letter-spacing:.005em; cursor:text}
 .who .nm:focus{outline:none; box-shadow:0 2px 0 var(--brass)}
 .who .rk{display:inline-block; margin-top:6px; font-family:var(--f-sc); font-size:10.5px; line-height:1.4; letter-spacing:.08em; color:var(--brass-ink); background:var(--brass); padding:1px 8px; border-radius:999px}
-.worth{text-align:right}
+.strip{display:flex; flex-direction:column; gap:8px; padding:2px 14px 4px}
+.worth{display:flex; flex-direction:column; align-items:flex-start; gap:6px}
 .worth .l{font-family:var(--f-sc); font-size:12px; letter-spacing:.12em; color:var(--muted)}
-.worth .v{font-size:20px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1.1}
+.worth .v{display:flex; flex-wrap:wrap; align-items:center; row-gap:6px; position:relative}
 
-.weight{display:flex; align-items:center; gap:10px; padding:0 4px; font-size:14px; color:var(--muted)}
+.weight{display:grid; grid-template-columns:auto auto minmax(0,1fr); align-items:center; column-gap:10px; row-gap:7px; font-size:14px; color:var(--muted)}
 .weight svg{width:16px; height:16px; flex:none; color:var(--brass)}
 .weight .kg{font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; white-space:nowrap}
-.weight .say{font-style:italic; min-width:0}
-.sag{flex:1; min-width:60px; max-width:140px; height:8px; border-radius:99px; background:rgba(0,0,0,.35); overflow:hidden; margin-left:auto}
-.sag i{display:block; height:100%; width:0; border-radius:99px; background:linear-gradient(90deg, var(--good), var(--brass) 55%, var(--bad)); background-size:140px 100%; transition:width .5s cubic-bezier(.3,1.3,.5,1)}
+.weight .say{font-style:italic; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.sag{grid-column:1 / -1; height:8px; border-radius:99px; background:rgba(0,0,0,.4); box-shadow:inset 0 0 0 1px rgba(255,220,170,.10); overflow:hidden}
+.sag i{display:block; height:100%; width:0; border-radius:99px; background:linear-gradient(90deg, var(--good), var(--brass) 55%, var(--bad)); background-size:var(--sagw,340px) 100%; transition:width .5s cubic-bezier(.3,1.3,.5,1)}
 
 .repeat{border:1px dashed var(--brass); background:rgba(217,164,65,.1); color:var(--brass); border-radius:999px; padding:3px 12px; font-size:13.5px; max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .gmmodes{grid-template-columns:repeat(2,auto)!important; padding:3px; gap:3px; align-self:center}
 .gmmodes .mode{padding:7px 14px; font-size:14px}
-.is-gm .who{flex-wrap:nowrap; align-items:center} .is-gm .who > div:first-child{min-width:0} .is-gm .who .nm{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.who .rk{max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; vertical-align:top}
+/* Pay | Receive and Give | Take: the raised leather highlight glides to the chosen side (tap, or swipe across) */
+.who .gmmodes{position:relative; touch-action:pan-y}
+.who .gmmodes::before{content:""; position:absolute; top:3px; bottom:3px; left:3px; width:calc(50% - 4.5px); border-radius:11px;
+  transform:translateX(calc(var(--on,0) * (100% + 3px))); transition:transform .3s cubic-bezier(.3,1.25,.5,1);
+  background:var(--leather-2); box-shadow:inset 0 0 0 1px rgba(255,220,170,.14)}
+.who .gmmodes .mode{position:relative; z-index:1; transition:color .3s}
+.who .gmmodes .mode[aria-selected="true"]{background:none; box-shadow:none}
+@media (prefers-reduced-motion: reduce){ .who .gmmodes::before{transition:none} }
+/* as tall as the name and title together */
+.who .gmmodes{align-self:stretch; align-items:stretch; min-height:46px; grid-template-columns:repeat(2,minmax(0,1fr))!important}   /* Pay and Give, the main actions, never narrower than Receive and Take */
+.who .gmmodes .mode{display:flex; align-items:center; justify-content:center; padding:0 16px; font-size:15.5px}
+@media (max-width:400px){ .who .gmmodes .mode{padding:0 11px; font-size:14.5px; letter-spacing:.03em} }
+.who{flex-wrap:nowrap; align-items:stretch} .who > div:first-child{min-width:0} .who .nm{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .ptab{overflow-wrap:break-word; hyphens:auto} html[lang=de] .ptab{letter-spacing:0; font-size:12.5px; padding-left:0; padding-right:0}
 .modes{display:grid; grid-template-columns:repeat(2,1fr); border-radius:14px; padding:4px; gap:4px; background:rgba(0,0,0,.35)}
 .mode{background:none; border:0; padding:11px 4px; border-radius:11px; font-family:var(--f-sc); font-weight:700; letter-spacing:.08em; color:var(--muted); font-size:16px}
@@ -114,6 +128,11 @@ h1 span{color:var(--brass)}
 .readout{position:relative; text-align:center; padding:6px 40px 0}
 .big{font-size:clamp(56px,17vw,84px); font-weight:700; line-height:1; font-variant-numeric:tabular-nums; letter-spacing:-.01em; min-height:1em; cursor:text}
 .big{display:flex; justify-content:center; align-items:center; flex-wrap:wrap; column-gap:.28em}
+.am{white-space:nowrap; font-weight:700; font-variant-numeric:tabular-nums}
+.am i{font-style:normal; font-size:.82em; margin-left:.04em; opacity:.85}
+.wc{display:inline-flex; align-items:center; gap:4px; font-size:22px; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink); margin-right:14px; line-height:1}
+.wc::before{content:attr(data-n)} .wc .bc{width:17px; height:17px; transform:none}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
 .amt-part{display:inline-flex; align-items:center; gap:.1em; white-space:nowrap}
 /* a small coin in the coin's own colour and shape, standing in for the letter */
 .bc{display:inline-block; width:.48em; height:.48em; flex:none; transform:translateY(.04em);
@@ -371,8 +390,8 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   .console::before{inset:5px; border-radius:15px}
   .who .nm{font-size:24px}
   .who .rk{margin-top:3px; font-size:9.5px; padding:0 7px}
-  .worth .l{font-size:10px} .worth .v{font-size:17px}
-  .weight{font-size:12px; margin-top:-4px} .sag{height:6px}
+  .worth .l{font-size:11px}
+  .weight{font-size:13px} .sag{height:6px}
   .mode{padding:7px 4px; font-size:14px}
   .readout{padding:0 36px}
   .big{font-size:clamp(40px,12vw,54px)}
@@ -405,7 +424,6 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   .console{gap:7px; padding-top:11px}
   .who > div:first-child{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
   .who .rk{margin-top:0}
-  .weight{margin-top:-3px}
   .mode{padding:5px 4px}
   .big{font-size:40px}
   .sub{margin-top:0}
@@ -414,12 +432,12 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   .stackzone{height:24px; margin-top:4px}
   .have .n{font-size:20px} .dial .lbl{font-size:9.5px; line-height:1.1}
   .slider{height:60px} .knob{width:50px; height:50px} .slider .txt{padding-left:64px; font-size:16px}
-  .is-gm .who .rk{display:none} .is-gm .who{flex-wrap:nowrap; align-items:center}
+  .is-gm .who .rk{display:none}
   .recips.multi{gap:5px} .gmrow{gap:5px} .recip{padding:2px 9px 2px 2px; font-size:13.5px} .recip .av{width:22px; height:22px; font-size:13px}
   .eachsw button{padding:3px 10px} .mixsw{padding:3px 10px 3px 4px; font-size:13px}
 }
 @media (prefers-reduced-motion: reduce){ .console.shake,.chip.pulse,.toast,.big.pop,.have.bump .n,.stk.drop,.slider .txt{animation:none} }
-@media (max-width:360px){ .ptab{font-size:11.5px; letter-spacing:0} html[lang=de] .ptab{font-size:11px} .gmmodes .mode{padding:6px 9px; font-size:13px} .gmrow.how{flex-wrap:nowrap; gap:4px} .eachsw button{padding:3px 8px; font-size:12px; letter-spacing:.03em} .mixsw{padding:3px 8px 3px 4px; font-size:12.5px; gap:5px} .mixsw .knobx{width:26px} .slider .txt{padding-right:10px} }
+@media (max-width:360px){ .ptab{font-size:11.5px; letter-spacing:0} html[lang=de] .ptab{font-size:11px} .who .gmmodes .mode{padding:0 9px; font-size:13.5px} .gmrow.how{flex-wrap:nowrap; gap:4px} .eachsw button{padding:3px 8px; font-size:12px; letter-spacing:.03em} .mixsw{padding:3px 8px 3px 4px; font-size:12.5px; gap:5px} .mixsw .knobx{width:26px} .slider .txt{padding-right:10px} }
 /* iPhones zoom into any field with text under 16px: keep the small fields at 16px on touch screens */
 @supports (-webkit-touch-callout:none){ .note,.field,.code{font-size:16px!important} }
 @media (pointer:coarse){ .note,.field,.code{font-size:16px!important} }
@@ -438,19 +456,14 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   <section class="console" id="console">
     <div class="who">
       <div><div class="nm" id="pName" contenteditable="true" spellcheck="false" title="Tap to rename" role="textbox" aria-label="Character name"></div><span class="rk" id="pRank"></span></div>
-      <div class="worth" id="worthBox"><div class="l">Total worth</div><div class="v" id="pWorth"></div></div>
       <div class="modes gmmodes" id="gmModes" role="tablist" aria-label="Give or take" hidden>
         <button class="mode" role="tab" data-gm="give">Give</button>
         <button class="mode" role="tab" data-gm="take">Take</button>
       </div>
-    </div>
-    <div class="weight" id="weight" title="Coins weigh something. Copper is the heaviest to carry around.">
-      <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M8 2v12M4 14h8M3 4h10M3 4l-2 5h4zM13 4l-2 5h4z"/></svg>
-      <span class="kg" id="pKg"></span><span class="say" id="pSay"></span><span class="sag" aria-hidden="true"><i id="pSag"></i></span>
-    </div>
-    <div class="modes" id="modes" role="tablist" aria-label="What happens">
-      <button class="mode" role="tab" data-mode="pay">Pay</button>
-      <button class="mode" role="tab" data-mode="get">Receive</button>
+      <div class="modes gmmodes" id="modes" role="tablist" aria-label="What happens">
+        <button class="mode" role="tab" data-mode="pay">Pay</button>
+        <button class="mode" role="tab" data-mode="get">Receive</button>
+      </div>
     </div>
     <div class="readout" id="readout">
       <div class="big zero" id="big" aria-live="polite">0</div>
@@ -479,6 +492,14 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
       <button class="knob" id="knob" aria-label="Slide to confirm">›</button>
     </div>
   </section>
+
+  <div class="strip" id="strip">
+    <div class="worth" id="worthBox"><span class="l">Total worth</span><span class="v" id="pWorth"></span></div>
+    <div class="weight" id="weight" title="Coins weigh something. Copper is the heaviest to carry around.">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M8 2v12M4 14h8M3 4h10M3 4l-2 5h4zM13 4l-2 5h4z"/></svg>
+      <span class="kg" id="pKg"></span><span class="say" id="pSay"></span><span class="sag" aria-hidden="true"><i id="pSag"></i></span>
+    </div>
+  </div>
 
   <section class="gmbook" id="gmBook" hidden>
     <h2>The Game Master's book</h2>
@@ -652,7 +673,7 @@ const DICT={de:{
 'Not a jingle':'Kein Klimpern', 'Light as a feather':'Federleicht', 'Jingles softly':'Klimpert leise', 'A satisfying weight':'Ein angenehmes Gewicht',
 'Tugs at your belt':'Zieht am Gürtel', 'You walk with a lean':'Du gehst schon schief', 'Needs its own mule':'Braucht einen eigenen Esel',
 'Penniless':'Mittellos', 'Scraping by':'Knapp bei Kasse', 'Modest':'Bescheiden', 'Comfortable':'Gut versorgt', 'Prosperous':'Wohlhabend', 'Wealthy':'Reich', 'New title':'Neuer Titel',
-'Keeper of the Coffers':'Hütet die Schatzkammer', 'Shared by the party':'Gehört der ganzen Gruppe', 'Unlimited':'Unbegrenzt', 'nothing':'nichts',
+'Keeper of the Coffers':'Hütet die Schatzkammer', 'Shared by the party':'Gemeinsame Kasse', 'Unlimited':'Unbegrenzt', 'nothing':'nichts',
 /* purse */
 'Choose character':'Figur wählen', 'Tap to rename':'Tippen zum Umbenennen', 'Character name':'Name der Figur', 'Total worth':'Gesamtwert',
 'Give or take':'Geben oder nehmen', 'Give':'Geben', 'Take':'Nehmen', 'What happens':'Was passiert', 'Pay':'Zahlen', 'Receive':'Erhalten',
@@ -865,6 +886,12 @@ const total=co=>D.reduce((t,d)=>t+(co[d]||0)*val(d),0);
 const topV=()=>val(D[0]);
 const brk=a=>{ const o=blank(); for(const d of D){ o[d]=Math.floor(a/val(d)); a-=o[d]*val(d); } return o; };
 const tagOf=d=>COINS[d].tag||d;
+/* amounts in each coin's own colour: easier to read than 6g 2s 15c in one colour */
+const fmtH=a=>{ const one=(n,d)=>`<span class="am u${d}">${n}<i>${esc(tagOf(d))}</i></span>`;
+  if(a<=0) return one(0,D[D.length-1]); const b=brk(a); return D.filter(d=>b[d]).map(d=>one(b[d],d)).join(' '); };
+/* amounts as small coins (total worth); the plain text stays readable for screen readers */
+const fmtCoins=a=>{ const b=brk(Math.max(0,a)), ds=a>0?D.filter(d=>b[d]):[D[D.length-1]];
+  return ds.map(d=>`<span class="wc" aria-hidden="true" data-n="${b[d]||0}"><span class="bc d-${d}"></span></span>`).join('')+`<span class="sr">${esc(fmt(a))}</span>`; };
 const fmt=a=>{ if(a<=0) return '0'+tagOf(D[D.length-1]); const b=brk(a); return D.filter(d=>b[d]).map(d=>b[d]+tagOf(d)).join(' '); };
 
 /* Pay `cost` from `coins`: hand over what fits, break one bigger coin if needed and get change back.
@@ -1056,12 +1083,13 @@ function renderParty(){
     +`<button class="chip add" id="addChip" type="button">${tx('+ Add')}</button>`; }
 function renderHeader(){
   const c=cur();
-  if(document.activeElement!==$('pName')) $('pName').textContent=c.name;
+  if(document.activeElement!==$('pName')){ $('pName').textContent=c.name; fitName(); }
   $('pRank').textContent=c.gm?tx('Keeper of the Coffers'):c.pot?tx('Shared by the party'):rank(c.coins); $('pRank').hidden=!c.gm&&!c.pot&&S.titles.mode==='off';
-  $('pWorth').textContent=c.gm?tx('Unlimited'):fmt(total(c.coins));
+  $('pWorth').innerHTML=c.gm?esc(tx('Unlimited')):fmtCoins(total(c.coins));
   $('weight').hidden=!!c.gm||!W().show;
   const kg=weight(c.coins); $('pKg').textContent=kgTxt(kg); $('pSay').textContent=heft(kg);
-  $('pSag').style.width=Math.min(100,kg/W().maxKg*100)+'%'; }
+  $('pSag').style.width=Math.min(100,kg/W().maxKg*100)+'%';
+  const tw=$('pSag').parentElement.clientWidth; if(tw) $('pSag').style.setProperty('--sagw',tw+'px'); }   /* green to red along the whole belt */
 const POUCH_SVG=`<svg viewBox="0 0 30 36" aria-hidden="true"><path d="M9 9c-5 4-8 11-7 17 1 6 6 9 13 9s12-3 13-9c1-6-2-13-7-17z" fill="#5a3722" stroke="#2a170c" stroke-width="1.2"/><path d="M10 9c-1-3 0-6 2-6l3 2 3-2c2 0 3 3 2 6z" fill="#6b4329" stroke="#2a170c" stroke-width="1.2"/><path d="M8 10h14" stroke="var(--base)" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="11" cy="21" rx="3" ry="4" fill="rgba(255,220,170,.10)"/></svg>`;
 /* One drawn coin per coin, ten to a stack; every full fifty sits in a pouch with a ×count.
    While an amount is set, leaving coins fade and change shows as dashed coins. */
@@ -1106,31 +1134,37 @@ function renderReadout(pop){
   sub.classList.remove('bad');
   if(c.gm){
     const po=payout(cost);
-    if(!po.n){ sub.textContent=tx(gmTake?'Choose who pays':'Choose who gets it'); return; }
+    if(!po.n){ sub.innerHTML=tx(gmTake?'Choose who pays':'Choose who gets it'); return; }
     if(!cost){
       if(S.lastGM&&repeatLabel()){ sub.innerHTML=`<button type="button" class="repeat" id="repeatBtn">${esc(tx('↻ Repeat: {x}',{x:repeatLabel()}))}</button>`; return; }
-      sub.textContent=gmTake?(po.n===1?tx('{name} has {amt}',{name:chosen()[0].name,amt:fmt(total(chosen()[0].coins))}):tx('Count out what each one pays')):(po.n===1?tx('Count out coins for {name}',{name:chosen()[0].name}):tx('Count out coins for the party')); return; }
+      sub.innerHTML=gmTake?(po.n===1?tx('{name} has {amt}',{name:esc(chosen()[0].name),amt:fmtH(total(chosen()[0].coins))}):tx('Count out what each one pays')):(po.n===1?tx('Count out coins for {name}',{name:esc(chosen()[0].name)}):tx('Count out coins for the party')); return; }
     if(gmTake){ const sh=shortOf(po.each);
-      if(po.n>1&&!po.each){ sub.textContent=tx('Too little to split among {n}',{n:po.n}); sub.classList.add('bad'); return; }
-      if(sh.length){ sub.textContent=sh.length===1?tx('{name} is {amt} short',{name:sh[0].name,amt:fmt(po.each-total(sh[0].coins))}):tx("{names} can't pay that",{names:sh.map(x=>x.name).join(', ')}); sub.classList.add('bad'); return; }
-      sub.textContent=po.n===1?tx('{name} keeps {amt}',{name:chosen()[0].name,amt:fmt(total(chosen()[0].coins)-cost)}):gmEach?tx('{n} × {amt} · {sum} in all',{n:po.n,amt:fmt(cost),sum:fmt(po.sum)}):tx('Each of {n} pays {amt}',{n:po.n,amt:fmt(po.each)}); return; }
-    if(po.n===1){ sub.textContent=tx(S.gmMixed?'Paid out as a mixed bag of coins':'Straight from the coffers, no change needed'); return; }
-    if(!po.each){ sub.textContent=tx('Too little to split among {n}',{n:po.n}); sub.classList.add('bad'); return; }
-    sub.textContent=gmEach?tx('{n} × {amt} · {sum} in all',{n:po.n,amt:fmt(cost),sum:fmt(po.sum)}):tx('Each of {n} gets {amt}',{n:po.n,amt:fmt(po.each)})+(po.left?tx(' · {amt} stays in the coffers',{amt:fmt(po.left)}):'');
-    if(S.gmMixed) sub.textContent+=tx(' · mixed bag'); return; }
-  if(!cost){ sub.textContent=mode()==='get'?tx('How much comes in?'):tx('{name} has {amt}',{name:c.name,amt:fmt(total(c.coins))}); return; }
-  if(mode()==='get'){ sub.textContent=tx('Worth {amt} in all',{amt:fmt(cost)}); return; }
+      if(po.n>1&&!po.each){ sub.innerHTML=tx('Too little to split among {n}',{n:po.n}); sub.classList.add('bad'); return; }
+      if(sh.length){ sub.innerHTML=sh.length===1?tx('{name} is {amt} short',{name:esc(sh[0].name),amt:fmtH(po.each-total(sh[0].coins))}):tx("{names} can't pay that",{names:esc(sh.map(x=>x.name).join(', '))}); sub.classList.add('bad'); return; }
+      sub.innerHTML=po.n===1?tx('{name} keeps {amt}',{name:esc(chosen()[0].name),amt:fmtH(total(chosen()[0].coins)-cost)}):gmEach?tx('{n} × {amt} · {sum} in all',{n:po.n,amt:fmtH(cost),sum:fmtH(po.sum)}):tx('Each of {n} pays {amt}',{n:po.n,amt:fmtH(po.each)}); return; }
+    if(po.n===1){ sub.innerHTML=tx(S.gmMixed?'Paid out as a mixed bag of coins':'Straight from the coffers, no change needed'); return; }
+    if(!po.each){ sub.innerHTML=tx('Too little to split among {n}',{n:po.n}); sub.classList.add('bad'); return; }
+    sub.innerHTML=gmEach?tx('{n} × {amt} · {sum} in all',{n:po.n,amt:fmtH(cost),sum:fmtH(po.sum)}):tx('Each of {n} gets {amt}',{n:po.n,amt:fmtH(po.each)})+(po.left?tx(' · {amt} stays in the coffers',{amt:fmtH(po.left)}):'');
+    if(S.gmMixed) sub.innerHTML+=tx(' · mixed bag'); return; }
+  if(!cost){ sub.innerHTML=mode()==='get'?tx('How much comes in?'):tx('{name} has {amt}',{name:esc(c.name),amt:fmtH(total(c.coins))}); return; }
+  if(mode()==='get'){ sub.innerHTML=tx('Worth {amt} in all',{amt:fmtH(cost)}); return; }
   if(potSplit()){ const n=players().length, each=Math.floor(cost/n);
-    if(cost>total(c.coins)){ sub.textContent=tx('{name} is {amt} short',{name:c.name,amt:fmt(cost-total(c.coins))}); sub.classList.add('bad'); return; }
-    sub.textContent=each?tx('Each of {n} gets {amt}',{n,amt:fmt(each)})+(cost-each*n?tx(' · {amt} stays in the purse',{amt:fmt(cost-each*n)}):''):tx('Too little to share among {n}',{n}); sub.classList.toggle('bad',!each); return; }
+    if(cost>total(c.coins)){ sub.innerHTML=tx('{name} is {amt} short',{name:esc(c.name),amt:fmtH(cost-total(c.coins))}); sub.classList.add('bad'); return; }
+    sub.innerHTML=each?tx('Each of {n} gets {amt}',{n,amt:fmtH(each)})+(cost-each*n?tx(' · {amt} stays in the purse',{amt:fmtH(cost-each*n)}):''):tx('Too little to share among {n}',{n}); sub.classList.toggle('bad',!each); return; }
   const p=plan(c.coins,cost);
-  if(!p){ sub.textContent=tx('{name} is {amt} short',{name:c.name,amt:fmt(cost-total(c.coins))}); sub.classList.add('bad'); return; }
-  sub.textContent=p.broken?tx('Breaks a {coin} coin · {amt} change',{coin:LANG==='en'?COINS[p.broken].name.toLowerCase():COINS[p.broken].name,amt:fmt(total(p.change))}):tx('Exact coin · {amt} left',{amt:fmt(total(p.after))}); }
+  if(!p){ sub.innerHTML=tx('{name} is {amt} short',{name:esc(c.name),amt:fmtH(cost-total(c.coins))}); sub.classList.add('bad'); return; }
+  sub.innerHTML=p.broken?tx('Breaks a {coin} coin · {amt} change',{coin:esc(LANG==='en'?COINS[p.broken].name.toLowerCase():COINS[p.broken].name),amt:fmtH(total(p.change))}):tx('Exact coin · {amt} left',{amt:fmtH(total(p.after))}); }
+/* long names shrink a little to fit next to Pay | Receive, then get cut with … */
+function fitName(){ const el=$('pName'); el.style.fontSize=''; let fs=parseFloat(getComputedStyle(el).fontSize);
+  while(el.scrollWidth>el.clientWidth+1&&fs>18){ fs-=1; el.style.fontSize=fs+'px'; } }
+addEventListener('resize',()=>fitName());
 function renderMode(){
   const G=cur().gm, M=mode();
-  $('modes').hidden=G; $('gmModes').hidden=!G; $('worthBox').hidden=G; $('console').classList.toggle('is-gm',!!G);
+  $('modes').hidden=G; $('gmModes').hidden=!G; $('strip').hidden=G; $('console').classList.toggle('is-gm',!!G); fitName(); $('console').classList.toggle('is-gm',!!G);
   document.querySelectorAll('#gmModes .mode').forEach(m=>m.setAttribute('aria-selected',(m.dataset.gm==='take')===gmTake));
+  $('gmModes').style.setProperty('--on',gmTake?1:0);
   document.querySelectorAll('#modes .mode').forEach(m=>m.setAttribute('aria-selected',m.dataset.mode===M));
+  $('modes').style.setProperty('--on',M==='get'?1:0);
   $('recips').hidden=!G;
   /* players pay an NPC by default, or a companion; the GM gives to the party or one player */
   const others=S.chars.filter(c=>c.id!==S.active&&!c.gm);
@@ -1185,25 +1219,25 @@ function book(){
     else if(fromGM&&e.k==='give'){ if(to) row(to).got+=e.amt; got+=e.amt; }
     else if(e.k==='take'){ for(const sh of e.shares||[]){ const id=pid(sh.id,sh.name); if(id) row(id).paid+=sh.amt; paid+=sh.amt; } }
     else if(e.k==='split'&&fromGM){ for(const sh of e.shares||[]){ const id=pid(sh.id,sh.name); if(id) row(id).got+=sh.amt; got+=sh.amt; } } }
-  return `<div class="book-tot"><div><span class="l">${tx('Taken in from players')}</span><span class="v in">${fmt(paid)}</span></div>
-    <div><span class="l">${tx('Paid out to players')}</span><span class="v out">${fmt(got)}</span></div></div>
+  return `<div class="book-tot"><div><span class="l">${tx('Taken in from players')}</span><span class="v in">${fmtH(paid)}</span></div>
+    <div><span class="l">${tx('Paid out to players')}</span><span class="v out">${fmtH(got)}</span></div></div>
     <table class="book"><thead><tr><th>${tx('Player')}</th><th>${tx('Purse now')}</th><th>${tx('Paid to GM')}</th><th>${tx('Got from GM')}</th></tr></thead><tbody>
-    ${S.chars.filter(c=>!c.gm).map(p=>{ const r=rows[p.id]||{paid:0,got:0}; return `<tr><td>${esc(p.name)}</td><td>${fmt(total(p.coins))}</td><td class="in">${r.paid?fmt(r.paid):'·'}</td><td class="out">${r.got?fmt(r.got):'·'}</td></tr>`; }).join('')}
+    ${S.chars.filter(c=>!c.gm).map(p=>{ const r=rows[p.id]||{paid:0,got:0}; return `<tr><td>${esc(p.name)}</td><td>${fmtH(total(p.coins))}</td><td class="in">${r.paid?fmtH(r.paid):'·'}</td><td class="out">${r.got?fmtH(r.got):'·'}</td></tr>`; }).join('')}
     </tbody></table>`; }
 function ledgerLine(e){
   const forTxt=e.note?tx(' for {x}',{x:`<i>${esc(e.note)}</i>`}):'', mixTxt=m=>m?` · <i>${tx('mixed bag: {x}',{x:m})}</i>`:'', B=s=>`<b>${esc(s)}</b>`;
-  if(e.k==='take'){ const names=(e.shares||[]).map(x=>esc(x.name)), each=fmt(e.each);
+  if(e.k==='take'){ const names=(e.shares||[]).map(x=>esc(x.name)), each=fmtH(e.each);
     const body=names.length===1?tx('{who} takes from {name}',{who:B(e.who),name:`<b>${names[0]}</b>`}):e.per?tx('{who} takes {each} from each of {names}',{who:B(e.who),each,names:names.join(', ')}):tx('{who} takes from {n} · {each} each',{who:B(e.who),n:names.length,each});
-    return `<li><span class="k">${tx('Took')}</span><span>${body}${forTxt}</span><span class="amt minus">−${fmt(e.amt)}</span></li>`; }
-  if(e.k==='start') return `<li><span class="k">${tx('Start')}</span><span>${tx("Every player's purse set to the starting purse")}</span><span class="amt">${fmt(e.amt)}</span></li>`;
-  if(e.k==='split'){ const from=e.from?esc(e.from):B(e.who), each=fmt(e.each);
+    return `<li><span class="k">${tx('Took')}</span><span>${body}${forTxt}</span><span class="amt minus">−${fmtH(e.amt)}</span></li>`; }
+  if(e.k==='start') return `<li><span class="k">${tx('Start')}</span><span>${tx("Every player's purse set to the starting purse")}</span><span class="amt">${fmtH(e.amt)}</span></li>`;
+  if(e.k==='split'){ const from=e.from?esc(e.from):B(e.who), each=fmtH(e.each);
     const body=e.per?tx('{from} gives {names} · {each} each',{from,names:(e.shares||[]).map(x=>esc(x.name)).join(', '),each}):tx('{from} shares among {n} · {each} each',{from,n:(e.shares||[]).length,each});
-    return `<li><span class="k">${tx(e.per?'Gave':'Split')}</span><span>${body}${forTxt}${e.mixed?mixTxt((e.shares||[]).map(x=>esc(x.name)+' '+esc(x.mix||'')).join('; ')):''}</span><span class="amt plus">+${fmt(e.amt)}</span></li>`; }
+    return `<li><span class="k">${tx(e.per?'Gave':'Split')}</span><span>${body}${forTxt}${e.mixed?mixTxt((e.shares||[]).map(x=>esc(x.name)+' '+esc(x.mix||'')).join('; ')):''}</span><span class="amt plus">+${fmtH(e.amt)}</span></li>`; }
   const minus=e.k==='pay'||e.k==='give', fromGM=(S.chars.find(x=>x.gm)||{}).name===e.who;
   const kind=tx(e.k==='give'?(fromGM?'Gave':'Paid'):{pay:'Paid',get:'Got',loot:'Loot'}[e.k]);
-  if(e.k==='give'&&fromGM&&e.from) return `<li><span class="k">${tx('Gave')}</span><span>${tx('{from} to {to}',{from:esc(e.from),to:B(e.to)})}${forTxt}${mixTxt(e.mix&&esc(e.mix))}</span><span class="amt plus">+${fmt(e.amt)}</span></li>`;
+  if(e.k==='give'&&fromGM&&e.from) return `<li><span class="k">${tx('Gave')}</span><span>${tx('{from} to {to}',{from:esc(e.from),to:B(e.to)})}${forTxt}${mixTxt(e.mix&&esc(e.mix))}</span><span class="amt plus">+${fmtH(e.amt)}</span></li>`;
   const whom=e.to?tx(' to {x}',{x:B(e.to)}):e.npc?tx(' to {x}',{x:esc(npcTxt(e.npc))}):e.from?tx(' from {x}',{x:esc(e.from)}):'';
-  return `<li><span class="k">${kind}</span><span>${B(e.who)}${whom}${forTxt}${mixTxt(e.mix&&esc(e.mix))}</span><span class="amt ${minus?'minus':'plus'}">${minus?'−':'+'}${fmt(e.amt)}</span></li>`; }
+  return `<li><span class="k">${kind}</span><span>${B(e.who)}${whom}${forTxt}${mixTxt(e.mix&&esc(e.mix))}</span><span class="amt ${minus?'minus':'plus'}">${minus?'−':'+'}${fmtH(e.amt)}</span></li>`; }
 function renderLedger(){
   const c=cur();
   $('gmBook').hidden=!c.gm; const b=book(); $('gmBookBody').innerHTML=b; $('bookInLedger').innerHTML=b;
@@ -1365,9 +1399,17 @@ $('dials').addEventListener('click',e=>e.preventDefault());
 })();
 /* Pay / Receive: tap a tab, or swipe sideways across the amount */
 function setMode(m){ if(m===S.tab) return; S.tab=m; save(); tick(); renderMode(); renderConsole(false); }
-$('modes').addEventListener('click',e=>{ const m=e.target.closest('.mode'); if(m) setMode(m.dataset.mode); });
-$('gmModes').addEventListener('click',e=>{ const m=e.target.closest('.mode'); if(!m) return; const t=m.dataset.gm==='take'; if(t===gmTake) return;
-  gmTake=t; if(t&&!gmSel&&players().length>1) gmSel=null; $('note').value=''; tick(); renderMode(); renderConsole(false); });
+function setGmTake(t){ if(t===gmTake) return; gmTake=t; $('note').value=''; tick(); renderMode(); renderConsole(false); }
+let swiped=false;
+$('modes').addEventListener('click',e=>{ if(swiped){ swiped=false; return; } const m=e.target.closest('.mode'); if(m) setMode(m.dataset.mode); });
+$('gmModes').addEventListener('click',e=>{ if(swiped){ swiped=false; return; } const m=e.target.closest('.mode'); if(m) setGmTake(m.dataset.gm==='take'); });
+/* swipe across the switch: right for the second side (Receive, Take), left for the first (Pay, Give) */
+[['modes',right=>setMode(right?'get':'pay')],['gmModes',right=>setGmTake(right)]].forEach(([id,go])=>{
+  let x0=null, y0=null;
+  $(id).addEventListener('pointerdown',e=>{ x0=e.clientX; y0=e.clientY; swiped=false; });
+  $(id).addEventListener('pointerup',e=>{ if(x0===null) return; const dx=e.clientX-x0, dy=e.clientY-y0; x0=null;
+    if(Math.abs(dx)>22&&Math.abs(dx)>Math.abs(dy)){ swiped=true; go(dx>0); setTimeout(()=>{ swiped=false; },350); } });
+  $(id).addEventListener('pointercancel',()=>{ x0=null; }); });
 $('sub').addEventListener('click',e=>{ if(e.target.closest('#repeatBtn')) repeatLast();
  });
 (()=>{ let x0=null,y0=null; const r=$('readout');
