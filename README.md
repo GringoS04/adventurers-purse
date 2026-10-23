@@ -6,6 +6,8 @@ An interactive coin purse for tabletop RPGs. Count coins with a tap, slide to pa
 
 Everything runs in one file, `index.html`. No server, no account, no installation.
 
+LootPal is in early alpha. See the [changelog](CHANGELOG.md) for what's new.
+
 ---
 
 ## Contents
