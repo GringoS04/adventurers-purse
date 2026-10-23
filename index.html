@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#17110e">
-<title>QuestPouch</title>
+<title>LootPal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans+SC:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@700;800&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans+SC:wght@500;700&display=swap">
 <style>
-/* QuestPouch
+/* LootPal
    Layout: one thumb-friendly column on a leather tabletop. Party on top, then the purse itself
    (name, worth, Pay/Receive, a big amount, coin dials, who gets it, slide to confirm).
    Ledger and Table settings fold away below. A single dark look by choice. */
@@ -25,7 +25,7 @@
   --good:#9cc779; --bad:#e86a50; --out:#e7957c;
   --npc:#5eb0c9; --npc-ink:#0e2229;
   --gold-hi:#fff2b3; --gold:#e3b33f; --gold-lo:#9a6d14; --gold-edge:#7a520c;
-  --f-display:"Grenze Gotisch", Georgia, serif;
+  --f-display:"Alegreya", "Palatino Linotype", Palatino, Georgia, serif;
   --f-body:"Alegreya Sans", "Gill Sans", "Trebuchet MS", sans-serif;
   --f-sc:"Alegreya Sans SC", "Alegreya Sans", "Gill Sans", sans-serif;
 }
@@ -56,14 +56,14 @@ header{display:flex; align-items:center; justify-content:space-between; gap:10px
 h1{font-family:var(--f-display); font-weight:700; font-size:28px; margin:0; line-height:1}
 h1 span{color:var(--brass)}
 .logo{line-height:0}
-.logo img{height:44px; width:auto; display:block; filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
+.logo img{height:30px; width:auto; display:block; filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
 .icon-btn{background:var(--table-2); border:1px solid var(--line); border-radius:999px; padding:6px 12px; font-family:var(--f-sc); font-size:13px; letter-spacing:.06em; color:var(--muted)}
 .icon-btn[aria-pressed="true"]{color:var(--brass)}
 .party-scroll{overflow-x:auto; scrollbar-width:none; margin-inline:-4px; padding:4px}
 .party-scroll::-webkit-scrollbar{display:none}
 .party{display:flex; gap:8px; width:max-content}
 .chip{display:flex; align-items:center; gap:8px; padding:5px 14px 5px 5px; border-radius:999px; border:1px solid var(--line); background:var(--table-2)}
-.chip .av,.recip .av,.prow .av{border-radius:50%; display:grid; place-items:center; font-family:var(--f-display); background:var(--leather-2); color:var(--brass)}
+.chip .av,.recip .av,.prow .av{border-radius:50%; display:grid; place-items:center; font-family:var(--f-display); font-weight:800; background:var(--leather-2); color:var(--brass)}
 .chip .av{width:32px; height:32px; font-size:19px}
 .chip .nm{font-weight:700}
 .chip[aria-current="true"]{border-color:var(--brass); background:#2c2016}
@@ -80,7 +80,7 @@ h1 span{color:var(--brass)}
 .console.shake{animation:shake .45s}
 
 .who{display:flex; justify-content:space-between; align-items:flex-end; gap:12px; flex-wrap:wrap; padding:0 4px}
-.who .nm{font-family:var(--f-display); font-size:clamp(30px,8.5vw,40px); line-height:.95; cursor:text}
+.who .nm{font-family:var(--f-display); font-weight:800; font-size:clamp(28px,8vw,36px); line-height:1; letter-spacing:.005em; cursor:text}
 .who .nm:focus{outline:none; box-shadow:0 2px 0 var(--brass)}
 .who .rk{display:inline-block; margin-top:6px; font-family:var(--f-sc); font-size:10.5px; line-height:1.4; letter-spacing:.08em; color:var(--brass-ink); background:var(--brass); padding:1px 8px; border-radius:999px}
 .worth{text-align:right}
@@ -97,6 +97,8 @@ h1 span{color:var(--brass)}
 .repeat{border:1px dashed var(--brass); background:rgba(217,164,65,.1); color:var(--brass); border-radius:999px; padding:3px 12px; font-size:13.5px; max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .gmmodes{grid-template-columns:repeat(2,auto)!important; padding:3px; gap:3px; align-self:center}
 .gmmodes .mode{padding:7px 14px; font-size:14px}
+.is-gm .who{flex-wrap:nowrap; align-items:center} .is-gm .who > div:first-child{min-width:0} .is-gm .who .nm{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.ptab{overflow-wrap:break-word; hyphens:auto} html[lang=de] .ptab{letter-spacing:0; font-size:12.5px; padding-left:0; padding-right:0}
 .modes{display:grid; grid-template-columns:repeat(2,1fr); border-radius:14px; padding:4px; gap:4px; background:rgba(0,0,0,.35)}
 .mode{background:none; border:0; padding:11px 4px; border-radius:11px; font-family:var(--f-sc); font-weight:700; letter-spacing:.08em; color:var(--muted); font-size:16px}
 .mode[aria-selected="true"]{background:var(--leather-2); color:var(--ink); box-shadow:inset 0 0 0 1px rgba(255,220,170,.14)}
@@ -117,8 +119,11 @@ h1 span{color:var(--brass)}
 .rbtn{position:absolute; width:38px; height:38px; border-radius:50%; border:1px solid var(--line); background:var(--well); color:var(--muted); line-height:1}
 .typeBtn{left:0; top:56px; font-size:12px; font-weight:700; letter-spacing:.02em}
 .noteBtn{left:0; top:10px}
-.noteBtn[aria-expanded="true"]{border-style:solid; border-color:var(--brass); color:var(--brass)}
-.noteBtn.has{background:var(--brass); color:var(--brass-ink); border-color:var(--brass)}
+.rbtn{transition:background .15s, color .15s, border-color .15s}
+/* one look for all round buttons: gold = open. A gold ring and dot = the receipt holds something while closed */
+.rbtn[aria-expanded="true"]{background:linear-gradient(180deg,#6b4a1c,#4a3212); color:#f3cf6a; border-color:var(--brass); box-shadow:inset 0 1px 0 rgba(255,220,150,.18), 0 0 0 2px rgba(227,179,63,.12)}
+.noteBtn.has:not([aria-expanded="true"]){border-color:var(--brass); color:var(--brass)}
+.noteBtn.has:not([aria-expanded="true"])::after{content:""; position:absolute; top:1px; right:1px; width:9px; height:9px; border-radius:50%; background:var(--brass); box-shadow:0 0 0 2px var(--table-2,#1d1511)}
 .editBtn{right:0; top:10px}
 .editBtn svg{width:16px; height:16px; display:block; margin:auto}
 .clear{right:0; top:56px; font-size:20px}
@@ -134,7 +139,9 @@ h1 span{color:var(--brass)}
 .quick{display:flex; flex-wrap:wrap; gap:6px}
 .quick button{border:1px solid rgba(255,220,170,.15); background:rgba(0,0,0,.28); color:var(--muted); border-radius:999px; padding:5px 12px; font-size:14px}
 .quick button[aria-pressed="true"]{background:var(--brass); color:var(--brass-ink); border-color:var(--brass); font-weight:700}
-.tocol{display:flex; flex-direction:column; gap:6px; min-width:0}
+.tocol{display:flex; flex-direction:column; gap:4px; min-width:0}
+#toTagRow{align-items:start} #toTagRow > span{padding-top:9px}
+.tohint{font-family:var(--f-body); font-size:12px; letter-spacing:0; color:var(--muted); opacity:.8; padding-left:4px}
 #toTags{flex-wrap:wrap; overflow:visible; gap:6px}
 #noteToRow{align-items:start} #noteToRow > span{padding-top:8px}
 .nf{display:grid; grid-template-columns:92px minmax(0,1fr); line-height:1.2; align-items:center; gap:8px; font-family:var(--f-sc); font-size:12px; letter-spacing:.08em; color:var(--muted)}
@@ -156,7 +163,7 @@ h1 span{color:var(--brass)}
 .face::before{content:""; position:absolute; inset:0; border-radius:var(--rad,50%); clip-path:var(--clip,none); -webkit-mask:var(--mask,none); mask:var(--mask,none);
   background:radial-gradient(circle at 35% 30%, var(--hi), var(--base) 48%, var(--lo));
   box-shadow:inset 0 0 0 4px var(--edge), inset 0 0 0 7px rgba(255,255,255,.18)}
-.face b{position:relative; transform:translateY(var(--ty,0)); opacity:var(--lt,1); font-family:var(--f-display); font-size:clamp(26px,8vw,36px); color:var(--lc,rgba(40,20,5,.55)); text-shadow:0 1px 0 var(--ls,rgba(255,255,255,.35))}
+.face b{position:relative; transform:translateY(var(--ty,0)); opacity:var(--lt,1); font-family:var(--f-display); font-weight:800; font-size:clamp(26px,8vw,36px); color:var(--lc,rgba(40,20,5,.55)); text-shadow:0 1px 0 var(--ls,rgba(255,255,255,.35))}
 .dial.tap .face{transform:translateY(4px) scale(.96)}
 .sel{position:absolute; top:-6px; right:-10px; min-width:34px; height:34px; padding:0 8px; border-radius:999px; display:grid; place-items:center;
   background:var(--ink); color:#1a0f08; font-weight:700; font-size:18px; font-variant-numeric:tabular-nums; box-shadow:0 3px 8px rgba(0,0,0,.5); transform:scale(0); transition:transform .15s cubic-bezier(.3,1.6,.5,1)}
@@ -230,13 +237,14 @@ h1 span{color:var(--brass)}
 /* ---------- Folding panels: ledger and settings ---------- */
 
 /* Bottom tabs: Ledger / Save & load / Settings. Tap the open tab again to fold it away. */
-.ptabs{display:grid; grid-template-columns:repeat(4,1fr); gap:4px; padding:4px; background:var(--table-2); border:1px solid var(--line); border-radius:14px}
-.ptab{background:none; border:0; border-radius:10px; padding:10px 2px; font-family:var(--f-sc); font-weight:700; letter-spacing:.04em; font-size:13.5px; line-height:1.15; color:var(--muted)}
+.ptab .ti{width:17px; height:17px; flex:none; opacity:.85} .ptab[aria-selected="true"] .ti{opacity:1; color:var(--brass)}
+.ptabs{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; padding:4px; background:var(--table-2); border:1px solid var(--line); border-radius:14px}
+.ptab{display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:0; border-radius:10px; padding:7px 2px 8px; font-family:var(--f-sc); font-weight:700; letter-spacing:.02em; font-size:12.5px; line-height:1.15; color:var(--muted)}
 .ptab[aria-selected="true"]{background:var(--leather-2); color:var(--ink); box-shadow:inset 0 0 0 1px rgba(255,220,170,.14)}
 .panel{background:var(--table-2); border:1px solid var(--line); border-radius:16px; padding:12px 16px; margin-top:-6px}
 /* GM's book */
 .gmbook{background:var(--table-2); border:1px solid var(--line); border-radius:20px; padding:16px}
-.gmbook h2{font-family:var(--f-display); font-weight:500; font-size:26px; margin:0 0 10px}
+.gmbook h2{font-family:var(--f-display); font-weight:800; font-size:24px; margin:0 0 10px}
 .book-tot{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px}
 .book-tot > div{background:var(--well); border-radius:12px; padding:10px 12px; display:flex; flex-direction:column; gap:2px}
 .book-tot .l{font-family:var(--f-sc); font-size:11px; letter-spacing:.1em; color:var(--muted)}
@@ -297,6 +305,8 @@ label.tg{display:flex; align-items:center; gap:10px; color:var(--ink)}
 label.tg input{width:18px; height:18px; flex:none; accent-color:var(--brass)}
 label.tg span{color:var(--faint); font-size:13px}
 .sub-opts{display:flex; flex-direction:column; gap:8px; padding-left:28px; transition:opacity .2s}
+#ladderOpts,#weightOpts{padding-left:10px; margin-left:8px; border-left:2px solid var(--rule)}
+#ladderOpts .x{width:30px; height:30px}
 .sub-opts.dim{opacity:.4; pointer-events:none}
 label.vol{display:flex; align-items:center; gap:10px; color:var(--ink)}
 label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
@@ -316,7 +326,7 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
 .x{width:34px; height:34px; border-radius:8px; border:1px solid var(--line); background:var(--well); color:var(--muted)}
 /* wealth ladder rows */
 .ladder{display:flex; flex-direction:column; gap:6px}
-.lrow{display:grid; grid-template-columns:minmax(0,1fr) auto 58px 84px 34px; gap:6px; align-items:center}
+.lrow{display:grid; grid-template-columns:minmax(80px,1fr) auto 46px 68px 30px; gap:6px 4px; align-items:center}
 .lrow .field{padding:8px 6px}
 .lrow input[data-l="amt"]{text-align:right}
 .lrow .from{font-size:13px; color:var(--muted)}
@@ -337,7 +347,7 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
 .toast button{pointer-events:auto; border:1px solid var(--brass); background:transparent; color:var(--brass); border-radius:999px; padding:4px 12px; font-weight:700}
 .toast.err{border-color:var(--bad)}
 .toast.ach{border-color:var(--brass); background:linear-gradient(180deg,#2c2016,#140e0b); display:block}
-.toast.ach b{font-family:var(--f-display); font-size:20px; color:var(--brass); display:block; font-weight:500}
+.toast.ach b{font-family:var(--f-display); font-size:19px; color:var(--brass); display:block; font-weight:800}
 .fly{position:fixed; left:0; top:0; width:26px; height:26px; z-index:40; pointer-events:none; border-radius:var(--rad,50%); clip-path:var(--clip,none); -webkit-mask:var(--mask,none); mask:var(--mask,none);
   background:radial-gradient(circle at 35% 30%, var(--hi), var(--base) 50%, var(--lo)); box-shadow:inset 0 0 0 2px var(--edge)}
 .till{position:fixed; top:-20px; left:50%; width:1px; height:1px}
@@ -347,12 +357,12 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   body{padding-block:8px 70px}
   .wrap{gap:10px}
   h1{font-size:20px}
-  .logo img{height:32px}
+  .logo img{height:25px}
   .icon-btn{padding:4px 10px; font-size:12px}
   .chip{padding:3px 12px 3px 3px; gap:6px} .chip .av{width:28px; height:28px; font-size:17px}
   .console{padding:14px 12px 12px; gap:10px; border-radius:20px}
   .console::before{inset:5px; border-radius:15px}
-  .who .nm{font-size:26px}
+  .who .nm{font-size:24px}
   .who .rk{margin-top:3px; font-size:9.5px; padding:0 7px}
   .worth .l{font-size:10px} .worth .v{font-size:17px}
   .weight{font-size:12px; margin-top:-4px} .sag{height:6px}
@@ -384,7 +394,7 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
 }
 /* very short phones (small iPhone with browser bars): keep everything, just tighter */
 @media (max-width:520px) and (max-height:600px){
-  .logo img{height:28px}
+  .logo img{height:22px}
   .console{gap:7px; padding-top:11px}
   .who > div:first-child{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
   .who .rk{margin-top:0}
@@ -402,14 +412,17 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   .eachsw button{padding:3px 10px} .mixsw{padding:3px 10px 3px 4px; font-size:13px}
 }
 @media (prefers-reduced-motion: reduce){ .console.shake,.chip.pulse,.toast,.big.pop,.have.bump .n,.stk.drop,.slider .txt{animation:none} }
+@media (max-width:360px){ .ptab{font-size:11.5px; letter-spacing:0} html[lang=de] .ptab{font-size:11px} .gmmodes .mode{padding:6px 9px; font-size:13px} .gmrow.how{flex-wrap:nowrap; gap:4px} .eachsw button{padding:3px 8px; font-size:12px; letter-spacing:.03em} .mixsw{padding:3px 8px 3px 4px; font-size:12.5px; gap:5px} .mixsw .knobx{width:26px} .slider .txt{padding-right:10px} }
+/* iPhones zoom into any field with text under 16px: keep the small fields at 16px on touch screens */
+@supports (-webkit-touch-callout:none){ .note,.field,.code{font-size:16px!important} }
+@media (pointer:coarse){ .note,.field,.code{font-size:16px!important} }
 </style>
 <style>:root{padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)} img{max-width:100%}</style>
 </head>
 <body>
-
 <div class="wrap">
   <header>
-    <h1 class="logo"><img src="data:image/webp;base64,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" alt="QuestPouch" width="413" height="96"></h1>
+    <h1 class="logo"><img src="data:image/webp;base64,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" alt="LootPal" width="439" height="132"></h1>
     <button class="icon-btn" id="soundBtn" aria-pressed="true">Sound on</button>
   </header>
 
@@ -435,9 +448,9 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
     <div class="readout" id="readout">
       <div class="big zero" id="big" aria-live="polite">0</div>
       <div class="sub" id="sub"></div>
-      <button class="rbtn typeBtn" id="typeBtn" type="button" aria-label="Type the amount" title="Type the amount">123</button>
-      <button class="rbtn noteBtn" id="noteBtn" type="button" aria-expanded="false" aria-label="Add what it's for and to whom" title="Add what it's for and to whom, for the ledger"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2.5h10v15l-1.7-1.2-1.6 1.2-1.7-1.2-1.7 1.2-1.6-1.2L5 17.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.5 6.5h5M7.5 9.5h5M7.5 12.5h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-      <button class="rbtn editBtn" id="editCoins" type="button" aria-label="Edit or add coins" title="Edit or add coins"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13.5 3.5l3 3L7 16H4v-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M11.5 5.5l3 3" stroke="currentColor" stroke-width="1.6"/></svg></button>
+      <button class="rbtn typeBtn" id="typeBtn" type="button" aria-expanded="false" aria-label="Type the amount" title="Type the amount">123</button>
+      <button class="rbtn noteBtn" id="noteBtn" type="button" aria-expanded="false" aria-label="Who and what for" title="Who and what for, for the ledger"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="7" cy="6" r="2.8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.8 17c0-3.3 2.3-5.6 5.2-5.6 1.6 0 3 .7 3.9 1.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14.2 10.6c-1.7 1.3-2.4 3.2-2 4.9.4 1.3 1.6 2 3.2 2s2.8-.7 3.2-2c.4-1.7-.3-3.6-2-4.9z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M13.6 9.4l1.8 1.1 1.8-1.1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="rbtn editBtn" id="editCoins" type="button" aria-expanded="false" aria-label="Edit or add coins" title="Edit or add coins"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13.5 3.5l3 3L7 16H4v-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M11.5 5.5l3 3" stroke="currentColor" stroke-width="1.6"/></svg></button>
       <button class="rbtn clear" id="clearBtn" type="button" aria-label="Clear amount" hidden>×</button>
       <form class="typer" id="typer" hidden>
         <span id="typerFields" style="display:contents"></span>
@@ -445,10 +458,10 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
       </form>
     </div>
     <div class="notebox" id="notebox" hidden>
-      <label class="nf"><span>For what?</span><input class="note" id="note" maxlength="60" placeholder="Optional, e.g. a longsword" autocomplete="off"></label>
+      <div class="nf" id="toTagRow"><span>To whom?</span><div class="tocol"><div class="recips" id="toTags"></div><span class="tohint" id="toHint"></span></div></div>
+      <label class="nf" id="noteToRow"><span id="noteToLbl">Which NPC?</span><input class="note" id="noteTo" maxlength="30" autocomplete="off"></label>
       <div class="nf" id="quickRow"><span></span><div class="quick" id="quickFor"></div></div>
-      <div class="nf" id="noteToRow"><span id="noteToLbl">To whom?</span>
-        <div class="tocol"><div class="recips" id="toTags"></div><input class="note" id="noteTo" maxlength="30" autocomplete="off" aria-label="Name of the NPC"></div></div>
+      <label class="nf"><span>For what?</span><input class="note" id="note" maxlength="60" placeholder="Optional, e.g. a longsword" autocomplete="off"></label>
     </div>
     <div class="dials" id="dials"></div>
     <p class="gesture-hint">Tap a coin to add one. Drag up or down to wind the amount.</p>
@@ -466,10 +479,10 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   </section>
 
   <nav class="ptabs" role="tablist" aria-label="More">
-    <button class="ptab" role="tab" type="button" data-panel="ledgerPanel" aria-selected="false">Ledger</button>
-    <button class="ptab" role="tab" type="button" data-panel="savePanel" aria-selected="false">Save &amp; load</button>
-    <button class="ptab" role="tab" type="button" data-panel="partyPanel" aria-selected="false">Party</button>
-    <button class="ptab" role="tab" type="button" data-panel="customPanel" aria-selected="false">Customize</button>
+    <button class="ptab" role="tab" type="button" data-panel="partyPanel" aria-selected="false"><svg class="ti" viewBox="0 0 20 20" aria-hidden="true"><circle cx="7" cy="6.5" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 16.5c0-3 2.2-5 5-5s5 2 5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13.6" cy="5.5" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 10.2c2.4.2 4 2 4 4.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Party</span></button>
+    <button class="ptab" role="tab" type="button" data-panel="customPanel" aria-selected="false"><svg class="ti" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="5.5" r="2" fill="currentColor"/><circle cx="13" cy="10" r="2" fill="currentColor"/><circle cx="8.5" cy="14.5" r="2" fill="currentColor"/></svg><span>Customize</span></button>
+    <button class="ptab" role="tab" type="button" data-panel="savePanel" aria-selected="false"><svg class="ti" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 3.5h10l3 3v10h-13z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 3.5v4h6v-4M6 16.5v-5h8v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Save &amp; load</span></button>
+    <button class="ptab" role="tab" type="button" data-panel="ledgerPanel" aria-selected="false"><svg class="ti" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2.5h10v15l-1.7-1.2-1.6 1.2-1.7-1.2-1.7 1.2-1.6-1.2L5 17.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.5 6.5h5M7.5 9.5h5M7.5 12.5h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Ledger</span></button>
   </nav>
 
   <section class="panel" id="ledgerPanel" role="tabpanel" hidden>
@@ -524,7 +537,7 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
   <section class="panel" id="customPanel" role="tabpanel" hidden>
     <div class="settings">
       <details class="sgroup">
-        <summary><span class="st">Coins</span><span class="ss" id="coinSummary"></span></summary>
+        <summary><span class="st">Coins</span><span class="ss">Add, remove or edit coins · <span id="coinSummary"></span></span></summary>
         <div class="sbody">
           <div id="coinRows"></div>
           <p class="err-s" id="csErr"></p>
@@ -537,21 +550,32 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
         </div>
       </details>
 
+
       <details class="sgroup">
-        <summary><span class="st">Wealth titles</span><span class="ss">The small label under each name</span></summary>
+        <summary><span class="st">Wealth &amp; weight</span><span class="ss">Wealth titles and purse weight for each character</span></summary>
         <div class="sbody">
-          <label class="tg"><input id="tOn" type="checkbox"> Show wealth titles</label>
-          <div id="ladder" class="ladder"></div>
-          <div class="row" id="ladderBtns">
-            <button class="btn" type="button" id="addStep">+ Add a step</button>
-            <button class="btn" type="button" id="resetSteps">Back to the default ladder</button>
+          <label class="tg"><input id="tOn" type="checkbox"> Wealth title <span>like "Comfortable" or "Wealthy"</span></label>
+          <div class="sub-opts" id="ladderOpts">
+            <div id="ladder" class="ladder"></div>
+            <div class="row" id="ladderBtns">
+              <button class="btn" type="button" id="addStep">+ Add a step</button>
+              <button class="btn" type="button" id="resetSteps">Back to the default ladder</button>
+            </div>
+            <p class="note-s" id="ladderNote">A character gets the title of the highest step their total worth reaches. Set the amounts to fit your campaign's economy.</p>
           </div>
-          <p class="note-s" id="ladderNote">A character gets the title of the highest step their total worth reaches. Set the amounts to fit your campaign's economy.</p>
+          <label class="tg" style="margin-top:6px"><input id="wShow" type="checkbox"> Purse weight <span>weight, status and belt bar</span></label>
+          <div class="sub-opts" id="weightOpts">
+            <div class="row">
+              <select class="field" id="wUnit" style="width:auto"><option value="metric">Grams &amp; kilos</option><option value="imperial">Ounces &amp; pounds</option></select>
+              <label class="row" style="gap:6px; color:var(--muted)">Belt is full at <input class="field" id="wMax" type="number" inputmode="decimal" min="0.1" step="0.5" style="width:80px"> <span id="wMaxU">kg</span></label>
+            </div>
+            <p class="note-s">Each coin's weight is set under Coins. The bar fills up to the "full" weight, and the descriptions scale with it.</p>
+          </div>
         </div>
       </details>
 
       <details class="sgroup">
-        <summary><span class="st">Deeds</span><span class="ss">Small achievements, off by default</span></summary>
+        <summary><span class="st">Deeds</span><span class="ss">Small achievements players can earn</span></summary>
         <div class="sbody">
           <label class="tg"><input id="dOn" type="checkbox"> Award deeds <span>like First Purchase or Pack Mule</span></label>
           <p class="note-s">When on, each character can earn six deeds once, shown in the ledger with a lute tune. Deeds already earned are kept if you switch it off again.</p>
@@ -559,7 +583,15 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
       </details>
 
       <details class="sgroup">
-        <summary><span class="st">Sound</span><span class="ss">Volume and which sounds play</span></summary>
+        <summary><span class="st">Language</span><span class="ss">English, Deutsch</span></summary>
+        <div class="sbody">
+          <label class="row" style="gap:8px; color:var(--muted)">Language <select class="field" id="langSel" style="width:auto"></select></label>
+          <p class="note-s">Names LootPal gave, like "Player 1" or "Gold", change with the language. Names you chose stay as they are.</p>
+        </div>
+      </details>
+
+      <details class="sgroup">
+        <summary><span class="st">Sound settings</span><span class="ss">Volume, sound effects and vibration</span></summary>
         <div class="sbody">
           <label class="tg"><input id="sOn" type="checkbox"> Sound on</label>
           <div class="sub-opts" id="sndOpts">
@@ -573,17 +605,7 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
         </div>
       </details>
 
-      <details class="sgroup">
-        <summary><span class="st">Purse weight</span><span class="ss">Show it, units, and when the belt is full</span></summary>
-        <div class="sbody">
-          <label class="tg"><input id="wShow" type="checkbox"> Show the weight under the name <span>weight, status and belt bar</span></label>
-          <div class="row">
-            <select class="field" id="wUnit" style="width:auto"><option value="metric">Grams &amp; kilos</option><option value="imperial">Ounces &amp; pounds</option></select>
-            <label class="row" style="gap:6px; color:var(--muted)">Belt is full at <input class="field" id="wMax" type="number" inputmode="decimal" min="0.1" step="0.5" style="width:80px"> <span id="wMaxU">kg</span></label>
-          </div>
-          <p class="note-s">Each coin's weight is set under Coins. The bar fills up to the "full" weight, and the descriptions scale with it.</p>
-        </div>
-      </details>
+
     </div>
   </section>
 </div>
@@ -596,6 +618,150 @@ label.vol input{flex:1; max-width:220px; accent-color:var(--brass)}
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* =====================================================================
+   0. Language: English strings are the keys, other languages translate them.
+      tx('Slide to pay {amt}',{amt}) fills the {placeholders}.
+   ===================================================================== */
+const LANGS={en:'English',de:'Deutsch'}, LKEY='lootpal-lang';
+let LANG=(()=>{ try{ const l=localStorage.getItem(LKEY)||localStorage.getItem('questpouch-lang'); if(LANGS[l]) return l; }catch(e){} return /^de\b/i.test(navigator.language||'')?'de':'en'; })();
+const DICT={de:{
+/* names the app gives */
+'Player {n}':'Spieler {n}', 'Game Master':'Spielleitung', 'Party purse':'Gruppenkasse', 'NPC':'NSC',
+'Gold':'Gold', 'Silver':'Silber', 'Copper':'Kupfer', 'New coin {n}':'Neue Münze {n}',
+/* colours and shapes */
+'Bronze':'Bronze', 'Platinum':'Platin', 'Jade green':'Jadegrün', 'Cobalt blue':'Kobaltblau', 'Crimson':'Karmesin', 'Amethyst':'Amethyst',
+'Obsidian black':'Obsidianschwarz', 'Bone white':'Knochenweiß', 'Iron':'Eisen',
+'Round':'Rund', 'Donut':'Lochmünze', 'Square':'Quadrat', 'Triangle':'Dreieck', 'Hexagon':'Sechseck', 'Diamond':'Raute',
+/* deeds */
+'First Purchase':'Erster Kauf', 'Spent your first coin.':'Die erste Münze ausgegeben.', 'Pay an NPC anything':'Einem NSC irgendetwas zahlen',
+'Open Hand':'Offene Hand', 'Paid a companion.':'Einem Gefährten etwas gezahlt.', 'Pay another player':'Einem anderen Spieler etwas zahlen',
+'Big Spender':'Spendierhosen', 'Paid a top coin or more in one go.':'Auf einen Schlag mindestens eine höchste Münze gezahlt.', "Pay your most valuable coin's worth at once":'Den Wert deiner wertvollsten Münze auf einmal zahlen',
+"Dragon's Hoard":'Drachenhort', 'Held ten top coins worth of coin.':'Den Wert von zehn höchsten Münzen besessen.', "Hold ten of your most valuable coins' worth":'Den Wert von zehn deiner wertvollsten Münzen besitzen',
+'Pocket Lint':'Leere Taschen', 'Emptied the purse completely.':'Den Beutel komplett geleert.', 'Spend every last coin':'Bis zur letzten Münze ausgeben',
+'Pack Mule':'Packesel', 'Hauled two thirds of a full belt of coin.':'Zwei Drittel eines vollen Gürtels an Münzen geschleppt.', 'Carry two thirds of a full belt':'Zwei Drittel eines vollen Gürtels tragen',
+"{name}'s deeds · {a} of {b}":'Taten von {name} · {a} von {b}',
+/* weight and wealth */
+'Not a jingle':'Kein Klimpern', 'Light as a feather':'Federleicht', 'Jingles softly':'Klimpert leise', 'A satisfying weight':'Ein angenehmes Gewicht',
+'Tugs at your belt':'Zieht am Gürtel', 'You walk with a lean':'Du gehst schon schief', 'Needs its own mule':'Braucht einen eigenen Esel',
+'Penniless':'Mittellos', 'Scraping by':'Knapp bei Kasse', 'Modest':'Bescheiden', 'Comfortable':'Gut versorgt', 'Prosperous':'Wohlhabend', 'Wealthy':'Reich', 'New title':'Neuer Titel',
+'Keeper of the Coffers':'Hütet die Schatzkammer', 'Shared by the party':'Gehört der ganzen Gruppe', 'Unlimited':'Unbegrenzt', 'nothing':'nichts',
+/* purse */
+'Choose character':'Figur wählen', 'Tap to rename':'Tippen zum Umbenennen', 'Character name':'Name der Figur', 'Total worth':'Gesamtwert',
+'Give or take':'Geben oder nehmen', 'Give':'Geben', 'Take':'Nehmen', 'What happens':'Was passiert', 'Pay':'Zahlen', 'Receive':'Erhalten',
+'Coins weigh something. Copper is the heaviest to carry around.':'Münzen wiegen etwas. Kupfer ist am schwersten zu tragen.',
+'Type the amount':'Betrag eintippen', "Add what it's for and to whom":'Eintragen, wofür und an wen', "Add what it's for and to whom, for the ledger":'Eintragen, wofür und an wen, fürs Kassenbuch',
+'Edit or add coins':'Münzen bearbeiten oder hinzufügen', 'Clear amount':'Betrag löschen', 'Done':'Fertig', 'Slide to confirm':'Zum Bestätigen schieben',
+'Tap a coin to add one. Drag up or down to wind the amount.':'Tippe auf eine Münze, um eine dazuzulegen. Zieh nach oben oder unten, um den Betrag zu drehen.',
+'+ Add':'+ Neu', 'Each pouch holds {n} coins':'Jeder Beutel fasst {n} Münzen', '{coin}: tap to add one, arrow keys to change':'{coin}: tippen für eine mehr, Pfeiltasten zum Ändern',
+"That's all {name} has":'Mehr hat {name} nicht',
+'For what?':'Wofür?', 'To whom?':'An wen?', 'From who or what?':'Von wem oder was?', 'Name of the NPC':'Name des NSC',
+'Optional, e.g. a longsword':'Optional, z. B. ein Langschwert', 'Optional, e.g. the blacksmith':'Optional, z. B. Schmied',
+'Optional, e.g. a noble knight':'Optional, z. B. edler Ritter', 'Optional, e.g. the innkeeper':'Optional, z. B. Wirt',
+'Optional, e.g. a fine for brawling':'Optional, z. B. eine Strafe für eine Prügelei', 'Optional, e.g. crypt treasure':'Optional, z. B. Gruftschatz', 'Optional, e.g. odd jobs':'Optional, z. B. Gelegenheitsarbeit',
+'Treasure':'Schatz', 'Loot':'Beute', 'Reward':'Belohnung', 'Bounty':'Kopfgeld', 'Tax':'Steuer', 'Fine':'Strafe', 'Toll':'Zoll', 'Theft':'Diebstahl',
+/* readout */
+'Choose who pays':'Wähle, wer zahlt', 'Choose who gets it':'Wähle, wer es bekommt', '{name} has {amt}':'{name} hat {amt}',
+'Count out what each one pays':'Zähl ab, was pro Person fällig ist', 'Count out coins for {name}':'Zähl Münzen für {name} ab', 'Count out coins for the party':'Zähl Münzen für die Gruppe ab',
+'Too little to split among {n}':'Zu wenig, um es unter {n} aufzuteilen', '{name} is {amt} short':'{name} fehlen {amt}', "{names} can't pay that":'{names} können das nicht zahlen',
+'{name} keeps {amt}':'{name} behält {amt}', '{n} × {amt} · {sum} in all':'{n} × {amt} · {sum} insgesamt', 'Each of {n} pays {amt}':'{n} Personen zahlen je {amt}',
+'Paid out as a mixed bag of coins':'Wird als bunte Mischung ausgezahlt', 'Straight from the coffers, no change needed':'Direkt aus der Schatzkammer, ohne Wechselgeld',
+'Each of {n} gets {amt}':'{n} Personen bekommen je {amt}', ' · {amt} stays in the coffers':' · {amt} bleibt übrig', ' · mixed bag':' · bunte Mischung',
+' · {amt} stays in the purse':' · {amt} bleibt im Beutel', 'Too little to share among {n}':'Zu wenig, um es unter {n} aufzuteilen', '÷ Share out everything among {n}':'÷ Alles unter {n} aufteilen',
+'How much comes in?':'Wie viel kommt herein?', 'Worth {amt} in all':'Insgesamt {amt} wert',
+'Breaks a {coin} coin · {amt} change':'Eine Münze {coin} wird gewechselt · {amt} zurück', 'Exact coin · {amt} left':'Passend · {amt} übrig',
+'↻ Repeat: {x}':'↻ Wiederholen: {x}', 'the party':'der Gruppe', '{n} players':'{n} Spielern',
+'give {amt} to {who}':'{who} {amt} geben', 'give {amt} each to {who}':'{who} je {amt} geben', 'take {amt} from {who}':'{who} {amt} abnehmen', 'take {amt} each from {who}':'{who} je {amt} abnehmen',
+/* GM tags */
+'Whole party ({n})':'Ganze Gruppe ({n})', 'With several players':'Bei mehreren Spielern', 'Split':'Teilen', 'Each':'Jeder',
+'Hold a name to add more':'Namen gedrückt halten für mehr', 'Pay out a random mix of coins with the same value':'Zufällige Münzmischung mit demselben Wert auszahlen', 'Mixed bag':'Bunte Mischung',
+/* slider */
+'Choose an amount':'Betrag wählen', 'Not enough coin':'Nicht genug Münzen', 'Too little to split':'Zu wenig zum Aufteilen', 'Too little to share':'Zu wenig zum Aufteilen',
+'Slide to share {amt} among {n}':'Schieben: {amt} unter {n} aufteilen', 'Slide to take {amt} from {who}':'Schieben: {who} {amt} abnehmen',
+'Slide to take {amt} from each of {n}':'Schieben: {n} Personen je {amt} abnehmen', 'Slide to take {amt} from {n}':'Schieben: {amt} von {n} Personen nehmen',
+'Slide to give {amt} to {who}':'Schieben: {who} {amt} geben', 'Slide to give {amt} to each of {n}':'Schieben: {n} Personen je {amt} geben',
+'Slide to receive {amt}':'Schieben: {amt} erhalten', 'Slide to pay {who} {amt}':'Schieben: {who} {amt} zahlen', 'Slide to pay {amt}':'Schieben: {amt} zahlen',
+/* GM book and ledger */
+"The Game Master's book":'Das Buch der Spielleitung', 'Taken in from players':'Von Spielern eingenommen', 'Paid out to players':'An Spieler ausgezahlt',
+'Player':'Spieler', 'Purse now':'Beutel jetzt', 'Paid to GM':'An SL gezahlt', 'Got from GM':'Von SL erhalten',
+'Took':'Genommen', 'Start':'Start', 'Gave':'Gegeben', 'Paid':'Gezahlt', 'Got':'Erhalten',
+' for {x}':' für {x}', 'mixed bag: {x}':'bunte Mischung: {x}', ' to {x}':' an {x}', ' from {x}':' von {x}', '{from} to {to}':'{from} an {to}',
+'{who} takes from {name}':'{who} nimmt von {name}', '{who} takes {each} from each of {names}':'{who} nimmt je {each} von {names}', '{who} takes from {n} · {each} each':'{who} nimmt von {n} Personen · je {each}',
+"Every player's purse set to the starting purse":'Alle Beutel auf den Startbeutel gesetzt',
+'{from} gives {names} · {each} each':'{from} gibt {names} · je {each}', '{from} shares among {n} · {each} each':'{from} teilt unter {n} Personen auf · je {each}',
+'Nothing spent yet. The night is young.':'Noch nichts ausgegeben. Die Nacht ist jung.',
+'↶ Undo':'↶ Rückgängig', 'Undo':'Rückgängig', 'Undone: {x}':'Rückgängig: {x}',
+/* transactions */
+'{name} received {amt}':'{name} hat {amt} erhalten', 'Took {amt} from {name}':'{name} {amt} abgenommen', 'Took {amt} from each of {n}':'{n} Personen je {amt} abgenommen',
+'Took {amt} from {n}':'{amt} von {n} Personen genommen', 'Gave {name} {amt}':'{name} {amt} gegeben', '{name} got a mixed bag: {coins}':'{name} bekommt eine bunte Mischung: {coins}',
+'Gave {amt} to each of {n}':'{n} Personen je {amt} gegeben', 'Shared {sum}: {each} each':'{sum} aufgeteilt: je {each}', '{name} shared {amt} each':'{name} hat je {amt} verteilt',
+'{name} paid {to} {amt}':'{name} hat {to} {amt} gezahlt', '{name} paid {amt}':'{name} hat {amt} gezahlt',
+/* bottom tabs */
+'More':'Mehr', 'Party':'Gruppe', 'Customize':'Anpassen', 'Save & load':'Speichern', 'Ledger':'Kassenbuch',
+/* save & load */
+'The purse saves itself in this browser, but browsers can forget. Make a backup after each session.':'Der Beutel speichert sich in diesem Browser, aber Browser können vergessen. Mach nach jeder Sitzung eine Sicherung.',
+'Save code':'Speichercode', 'Include the ledger':'Kassenbuch mitnehmen', 'makes the code longer':'macht den Code länger', 'Make a save code':'Speichercode erstellen', 'Copy':'Kopieren',
+'Your save code':'Dein Speichercode', 'Paste a save code here to load it':'Speichercode hier einfügen, um ihn zu laden', 'Paste a save code':'Speichercode einfügen', 'Load this code':'Diesen Code laden',
+'Save file':'Speicherdatei', 'Save to a file':'In eine Datei speichern', 'Load a file':'Datei laden', '{n} characters':'{n} Zeichen',
+'Copied. Keep it somewhere safe, like a note or a message to yourself.':'Kopiert. Bewahre ihn sicher auf, etwa in einer Notiz oder einer Nachricht an dich selbst.',
+"Selected. Copy it with your device's copy command.":'Markiert. Kopiere ihn mit dem Kopierbefehl deines Geräts.',
+'Tap again to replace this table':'Nochmal tippen, um diesen Tisch zu ersetzen', 'no players':'keine Spieler',
+'This replaces the current table with: {names}, {c} coin types, {l} ledger entries.':'Das ersetzt den aktuellen Tisch durch: {names}, {c} Münzarten, {l} Einträge im Kassenbuch.',
+'That is not a LootPal save code.':'Das ist kein LootPal-Speichercode.', 'This browser cannot read compressed codes.':'Dieser Browser kann komprimierte Codes nicht lesen.',
+'The code is readable, but it holds no table.':'Der Code ist lesbar, enthält aber keinen Tisch.', 'That code could not be read. Check that it was copied completely.':'Der Code ließ sich nicht lesen. Prüfe, ob er vollständig kopiert wurde.',
+'Table loaded.':'Tisch geladen.', 'Saved.':'Gespeichert.', 'Saved to your downloads.':'In deinen Downloads gespeichert.', 'Not saved.':'Nicht gespeichert.',
+'Saving a file does not work here. Use a save code instead.':'Dateien speichern geht hier nicht. Nimm stattdessen einen Speichercode.',
+'Replace this table':'Diesen Tisch ersetzen', 'That file is not a LootPal save.':'Diese Datei ist kein LootPal-Spielstand.',
+/* party */
+"Who's at the table":'Wer sitzt am Tisch', "New player's name":'Name der neuen Figur', '+ Add a party purse':'+ Gruppenkasse hinzufügen',
+'Leave the name empty to get "Player 4", "Player 5" and so on. You can also rename a character by tapping their name on the purse.':'Ohne Namen heißt die Figur „Spieler 4“, „Spieler 5“ und so weiter. Du kannst eine Figur auch umbenennen, indem du oben im Beutel auf ihren Namen tippst.',
+'Starting purse':'Startbeutel', 'Give everyone the starting purse':'Allen den Startbeutel geben', 'Tap again to set every purse':'Nochmal tippen, um alle Beutel zu setzen',
+"Every player's purse is set to exactly the starting purse. What they hold now is replaced. The GM's book doesn't count this as a payout.":'Jeder Beutel wird genau auf den Startbeutel gesetzt. Was jetzt darin ist, wird ersetzt. Im Buch der Spielleitung zählt das nicht als Auszahlung.',
+'Tap the button again to do it.':'Tippe noch einmal auf den Knopf, um es zu tun.',
+'Name of the NPC tag':'Name des NSC-Knopfs',
+'Only changes the label on the tag players pay to by default, for example "The Realm" or "Merchants". It doesn\'t change how payments work, and past ledger entries keep the name they had.':'Ändert nur die Beschriftung des Knopfs, an den Spieler standardmäßig zahlen, zum Beispiel „Das Reich“ oder „Händler“. Am Bezahlen ändert sich nichts, und alte Einträge im Kassenbuch behalten ihren Namen.',
+'Start over':'Neu anfangen', 'Reset example table':'Beispieltisch zurücksetzen', 'Tap again to reset everything':'Nochmal tippen, um alles zurückzusetzen',
+'Starts over with Player 1–3, the standard coins and an empty ledger.':'Beginnt neu mit Spieler 1–3, den Standardmünzen und einem leeren Kassenbuch.',
+'Name of {name}':'Name von {name}', 'Always here':'Immer dabei', 'Remove':'Entfernen', 'Tap again to remove':'Nochmal tippen zum Entfernen',
+'Party purse added. It gets no share of "Whole party" payouts and no starting purse.':'Gruppenkasse hinzugefügt. Sie bekommt keinen Anteil an Auszahlungen an die „Ganze Gruppe“ und keinen Startbeutel.',
+'{name} leaves the party. Their entries stay in the ledger.':'{name} verlässt die Gruppe. Die Einträge bleiben im Kassenbuch.',
+'{name} joins the party with {amt}.':'{name} kommt mit {amt} in die Gruppe.', '{name} joins the party with an empty purse.':'{name} kommt mit leerem Beutel in die Gruppe.',
+'Starting {name}':'Start: {name}', 'New players start with {amt}. Set everything to 0 for empty purses.':'Neue Figuren beginnen mit {amt}. Setz alles auf 0 für leere Beutel.',
+'New players start with an empty purse.':'Neue Figuren beginnen mit leerem Beutel.', 'Starting purse for everyone':'Startbeutel für alle', 'Every player now holds {amt}.':'Jetzt hat jede Figur {amt}.',
+/* customize: coins */
+'Coins':'Münzen', 'Add, remove or edit coins ·':'Münzen hinzufügen, entfernen oder bearbeiten ·', '+ Add a coin':'+ Münze hinzufügen', '+ Add a coin ({n} is the maximum)':'+ Münze hinzufügen (höchstens {n})',
+'Reset to Gold, Silver & Copper':'Zurück zu Gold, Silber & Kupfer', 'Tap again to reset the coins':'Nochmal tippen, um die Münzen zurückzusetzen',
+"Back to Gold, Silver and Copper with their standard worth, weight, colour and shape. Everyone's coins are changed into the new coins at their value, so nobody gets richer or poorer.":'Zurück zu Gold, Silber und Kupfer mit Standardwert, -gewicht, -farbe und -form. Alle Münzen werden zum vollen Wert umgetauscht, niemand wird reicher oder ärmer.',
+'Tap the button again to reset.':'Tippe noch einmal auf den Knopf zum Zurücksetzen.',
+'Pick a colour and a shape for each coin. The cheapest coin is the base and is always worth 1. Every other coin is worth a whole number of base coins, so uneven systems like 12 pence to the shilling work too.':'Wähle Farbe und Form für jede Münze. Die billigste Münze ist die Grundmünze und immer 1 wert. Jede andere Münze ist eine ganze Zahl Grundmünzen wert, also gehen auch krumme Systeme wie 12 Pfennig auf den Schilling.',
+'Tap to change colour':'Tippen, um die Farbe zu ändern', 'Change colour, now {c}':'Farbe ändern, jetzt {c}', 'Coin name':'Münzname', 'Name':'Name', 'Short name':'Kürzel', 'Short':'Kürzel',
+'Remove {name}':'{name} entfernen', 'Colour':'Farbe', 'Shape':'Form', 'Weighs':'Wiegt', 'Weight of one {name}':'Gewicht einer Münze {name}',
+'Base coin · worth 1':'Grundmünze · Wert 1', 'Worth':'Wert', 'Worth in {name}':'Wert in {name}',
+'Each coin needs its own worth of at least 2 base coins.':'Jede Münze braucht einen eigenen Wert von mindestens 2 Grundmünzen.',
+'Coins reset to Gold, Silver and Copper. Everyone kept their wealth.':'Münzen auf Gold, Silber und Kupfer zurückgesetzt. Alle haben ihren Reichtum behalten.',
+/* customize: wealth & weight */
+'Wealth & weight':'Reichtum & Gewicht', 'Wealth titles and purse weight for each character':'Reichtumstitel und Beutelgewicht für jede Figur',
+'Wealth title':'Reichtumstitel', 'like "Comfortable" or "Wealthy"':'wie „Gut versorgt“ oder „Reich“', '+ Add a step':'+ Stufe hinzufügen', 'Back to the default ladder':'Zurück zur Standardleiter',
+"A character gets the title of the highest step their total worth reaches. Set the amounts to fit your campaign's economy.":'Eine Figur bekommt den Titel der höchsten Stufe, die ihr Gesamtwert erreicht. Passe die Beträge an die Wirtschaft deiner Kampagne an.',
+'Title':'Titel', 'from':'ab', 'nothing at all':'gar nichts', 'Starts at':'Beginnt bei', 'Coin':'Münze', 'Remove step':'Stufe entfernen',
+'Purse weight':'Beutelgewicht', 'weight, status and belt bar':'Gewicht, Zustand und Gürtelbalken', 'Grams & kilos':'Gramm & Kilo', 'Ounces & pounds':'Unzen & Pfund', 'Belt is full at':'Gürtel ist voll bei',
+'Each coin\'s weight is set under Coins. The bar fills up to the "full" weight, and the descriptions scale with it.':'Das Gewicht jeder Münze stellst du unter Münzen ein. Der Balken füllt sich bis zum „vollen“ Gewicht, die Beschreibungen passen sich daran an.',
+/* customize: deeds and sound */
+'Deeds':'Taten', 'Small achievements players can earn':'Kleine Erfolge, die Spieler verdienen können', 'Award deeds':'Taten vergeben', 'like First Purchase or Pack Mule':'wie Erster Kauf oder Packesel',
+"When on, each character can earn six deeds once, shown in the ledger with a lute tune. Deeds already earned are kept if you switch it off again.":'Wenn an, kann jede Figur sechs Taten je einmal verdienen, angezeigt im Kassenbuch mit einer Lautenmelodie. Verdiente Taten bleiben erhalten, wenn du es wieder ausschaltest.',
+'Sound settings':'Klang', 'Volume, sound effects and vibration':'Lautstärke, Klangeffekte und Vibration', 'Sound on':'Ton an', 'Sound off':'Ton aus', 'Volume':'Lautstärke',
+'Counting coins':'Münzen zählen', 'metal on metal':'Metall auf Metall', 'Paying and receiving':'Zahlen und Erhalten', 'coins on the table, pouch':'Münzen auf dem Tisch, Beutel',
+'a lute tune for each':'eine Lautenmelodie für jede', 'GM rewards':'Belohnungen der SL', 'a flourish when the GM pays out':'ein Tusch, wenn die SL auszahlt',
+'Vibration':'Vibration', 'on phones that support it':'auf Handys, die es können',
+/* language */
+'Who and what for':'Wer und wofür', 'Who and what for, for the ledger':'Wer und wofür, fürs Kassenbuch', 'Which NPC?':'Welcher NSC?',
+'{npc} unless you pick someone':'{npc}, wenn du niemanden wählst', 'Split in party ({n})':'In der Gruppe teilen ({n})',
+'Language':'Sprache',
+'Names LootPal gave, like "Player 1" or "Gold", change with the language. Names you chose stay as they are.':'Namen, die LootPal vergeben hat, wie „Spieler 1“ oder „Gold“, wechseln mit der Sprache. Selbst gewählte Namen bleiben, wie sie sind.'
+}};
+const trIn=(s,l)=>(l!=='en'&&DICT[l]&&DICT[l][s])||s;
+const tx=(s,v)=>{ let o=trIn(s,LANG); if(v) o=o.replace(/\{(\w+)\}/g,(m,k)=>k in v?v[k]:m); return o; };
+const pname=k=>tx('Player {n}',{n:k});
 
 /* =====================================================================
    1. Catalogues: materials, shapes, deeds
@@ -640,13 +806,13 @@ const ACH={
    2. State: defaults, migration of older saves, storage
    ===================================================================== */
 const KEY='adv-purse-proto-v1';
-const defaultCoins=()=>[{id:'g',name:'Gold',tag:'g',metal:'gold',value:100},{id:'s',name:'Silver',tag:'s',metal:'silver',value:10},{id:'c',name:'Copper',tag:'c',metal:'copper',value:1}];
+const defaultCoins=()=>[{id:'g',name:tx('Gold'),tag:'g',metal:'gold',value:100},{id:'s',name:tx('Silver'),tag:'s',metal:'silver',value:10},{id:'c',name:tx('Copper'),tag:LANG==='de'?'k':'c',metal:'copper',value:1}];
 const GM_PURSE={g:50,s:40,c:60};
 /* every new player starts with this purse */
 const START_PURSE={g:5,s:10,c:25};
-const example=()=>({coinset:defaultCoins(), startPurse:{...START_PURSE}, sound:true, tab:'pay', active:'p1', log:[], chars:[
-  {id:'p1',name:'Player 1',coins:{...START_PURSE},ach:[]}, {id:'p2',name:'Player 2',coins:{...START_PURSE},ach:[]},
-  {id:'p3',name:'Player 3',coins:{...START_PURSE},ach:[]}, {id:'gm',name:'Game Master',gm:true,coins:{...GM_PURSE},ach:[]}]});
+const example=()=>({weight:{show:false, unit:'metric', maxKg:3}, coinset:defaultCoins(), startPurse:{...START_PURSE}, sound:true, tab:'pay', active:'p1', log:[], chars:[
+  {id:'p1',name:pname(1),coins:{...START_PURSE},ach:[]}, {id:'p2',name:pname(2),coins:{...START_PURSE},ach:[]},
+  {id:'p3',name:pname(3),coins:{...START_PURSE},ach:[]}, {id:'gm',name:tx('Game Master'),gm:true,coins:{...GM_PURSE},ach:[]}]});
 
 /* Brings any saved table (older versions included) up to the current shape. Coin-dependent parts
    (wealth ladder) are filled after applyCoins(). */
@@ -655,11 +821,11 @@ function migrate(s){
   if(!Array.isArray(s.coinset)||!s.coinset.length){ const r=s.rates||{s:10,g:10}; s.coinset=defaultCoins(); s.coinset[1].value=r.s; s.coinset[0].value=r.s*r.g; }
   delete s.rates;
   for(const ch of s.chars){ ch.coins=Object.assign(blank(),ch.coins||{}); if(!Array.isArray(ch.ach)) ch.ach=[]; }
-  if(!s.chars.some(c=>c.gm)) s.chars.push({id:'gm',name:'Game Master',gm:true,coins:{...blank(),...GM_PURSE},ach:[]});
+  if(!s.chars.some(c=>c.gm)) s.chars.push({id:'gm',name:tx('Game Master'),gm:true,coins:{...blank(),...GM_PURSE},ach:[]});
   if(!s.chars.some(c=>c.id===s.active)) s.active=(s.chars.find(c=>!c.gm)||s.chars[0]).id;
   if(!Array.isArray(s.log)) s.log=[];
   if(!['pay','get'].includes(s.tab)) s.tab='pay';
-  if(!s.weight) s.weight={show:true, unit:'metric', maxKg:3};
+  if(!s.weight) s.weight={show:false, unit:'metric', maxKg:3};   /* weight is an extra: off for a new table */
   /* one switch for the whole weight line (weight, status and belt bar) */
   if(s.weight.show==null) s.weight.show=!!(s.weight.showKg||s.weight.showSay||s.weight.showBar);
   delete s.weight.showKg; delete s.weight.showSay; delete s.weight.showBar;
@@ -714,11 +880,12 @@ const gramsOf=d=>{ const c=COINS[d]; return c.grams!=null ? c.grams : METALS[c.m
 const weight=co=>D.reduce((w,d)=>w+co[d]*gramsOf(d),0)/1000;
 const kgTxt=kg=>{ if(W().unit==='imperial'){ const lb=kg/LB; return lb<1 ? (lb*16).toFixed(lb*16<10?1:0).replace('.0','')+' oz' : lb.toFixed(lb<10?1:0)+' lb'; }
   return kg<1?Math.round(kg*1000)+' g':kg.toFixed(kg<10?2:1).replace('.',',')+' kg'; };
-const heft=kg=>{ const f=kg/W().maxKg; return kg<=0?'Not a jingle':f<.033?'Light as a feather':f<.1?'Jingles softly':f<.233?'A satisfying weight':f<.5?'Tugs at your belt':f<1?'You walk with a lean':'Needs its own mule'; };
+const heft=kg=>{ const f=kg/W().maxKg; return tx(kg<=0?'Not a jingle':f<.033?'Light as a feather':f<.1?'Jingles softly':f<.233?'A satisfying weight':f<.5?'Tugs at your belt':f<1?'You walk with a lean':'Needs its own mule'); };
 
 /* Wealth titles: an editable ladder, each step starting at an amount in base coins */
 function defaultLadder(){ const t=topV(), b=D[D.length-1], top=D[0];
-  return [{label:'Penniless',from:0,coin:b},{label:'Scraping by',from:1,coin:b},{label:'Modest',from:t,coin:top},{label:'Comfortable',from:5*t,coin:top},{label:'Prosperous',from:20*t,coin:top},{label:'Wealthy',from:100*t,coin:top}]; }
+  return [{label:tx('Penniless'),from:0,coin:b},{label:tx('Scraping by'),from:1,coin:b},{label:tx('Modest'),from:t,coin:top},{label:tx('Comfortable'),from:5*t,coin:top},{label:tx('Prosperous'),from:20*t,coin:top},{label:tx('Wealthy'),from:100*t,coin:top}]; }
+const LADDER_KEYS=['Penniless','Scraping by','Modest','Comfortable','Prosperous','Wealthy','New title'];
 const rank=co=>{ const w=total(co), st=[...S.titles.steps].sort((a,b)=>a.from-b.from); let r=st[0]?.label||''; for(const x of st) if(w>=x.from) r=x.label; return r; };
 
 applyCoins();
@@ -728,14 +895,14 @@ if(!S.titles) S.titles={mode:'ladder', steps:defaultLadder()};
 /* avatar letter: the initial, or the number for names like "Player 2" */
 /* avatar letter: the initial, or the number for names like "Player 2"; the party purse gets a coin sign */
 const initialOf=c=>c.pot?'¤':initial(c.name);
-const initial=n=>{ const m=/^player\s*(\d+)$/i.exec(n.trim()); return m?m[1]:(n.trim()[0]||'?'); };
+const initial=n=>{ const m=/^(?:player|spieler)\s*(\d+)$/i.exec(n.trim()); return m?m[1]:(n.trim()[0]||'?'); };
 const cur=()=>S.chars.find(c=>c.id===S.active)||S.chars[0];
 const byId=id=>S.chars.find(c=>c.id===id);
 const players=()=>S.chars.filter(c=>!c.gm&&!c.pot);   /* the party purse is not a player */
 const pot=()=>S.chars.find(c=>c.pot);
-let potShare=false;   /* the party purse is sharing out everything */
-const npc=()=>S.npcName||'NPC';
-const mode=()=>cur().gm?(gmTake?'take':'give'):(cur().pot&&potShare)?'share':S.tab;
+const npc=()=>S.npcName||tx('NPC');
+const npcTxt=n=>(n==='NPC'||n==='NSC')&&!S.npcName?npc():n;   /* the default NPC name follows the language */
+const mode=()=>cur().gm?(gmTake?'take':'give'):S.tab;
 /* The GM hands out to one or more players: gmSel is the chosen set (null = the whole party).
    With several chosen, gmEach decides: split the amount between them, or give the amount to each. */
 let gmSel=null, gmEach=false, gmTake=false;   /* gmTake: the GM takes coins from players (fines, taxes, theft) */
@@ -752,7 +919,7 @@ function mixedBag(value){ const o=blank(); let rem=value;
   for(let i=D.length-1;i>0;i--){ const d=D[i], up=D[i-1], ratio=val(up)/val(d);
     while(o[d]>Math.max(30,ratio*3)&&Number.isInteger(ratio)){ o[d]-=ratio; o[up]++; } }
   return o; }
-const coinsTxt=co=>D.filter(d=>co[d]).map(d=>co[d]+tagOf(d)).join(' ')||'nothing';
+const coinsTxt=co=>D.filter(d=>co[d]).map(d=>co[d]+tagOf(d)).join(' ')||tx('nothing');
 /* how a GM payout of `cost` lands: each = per player, left = stays in the coffers, sum = what leaves */
 /* players who can't afford their part of a take */
 const shortOf=each=>chosen().filter(pl=>total(pl.coins)<each);
@@ -868,9 +1035,9 @@ function toast(html,cls='',ms,action){
   setTimeout(()=>{ t.style.transition='opacity .4s'; t.style.opacity='0'; setTimeout(()=>t.remove(),400); }, ms||(cls==='ach'?3600:2400)); }
 function shake(){ const s=$('console'); s.classList.remove('shake'); void s.offsetWidth; s.classList.add('shake'); buzz([30,40,30]); }
 function award(ch,id){ if(!S.deeds||ch.gm||ch.pot||ch.ach.includes(id)) return; ch.ach.push(id);
-  setTimeout(()=>toast(`<b>${esc(ACH[id].n)}</b>${esc(ch.name)}: ${esc(ACH[id].d)}`,'ach'),700); fanfare(id); }
+  setTimeout(()=>toast(`<b>${esc(tx(ACH[id].n))}</b>${esc(ch.name)}: ${esc(tx(ACH[id].d))}`,'ach'),700); fanfare(id); }
 function checkPurse(ch){ if(ch.gm) return;
-  if(weight(ch.coins)>W().maxKg*2/3) award(ch,'mule'); if(total(ch.coins)>=10*topV()) award(ch,'hoard'); if(total(ch.coins)===0) award(ch,'lint'); }
+  if(W().show&&weight(ch.coins)>W().maxKg*2/3) award(ch,'mule'); if(total(ch.coins)>=10*topV()) award(ch,'hoard'); if(total(ch.coins)===0) award(ch,'lint'); }
 
 /* =====================================================================
    6. Rendering the purse
@@ -879,12 +1046,12 @@ let amt=blank(), recip=null;          /* the amount being counted, and who gets 
 let lastHave={};
 function renderParty(){
   $('party').innerHTML=S.chars.map(c=>`<button class="chip${c.gm?' gm':''}${c.pot?' pot':''}" data-id="${c.id}" aria-current="${c.id===S.active}"><span class="av">${esc(initialOf(c))}</span><span class="nm">${esc(c.name)}</span></button>`).join('')
-    +`<button class="chip add" id="addChip" type="button">+ Add</button>`; }
+    +`<button class="chip add" id="addChip" type="button">${tx('+ Add')}</button>`; }
 function renderHeader(){
   const c=cur();
   if(document.activeElement!==$('pName')) $('pName').textContent=c.name;
-  $('pRank').textContent=c.gm?'Keeper of the Coffers':c.pot?'Shared by the party':rank(c.coins); $('pRank').hidden=!c.gm&&!c.pot&&S.titles.mode==='off';
-  $('pWorth').textContent=c.gm?'Unlimited':fmt(total(c.coins));
+  $('pRank').textContent=c.gm?tx('Keeper of the Coffers'):c.pot?tx('Shared by the party'):rank(c.coins); $('pRank').hidden=!c.gm&&!c.pot&&S.titles.mode==='off';
+  $('pWorth').textContent=c.gm?tx('Unlimited'):fmt(total(c.coins));
   $('weight').hidden=!!c.gm||!W().show;
   const kg=weight(c.coins); $('pKg').textContent=kgTxt(kg); $('pSay').textContent=heft(kg);
   $('pSag').style.width=Math.min(100,kg/W().maxKg*100)+'%'; }
@@ -900,11 +1067,11 @@ function stackHTML(c,d,have,after,bump){
   for(let i=0;i<top;i++){ const st=Math.floor(i/PER), l=i%PER, x=(st-(stacks-1)/2)*gap+shift;
     const cls=i>=vis?'ghost':i>=aft?'leave':i>=prevVis?'drop':'';
     h+=`<i class="stk ${cls}" style="left:calc(50% - 11px + ${x}px); bottom:${3+l*3.2}px; z-index:${st*20+l+1};${cls==='drop'?`animation-delay:${Math.min(i-prevVis,12)*30}ms`:''}"></i>`; }
-  if(bag) h+=`<span class="pouch" style="left:calc(50% - 15px + ${(-(stacks-1)/2)*gap+shift-27}px)" title="Each pouch holds ${BAG} coins">${POUCH_SVG}<b class="${same?'':'ch'}">${c.gm?'∞':same?'×'+pH:`×${pH}→${pA}`}</b></span>`;
+  if(bag) h+=`<span class="pouch" style="left:calc(50% - 15px + ${(-(stacks-1)/2)*gap+shift-27}px)" title="${tx('Each pouch holds {n} coins',{n:BAG})}">${POUCH_SVG}<b class="${same?'':'ch'}">${c.gm?'∞':same?'×'+pH:`×${pH}→${pA}`}</b></span>`;
   return top||bag ? h : '<i class="nil"></i>'; }
 function renderDials(bump){
   if(!$('dials').children.length){
-    $('dials').innerHTML=D.map(d=>`<button class="dial d-${d}" data-d="${d}" aria-label="${esc(COINS[d].name)}: tap to add one, arrow keys to change">
+    $('dials').innerHTML=D.map(d=>`<button class="dial d-${d}" data-d="${d}" aria-label="${esc(tx('{coin}: tap to add one, arrow keys to change',{coin:COINS[d].name}))}">
       <span class="arrows" aria-hidden="true">▲<br>▼</span>
       <span class="face"><b>${esc(tagOf(d).slice(0,2).toUpperCase())}</b><span class="sel" id="sel-${d}"></span></span>
       <span class="stackzone" id="stk-${d}"></span>
@@ -922,7 +1089,7 @@ function renderDials(bump){
     const box=$('have-'+d); box.classList.remove('bump');
     if(bump&&lastHave.id===c.id&&lastHave[d]!==have){ void box.offsetWidth; box.classList.add('bump'); } }
   lastHave={id:c.id,...c.coins}; }
-function flashCap(){ const sub=$('sub'), c=cur(); sub.textContent=`That's all ${c.name} has`; sub.classList.add('bad'); }
+function flashCap(){ const sub=$('sub'), c=cur(); sub.textContent=tx("That's all {name} has",{name:c.name}); sub.classList.add('bad'); }
 function renderReadout(pop){
   const cost=total(amt), big=$('big'), c=cur(), sub=$('sub');
   big.classList.toggle('zero',!cost);
@@ -932,26 +1099,26 @@ function renderReadout(pop){
   sub.classList.remove('bad');
   if(c.gm){
     const po=payout(cost);
-    if(!po.n){ sub.textContent=gmTake?'Choose who pays':'Choose who gets it'; return; }
+    if(!po.n){ sub.textContent=tx(gmTake?'Choose who pays':'Choose who gets it'); return; }
     if(!cost){
-      if(S.lastGM&&repeatLabel()){ sub.innerHTML=`<button type="button" class="repeat" id="repeatBtn">↻ Repeat: ${esc(repeatLabel())}</button>`; return; }
-      sub.textContent=gmTake?(po.n===1?`${chosen()[0].name} has ${fmt(total(chosen()[0].coins))}`:'Count out what each one pays'):(po.n===1?`Count out coins for ${chosen()[0].name}`:'Count out coins for the party'); return; }
+      if(S.lastGM&&repeatLabel()){ sub.innerHTML=`<button type="button" class="repeat" id="repeatBtn">${esc(tx('↻ Repeat: {x}',{x:repeatLabel()}))}</button>`; return; }
+      sub.textContent=gmTake?(po.n===1?tx('{name} has {amt}',{name:chosen()[0].name,amt:fmt(total(chosen()[0].coins))}):tx('Count out what each one pays')):(po.n===1?tx('Count out coins for {name}',{name:chosen()[0].name}):tx('Count out coins for the party')); return; }
     if(gmTake){ const sh=shortOf(po.each);
-      if(po.n>1&&!po.each){ sub.textContent=`Too little to split among ${po.n}`; sub.classList.add('bad'); return; }
-      if(sh.length){ sub.textContent=sh.length===1?`${sh[0].name} is ${fmt(po.each-total(sh[0].coins))} short`:`${sh.map(x=>x.name).join(', ')} can't pay that`; sub.classList.add('bad'); return; }
-      sub.textContent=po.n===1?`${chosen()[0].name} keeps ${fmt(total(chosen()[0].coins)-cost)}`:gmEach?`${po.n} × ${fmt(cost)} · ${fmt(po.sum)} in all`:`Each of ${po.n} pays ${fmt(po.each)}`; return; }
-    if(po.n===1){ sub.textContent=S.gmMixed?'Paid out as a mixed bag of coins':'Straight from the coffers, no change needed'; return; }
-    if(!po.each){ sub.textContent=`Too little to split among ${po.n}`; sub.classList.add('bad'); return; }
-    sub.textContent=gmEach?`${po.n} × ${fmt(cost)} · ${fmt(po.sum)} in all`:`Each of ${po.n} gets ${fmt(po.each)}${po.left?` · ${fmt(po.left)} stays in the coffers`:''}`;
-    if(S.gmMixed) sub.textContent+=' · mixed bag'; return; }
-  if(c.pot&&potShare){ const n=players().length, w=total(c.coins), each=n?Math.floor(w/n):0;
-    sub.textContent=each?`Each of ${n} gets ${fmt(each)}${w-each*n?` · ${fmt(w-each*n)} stays in the purse`:''}`:`Too little to share among ${n}`; sub.classList.toggle('bad',!each); return; }
-  if(!cost&&c.pot&&total(c.coins)&&players().length&&mode()==='pay'){ sub.innerHTML=`<button type="button" class="repeat" id="shareAllBtn">÷ Share out everything among ${players().length}</button>`; return; }
-  if(!cost){ sub.textContent=mode()==='get'?'How much comes in?':`${c.name} has ${fmt(total(c.coins))}`; return; }
-  if(mode()==='get'){ sub.textContent=`Worth ${fmt(cost)} in all`; return; }
+      if(po.n>1&&!po.each){ sub.textContent=tx('Too little to split among {n}',{n:po.n}); sub.classList.add('bad'); return; }
+      if(sh.length){ sub.textContent=sh.length===1?tx('{name} is {amt} short',{name:sh[0].name,amt:fmt(po.each-total(sh[0].coins))}):tx("{names} can't pay that",{names:sh.map(x=>x.name).join(', ')}); sub.classList.add('bad'); return; }
+      sub.textContent=po.n===1?tx('{name} keeps {amt}',{name:chosen()[0].name,amt:fmt(total(chosen()[0].coins)-cost)}):gmEach?tx('{n} × {amt} · {sum} in all',{n:po.n,amt:fmt(cost),sum:fmt(po.sum)}):tx('Each of {n} pays {amt}',{n:po.n,amt:fmt(po.each)}); return; }
+    if(po.n===1){ sub.textContent=tx(S.gmMixed?'Paid out as a mixed bag of coins':'Straight from the coffers, no change needed'); return; }
+    if(!po.each){ sub.textContent=tx('Too little to split among {n}',{n:po.n}); sub.classList.add('bad'); return; }
+    sub.textContent=gmEach?tx('{n} × {amt} · {sum} in all',{n:po.n,amt:fmt(cost),sum:fmt(po.sum)}):tx('Each of {n} gets {amt}',{n:po.n,amt:fmt(po.each)})+(po.left?tx(' · {amt} stays in the coffers',{amt:fmt(po.left)}):'');
+    if(S.gmMixed) sub.textContent+=tx(' · mixed bag'); return; }
+  if(!cost){ sub.textContent=mode()==='get'?tx('How much comes in?'):tx('{name} has {amt}',{name:c.name,amt:fmt(total(c.coins))}); return; }
+  if(mode()==='get'){ sub.textContent=tx('Worth {amt} in all',{amt:fmt(cost)}); return; }
+  if(potSplit()){ const n=players().length, each=Math.floor(cost/n);
+    if(cost>total(c.coins)){ sub.textContent=tx('{name} is {amt} short',{name:c.name,amt:fmt(cost-total(c.coins))}); sub.classList.add('bad'); return; }
+    sub.textContent=each?tx('Each of {n} gets {amt}',{n,amt:fmt(each)})+(cost-each*n?tx(' · {amt} stays in the purse',{amt:fmt(cost-each*n)}):''):tx('Too little to share among {n}',{n}); sub.classList.toggle('bad',!each); return; }
   const p=plan(c.coins,cost);
-  if(!p){ sub.textContent=`${c.name} is ${fmt(cost-total(c.coins))} short`; sub.classList.add('bad'); return; }
-  sub.textContent=p.broken?`Breaks a ${COINS[p.broken].name.toLowerCase()} coin · ${fmt(total(p.change))} change`:`Exact coin · ${fmt(total(p.after))} left`; }
+  if(!p){ sub.textContent=tx('{name} is {amt} short',{name:c.name,amt:fmt(cost-total(c.coins))}); sub.classList.add('bad'); return; }
+  sub.textContent=p.broken?tx('Breaks a {coin} coin · {amt} change',{coin:LANG==='en'?COINS[p.broken].name.toLowerCase():COINS[p.broken].name,amt:fmt(total(p.change))}):tx('Exact coin · {amt} left',{amt:fmt(total(p.after))}); }
 function renderMode(){
   const G=cur().gm, M=mode();
   $('modes').hidden=G; $('gmModes').hidden=!G; $('worthBox').hidden=G; $('console').classList.toggle('is-gm',!!G);
@@ -960,7 +1127,8 @@ function renderMode(){
   $('recips').hidden=!G;
   /* players pay an NPC by default, or a companion; the GM gives to the party or one player */
   const others=S.chars.filter(c=>c.id!==S.active&&!c.gm);
-  if(!G&&recip&&!others.find(o=>o.id===recip)) recip=null;
+  const canSplit=cur().pot&&players().length>1;
+  if(!G&&recip&&!(recip==='split'&&canSplit)&&!others.find(o=>o.id===recip)) recip=null;
   const tag=(to,cls,av,label,on)=>`<button class="recip${cls}" type="button" data-to="${to}" aria-pressed="${on}"><span class="av">${av}</span>${label}</button>`;
   $('recips').classList.toggle('multi',!!G);
   if(G){
@@ -968,15 +1136,16 @@ function renderMode(){
     const whole=!gmSel, ch=new Set(chosen().map(p=>p.id)), many=ch.size>1;
     /* row 1: who gets it. row 2: how it is paid out */
     const pl=others.filter(o=>!o.pot), pt=others.find(o=>o.pot);
-    $('recips').innerHTML=`<div class="gmrow">${(pl.length>1?tag('party',' party','÷',`Whole party (${pl.length})`,whole):'')
+    $('recips').innerHTML=`<div class="gmrow">${(pl.length>1?tag('party',' party','÷',tx('Whole party ({n})',{n:pl.length}),whole):'')
       +pl.map(o=>tag(o.id,'',esc(initialOf(o)),esc(o.name),!whole&&ch.has(o.id))).join('')
       +(pt?tag(pt.id,' pot','¤',esc(pt.name),!whole&&ch.has(pt.id)):'')}</div>
-      <div class="gmrow how">${many?`<span class="eachsw" role="group" aria-label="With several players"><button type="button" data-each="0" aria-pressed="${!gmEach}">Split</button><button type="button" data-each="1" aria-pressed="${gmEach}">Each</button></span>`
-        :(gmSel&&gmSel.size===1&&others.length>2?`<span class="holdhint">Hold a name to add more</span>`:'')}
-      ${gmTake?'':`<button type="button" class="mixsw" data-mix role="switch" aria-checked="${!!S.gmMixed}" title="Pay out a random mix of coins with the same value"><span class="knobx" aria-hidden="true"></span>Mixed bag</button>`}</div>`;
+      <div class="gmrow how">${many?`<span class="eachsw" role="group" aria-label="${tx('With several players')}"><button type="button" data-each="0" aria-pressed="${!gmEach}">${tx('Split')}</button><button type="button" data-each="1" aria-pressed="${gmEach}">${tx('Each')}</button></span>`
+        :(gmSel&&gmSel.size===1&&others.length>2?`<span class="holdhint">${tx('Hold a name to add more')}</span>`:'')}
+      ${gmTake?'':`<button type="button" class="mixsw" data-mix role="switch" aria-checked="${!!S.gmMixed}" title="${tx('Pay out a random mix of coins with the same value')}"><span class="knobx" aria-hidden="true"></span>${tx('Mixed bag')}</button>`}</div>`;
     return; }
   /* players choose who gets it inside the receipt panel: NPC by default, or a companion */
   $('toTags').innerHTML=tag('',' npc',esc(npc()[0]||'N'),esc(npc()),!recip)
+    +(canSplit?tag('split',' party','÷',esc(tx('Split in party ({n})',{n:players().length})),recip==='split'):'')
     +others.map(o=>tag(o.id,o.pot?' pot':'',esc(initialOf(o)),esc(o.name),o.id===recip)).join(''); }
 function renderSlider(){
   if(typeof syncNote==='function') syncNote();
@@ -984,16 +1153,18 @@ function renderSlider(){
   const short=!c.gm&&M!=='get'&&cost&&total(c.coins)<cost;
   const po=c.gm?payout(cost):null, tooSmall=c.gm&&cost&&po.n>1&&!po.each;
   const gmShort=c.gm&&gmTake&&cost&&po.each&&shortOf(po.each).length>0;
-  const off=!cost||short||tooSmall||gmShort||(c.gm&&!po.n);
+  const splitSmall=potSplit()&&cost&&!Math.floor(cost/players().length);
+  const off=!cost||short||tooSmall||gmShort||splitSmall||(c.gm&&!po.n);
   $('slider').classList.toggle('off',!!off&&!short&&!gmShort); $('slider').classList.toggle('short',!!(short||gmShort));
   $('knob').disabled=!!off;
-  if(c.pot&&potShare){ const n=players().length, each=n?Math.floor(total(c.coins)/n):0; $('slider').classList.toggle('off',!each); $('slider').classList.remove('short'); $('knob').disabled=!each;
-    $('slideTxt').textContent=each?`Slide to share ${fmt(each*n)} among ${n}`:'Too little to share'; return; }
-  $('slideTxt').textContent=(c.gm&&!po.n)?(gmTake?'Choose who pays':'Choose who gets it') : !cost?'Choose an amount' : (short||gmShort)?'Not enough coin' : tooSmall?'Too little to split'
-    : (c.gm&&gmTake) ? (po.n===1?`Slide to take ${fmt(cost)} from ${chosen()[0].name}` : gmEach?`Slide to take ${fmt(cost)} from each of ${po.n}` : `Slide to take ${fmt(cost)} from ${po.n}`)
-    : c.gm ? (po.n===1?`Slide to give ${fmt(cost)} to ${chosen()[0].name}` : gmEach?`Slide to give ${fmt(cost)} to each of ${po.n}` : `Slide to share ${fmt(cost)} among ${po.n}`)
-    : M==='get'?`Slide to receive ${fmt(cost)}`
-    : recip?`Slide to pay ${byId(recip).name} ${fmt(cost)}`:`Slide to pay ${fmt(cost)}`; }
+  const a=fmt(cost), who=po&&po.n===1?chosen()[0].name:'', n=po?po.n:0;
+  $('slideTxt').textContent=(c.gm&&!po.n)?tx(gmTake?'Choose who pays':'Choose who gets it') : !cost?tx('Choose an amount') : (short||gmShort)?tx('Not enough coin') : tooSmall?tx('Too little to split')
+    : (c.gm&&gmTake) ? (n===1?tx('Slide to take {amt} from {who}',{amt:a,who}) : gmEach?tx('Slide to take {amt} from each of {n}',{amt:a,n}) : tx('Slide to take {amt} from {n}',{amt:a,n}))
+    : c.gm ? (n===1?tx('Slide to give {amt} to {who}',{amt:a,who}) : gmEach?tx('Slide to give {amt} to each of {n}',{amt:a,n}) : tx('Slide to share {amt} among {n}',{amt:a,n}))
+    : splitSmall?tx('Too little to share')
+    : potSplit()?tx('Slide to share {amt} among {n}',{amt:fmt(Math.floor(cost/players().length)*players().length),n:players().length})
+    : M==='get'?tx('Slide to receive {amt}',{amt:a})
+    : recip?tx('Slide to pay {who} {amt}',{who:byId(recip).name,amt:a}):tx('Slide to pay {amt}',{amt:a}); }
 
 /* The GM's book: what players paid to the GM and the world, and what the GM paid out */
 function book(){
@@ -1007,30 +1178,35 @@ function book(){
     else if(fromGM&&e.k==='give'){ if(to) row(to).got+=e.amt; got+=e.amt; }
     else if(e.k==='take'){ for(const sh of e.shares||[]){ const id=pid(sh.id,sh.name); if(id) row(id).paid+=sh.amt; paid+=sh.amt; } }
     else if(e.k==='split'&&fromGM){ for(const sh of e.shares||[]){ const id=pid(sh.id,sh.name); if(id) row(id).got+=sh.amt; got+=sh.amt; } } }
-  return `<div class="book-tot"><div><span class="l">Taken in from players</span><span class="v in">${fmt(paid)}</span></div>
-    <div><span class="l">Paid out to players</span><span class="v out">${fmt(got)}</span></div></div>
-    <table class="book"><thead><tr><th>Player</th><th>Purse now</th><th>Paid to GM</th><th>Got from GM</th></tr></thead><tbody>
+  return `<div class="book-tot"><div><span class="l">${tx('Taken in from players')}</span><span class="v in">${fmt(paid)}</span></div>
+    <div><span class="l">${tx('Paid out to players')}</span><span class="v out">${fmt(got)}</span></div></div>
+    <table class="book"><thead><tr><th>${tx('Player')}</th><th>${tx('Purse now')}</th><th>${tx('Paid to GM')}</th><th>${tx('Got from GM')}</th></tr></thead><tbody>
     ${S.chars.filter(c=>!c.gm).map(p=>{ const r=rows[p.id]||{paid:0,got:0}; return `<tr><td>${esc(p.name)}</td><td>${fmt(total(p.coins))}</td><td class="in">${r.paid?fmt(r.paid):'·'}</td><td class="out">${r.got?fmt(r.got):'·'}</td></tr>`; }).join('')}
     </tbody></table>`; }
 function ledgerLine(e){
-  if(e.k==='take'){ const names=(e.shares||[]).map(x=>esc(x.name));
-    return `<li><span class="k">Took</span><span><b>${esc(e.who)}</b> takes ${names.length===1?`from <b>${names[0]}</b>`:e.per?`${fmt(e.each)} from each of ${names.join(', ')}`:`from ${names.length} · ${fmt(e.each)} each`}${e.note?` for <i>${esc(e.note)}</i>`:''}</span><span class="amt minus">−${fmt(e.amt)}</span></li>`; }
-  if(e.k==='start') return `<li><span class="k">Start</span><span>Every player's purse set to the starting purse</span><span class="amt">${fmt(e.amt)}</span></li>`;
-  if(e.k==='split') return `<li><span class="k">${e.per?'Gave':'Split'}</span><span>${e.from?esc(e.from):`<b>${esc(e.who)}</b>`} ${e.per?'gives':'shares among'} ${e.per?(e.shares||[]).map(x=>esc(x.name)).join(', '):(e.shares||[]).length} · ${fmt(e.each)} each${e.note?` for <i>${esc(e.note)}</i>`:''}${e.mixed?` · <i>mixed bag: ${(e.shares||[]).map(x=>esc(x.name)+' '+esc(x.mix||'')).join('; ')}</i>`:''}</span><span class="amt plus">+${fmt(e.amt)}</span></li>`;
+  const forTxt=e.note?tx(' for {x}',{x:`<i>${esc(e.note)}</i>`}):'', mixTxt=m=>m?` · <i>${tx('mixed bag: {x}',{x:m})}</i>`:'', B=s=>`<b>${esc(s)}</b>`;
+  if(e.k==='take'){ const names=(e.shares||[]).map(x=>esc(x.name)), each=fmt(e.each);
+    const body=names.length===1?tx('{who} takes from {name}',{who:B(e.who),name:`<b>${names[0]}</b>`}):e.per?tx('{who} takes {each} from each of {names}',{who:B(e.who),each,names:names.join(', ')}):tx('{who} takes from {n} · {each} each',{who:B(e.who),n:names.length,each});
+    return `<li><span class="k">${tx('Took')}</span><span>${body}${forTxt}</span><span class="amt minus">−${fmt(e.amt)}</span></li>`; }
+  if(e.k==='start') return `<li><span class="k">${tx('Start')}</span><span>${tx("Every player's purse set to the starting purse")}</span><span class="amt">${fmt(e.amt)}</span></li>`;
+  if(e.k==='split'){ const from=e.from?esc(e.from):B(e.who), each=fmt(e.each);
+    const body=e.per?tx('{from} gives {names} · {each} each',{from,names:(e.shares||[]).map(x=>esc(x.name)).join(', '),each}):tx('{from} shares among {n} · {each} each',{from,n:(e.shares||[]).length,each});
+    return `<li><span class="k">${tx(e.per?'Gave':'Split')}</span><span>${body}${forTxt}${e.mixed?mixTxt((e.shares||[]).map(x=>esc(x.name)+' '+esc(x.mix||'')).join('; ')):''}</span><span class="amt plus">+${fmt(e.amt)}</span></li>`; }
   const minus=e.k==='pay'||e.k==='give', fromGM=(S.chars.find(x=>x.gm)||{}).name===e.who;
-  const kind=e.k==='give'?(fromGM?'Gave':'Paid'):{pay:'Paid',get:'Got',loot:'Loot'}[e.k];
-  if(e.k==='give'&&fromGM&&e.from) return `<li><span class="k">Gave</span><span>${esc(e.from)} to <b>${esc(e.to)}</b>${e.note?` for <i>${esc(e.note)}</i>`:''}${e.mix?` · <i>mixed bag: ${esc(e.mix)}</i>`:''}</span><span class="amt plus">+${fmt(e.amt)}</span></li>`;
-  const whom=e.to?` to <b>${esc(e.to)}</b>`:e.npc?` to ${esc(e.npc)}`:e.from?` from ${esc(e.from)}`:'';
-  return `<li><span class="k">${kind}</span><span><b>${esc(e.who)}</b>${whom}${e.note?` for <i>${esc(e.note)}</i>`:''}${e.mix?` · <i>mixed bag: ${esc(e.mix)}</i>`:''}</span><span class="amt ${minus?'minus':'plus'}">${minus?'−':'+'}${fmt(e.amt)}</span></li>`; }
+  const kind=tx(e.k==='give'?(fromGM?'Gave':'Paid'):{pay:'Paid',get:'Got',loot:'Loot'}[e.k]);
+  if(e.k==='give'&&fromGM&&e.from) return `<li><span class="k">${tx('Gave')}</span><span>${tx('{from} to {to}',{from:esc(e.from),to:B(e.to)})}${forTxt}${mixTxt(e.mix&&esc(e.mix))}</span><span class="amt plus">+${fmt(e.amt)}</span></li>`;
+  const whom=e.to?tx(' to {x}',{x:B(e.to)}):e.npc?tx(' to {x}',{x:esc(npcTxt(e.npc))}):e.from?tx(' from {x}',{x:esc(e.from)}):'';
+  return `<li><span class="k">${kind}</span><span>${B(e.who)}${whom}${forTxt}${mixTxt(e.mix&&esc(e.mix))}</span><span class="amt ${minus?'minus':'plus'}">${minus?'−':'+'}${fmt(e.amt)}</span></li>`; }
 function renderLedger(){
   const c=cur();
   $('gmBook').hidden=!c.gm; const b=book(); $('gmBookBody').innerHTML=b; $('bookInLedger').innerHTML=b;
-  const earned=c.ach.filter(id=>ACH[id]);
-  $('deeds').innerHTML=(c.gm||!S.deeds)?'' : `<h3 class="deeds-h">${esc(c.name)}'s deeds · ${earned.length} of ${Object.keys(ACH).length}</h3>`
-    +Object.entries(ACH).map(([id,a])=>{ const got=earned.includes(id);
-      return `<button type="button" class="deed${got?' got':''}" data-deed="${id}" ${got?'':'tabindex="-1"'}><span class="star">${got?'★':'☆'}</span><span class="dn">${esc(a.n)}</span><span class="dh">${esc(got?a.d:a.h)}</span></button>`; }).join('');
+  const deedIds=Object.keys(ACH).filter(id=>id!=='mule'||W().show);   /* Pack Mule only exists when weight is on */
+  const earned=c.ach.filter(id=>deedIds.includes(id));
+  $('deeds').innerHTML=(c.gm||!S.deeds)?'' : `<h3 class="deeds-h">${esc(tx("{name}'s deeds · {a} of {b}",{name:c.name,a:earned.length,b:deedIds.length}))}</h3>`
+    +deedIds.map(id=>[id,ACH[id]]).map(([id,a])=>{ const got=earned.includes(id);
+      return `<button type="button" class="deed${got?' got':''}" data-deed="${id}" ${got?'':'tabindex="-1"'}><span class="star">${got?'★':'☆'}</span><span class="dn">${esc(tx(a.n))}</span><span class="dh">${esc(tx(got?a.d:a.h))}</span></button>`; }).join('');
   const L=S.log.slice(-30).reverse();
-  $('ledger').innerHTML=L.length?L.map(ledgerLine).join(''):'<li class="empty">Nothing spent yet. The night is young.</li>';
+  $('ledger').innerHTML=L.length?L.map(ledgerLine).join(''):`<li class="empty">${tx('Nothing spent yet. The night is young.')}</li>`;
   renderUndo(); }
 function syncTyper(){ if(!$('typer').hidden) for(const d of D){ const f=$('t'+d); if(document.activeElement!==f) f.value=amt[d]||''; } }
 function renderConsole(pop,bump){ renderDials(bump); renderReadout(pop); renderSlider(); syncTyper(); }
@@ -1043,7 +1219,7 @@ const UNDO=[];                         /* in memory: the last few transactions, 
 function snapshot(label){ UNDO.push({label, chars:JSON.stringify(S.chars), log:JSON.stringify(S.log), active:S.active}); if(UNDO.length>10) UNDO.shift(); }
 function undo(){ const u=UNDO.pop(); if(!u) return;
   S.chars=JSON.parse(u.chars); S.log=JSON.parse(u.log); if(!byId(S.active)) S.active=u.active; save(); tick();
-  renderAll(false); toast(`Undone: ${esc(u.label)}`); }
+  renderAll(false); toast(esc(tx('Undone: {x}',{x:u.label}))); }
 function renderUndo(){ const u=UNDO[UNDO.length-1]; $('undoRow').hidden=!u; if(u) $('undoWhat').textContent=u.label; }
 function log(e){ S.log.push(e); if(S.log.length>200) S.log.splice(0,S.log.length-200); }
 /* remember the GM's last payout so it can be repeated with one tap */
@@ -1051,9 +1227,9 @@ function rememberGM(note,from){ S.lastGM={amt:Object.fromEntries(D.map(d=>[d,amt
 function repeatLabel(){ const L=S.lastGM; if(!L) return '';
   const val=D.reduce((t,d)=>t+(L.amt[d]||0)*COINS[d].value,0); if(!val) return '';
   const sel=L.sel?L.sel.map(byId).filter(Boolean):null; if(L.sel&&!sel.length) return '';
-  const who=!sel?'the party':sel.length===1?sel[0].name:`${sel.length} players`;
-  const many=!sel||sel.length>1;
-  return `${L.take?'take':'give'} ${fmt(val)}${many&&L.each?' each':''} ${L.take?'from':'to'} ${who}${L.note?` for ${L.note}`:''}`; }
+  const who=!sel?tx('the party'):sel.length===1?sel[0].name:tx('{n} players',{n:sel.length});
+  const each=(!sel||sel.length>1)&&L.each;
+  return tx(L.take?(each?'take {amt} each from {who}':'take {amt} from {who}'):(each?'give {amt} each to {who}':'give {amt} to {who}'),{amt:fmt(val),who})+(L.note?tx(' for {x}',{x:L.note}):''); }
 function repeatLast(){ const L=S.lastGM; if(!L) return;
   amt=blank(); for(const d of D) amt[d]=L.amt[d]||0;
   gmSel=L.sel?new Set(L.sel.filter(id=>byId(id))):null; if(gmSel&&!gmSel.size) gmSel=null;
@@ -1063,17 +1239,17 @@ function repeatLast(){ const L=S.lastGM; if(!L) return;
 function finish(label,delay=650){
   amt=blank(); clearNote(); closeTyper(); save();
   renderReadout(false); renderSlider(); renderLedger();
-  toast(esc(label),'',4000,{label:'Undo',run:undo});
+  toast(esc(label),'',4000,{label:tx('Undo'),run:undo});
   setTimeout(()=>{ renderParty(); renderHeader(); renderMode(); renderDials(true); }, reduce?0:delay); }
 function commit(){
   const c=cur(), cost=total(amt); if(!cost) return;
   const dials=$('dials'), M=mode(), note=$('note').value.trim(), other=withNpc()?$('noteTo').value.trim():'';
   if(M==='get'){
-    snapshot(`${c.name} received ${fmt(cost)}`);
+    const gl=tx('{name} received {amt}',{name:c.name,amt:fmt(cost)}); snapshot(gl);
     for(const d of D) c.coins[d]+=amt[d];
     fly(amt,$('till'),dials); rustle(); jingle(amt,0.3); buzz(20);
     log({k:'get',who:c.name,whoId:c.id,amt:cost,note,from:other||undefined}); checkPurse(c);
-    return finish(`${c.name} received ${fmt(cost)}`); }
+    return finish(gl); }
   if(c.gm){
     /* the GM's coffers never run dry: coins go straight to the players */
     const po=payout(cost), list=chosen(); if(!po.n||!po.each){ thud(); return; }
@@ -1082,7 +1258,7 @@ function commit(){
     if(gmTake){
       /* the GM takes coins: fines, taxes, tolls, a pickpocket */
       if(shortOf(po.each).length){ thud(); shake(); return; }
-      const label=po.n===1?`Took ${fmt(po.each)} from ${list[0].name}`:gmEach?`Took ${fmt(po.each)} from each of ${po.n}`:`Took ${fmt(po.sum)} from ${po.n}`;
+      const label=po.n===1?tx('Took {amt} from {name}',{amt:fmt(po.each),name:list[0].name}):gmEach?tx('Took {amt} from each of {n}',{amt:fmt(po.each),n:po.n}):tx('Took {amt} from {n}',{amt:fmt(po.sum),n:po.n});
       snapshot(label);
       const shares=[]; rustle();
       list.forEach((pl,i)=>{ const p=plan(pl.coins,po.each), handed={...p.used}; if(p.broken) handed[p.broken]++;
@@ -1092,13 +1268,13 @@ function commit(){
       log({k:'take',who:c.name,whoId:c.id,amt:po.sum,each:po.each,shares,note,per:gmEach?1:0});
       resetSel(); return finish(label,650+po.n*180); }
     if(po.n===1){ const r=list[0];
-      snapshot(`Gave ${r.name} ${fmt(cost)}`);
+      const gv=tx('Gave {name} {amt}',{name:r.name,amt:fmt(cost)}); snapshot(gv);
       const coins=S.gmMixed?mixedBag(cost):{...amt};
       for(const d of D) r.coins[d]+=coins[d];
       rustle(); jingle(coins,0.22); fly(coins,dials,chipEl(r.id)); buzz(20); rewardTone(0.55);
       log({k:'give',who:c.name,whoId:c.id,to:r.name,toId:r.id,amt:cost,note,from:other||undefined,mix:S.gmMixed?coinsTxt(coins):undefined}); checkPurse(r); pulseChip(r.id,600);
-      resetSel(); return finish(S.gmMixed?`${r.name} got a mixed bag: ${coinsTxt(coins)}`:`Gave ${r.name} ${fmt(cost)}`); }
-    const label=gmEach?`Gave ${fmt(po.each)} to each of ${po.n}`:`Shared ${fmt(po.sum)}: ${fmt(po.each)} each`;
+      resetSel(); return finish(S.gmMixed?tx('{name} got a mixed bag: {coins}',{name:r.name,coins:coinsTxt(coins)}):gv); }
+    const label=gmEach?tx('Gave {amt} to each of {n}',{amt:fmt(po.each),n:po.n}):tx('Shared {sum}: {each} each',{sum:fmt(po.sum),each:fmt(po.each)});
     snapshot(label);
     const shares=[]; rustle();
     list.forEach((pl,i)=>{ const coins=S.gmMixed?mixedBag(po.each):brk(po.each);
@@ -1107,19 +1283,19 @@ function commit(){
     buzz(20); rewardTone(0.35+po.n*0.18);
     log({k:'split',who:c.name,whoId:c.id,amt:po.sum,each:po.each,shares,note,from:other||undefined,per:gmEach?1:0,mixed:S.gmMixed?1:0});
     resetSel(); return finish(label,650+po.n*180); }
-  if(M==='share'){
-    /* the party purse shares out everything it holds; what doesn't divide evenly stays */
-    const list=players(), n=list.length, w=total(c.coins), each=n?Math.floor(w/n):0; if(!each){ thud(); return; }
-    const label=`${c.name} shared ${fmt(each)} each`; snapshot(label);
-    const coins=brk(each), shares=[]; c.coins=brk(w-each*n); rustle();
+  if(potSplit()){
+    /* the party purse splits an amount among the players; what doesn't divide evenly stays */
+    const list=players(), n=list.length, each=Math.floor(cost/n); if(!each){ thud(); return; }
+    const p=plan(c.coins,each*n); if(!p){ thud(); shake(); return; }
+    const label=tx('{name} shared {amt} each',{name:c.name,amt:fmt(each)}); snapshot(label);
+    const coins=brk(each), shares=[]; c.coins=p.after; rustle();
     list.forEach((pl,i)=>{ for(const d of D) pl.coins[d]+=coins[d]; shares.push({id:pl.id,name:pl.name,amt:each});
       fly(coins,dials,chipEl(pl.id),i*180); jingle(coins,0.22+i*0.18); checkPurse(pl); pulseChip(pl.id,650+i*180); });
-    buzz(20); rewardTone(0.35+n*0.18);
-    log({k:'split',who:c.name,whoId:c.id,amt:each*n,each,shares,note});
-    potShare=false; return finish(label,650+n*180); }
+    buzz(20); rewardTone(0.35+n*0.18); log({k:'split',who:c.name,whoId:c.id,amt:each*n,each,shares,note}); recip=null;
+    return finish(label,650+n*180); }
   /* a player pays an NPC or a companion */
   const p=plan(c.coins,cost); if(!p){ thud(); shake(); return; }
-  const to=recip?byId(recip):null, label=to?`${c.name} paid ${to.name} ${fmt(cost)}`:`${c.name} paid ${fmt(cost)}`;
+  const to=recip?byId(recip):null, label=to?tx('{name} paid {to} {amt}',{name:c.name,to:to.name,amt:fmt(cost)}):tx('{name} paid {amt}',{name:c.name,amt:fmt(cost)});
   snapshot(label);
   const handed={...p.used}; if(p.broken) handed[p.broken]++;
   c.coins=p.after;
@@ -1140,7 +1316,6 @@ function maxFor(d){ const c=cur(); if(c.gm||mode()!=='pay') return 99999;
   const rest=total(amt)-amt[d]*val(d); return Math.max(0,Math.floor((total(c.coins)-rest)/val(d))); }
 let capWarned=0;
 function setAmt(d,n,sound=true){
-  if(potShare) return false;   /* sharing out the whole purse: the amount is fixed */
   n=Math.max(0,Math.min(999,n));
   const cap=maxFor(d);
   if(n>cap){ if(amt[d]>=cap){ if(Date.now()-capWarned>600){ capWarned=Date.now(); thud(); buzz([20,30,20]); flashCap(); } return false; } n=cap; }
@@ -1187,7 +1362,7 @@ $('modes').addEventListener('click',e=>{ const m=e.target.closest('.mode'); if(m
 $('gmModes').addEventListener('click',e=>{ const m=e.target.closest('.mode'); if(!m) return; const t=m.dataset.gm==='take'; if(t===gmTake) return;
   gmTake=t; if(t&&!gmSel&&players().length>1) gmSel=null; $('note').value=''; tick(); renderMode(); renderConsole(false); });
 $('sub').addEventListener('click',e=>{ if(e.target.closest('#repeatBtn')) repeatLast();
-  if(e.target.closest('#shareAllBtn')){ potShare=true; amt=blank(); const c=cur(); for(const d of D) amt[d]=c.coins[d]; chink(D[0]); renderConsole(true); } });
+ });
 (()=>{ let x0=null,y0=null; const r=$('readout');
   r.addEventListener('pointerdown',e=>{ x0=e.clientX; y0=e.clientY; });
   r.addEventListener('pointerup',e=>{ if(x0===null) return; const dx=e.clientX-x0, dy=e.clientY-y0; x0=null;
@@ -1197,34 +1372,38 @@ function buildTyper(){
   $('typerFields').innerHTML=D.map(d=>`<label>${esc(COINS[d].name)}<span class="f"><span class="mc d-${d}"></span><input id="t${d}" type="number" inputmode="numeric" min="0" placeholder="0"></span></label>`).join('');
   for(const d of D) $('t'+d).addEventListener('input',e=>{ let v=Math.max(0,Math.min(99999,parseInt(e.target.value,10)||0)); const cap=maxFor(d);
     if(v>cap){ v=cap; e.target.value=v; flashCap(); thud(); } amt[d]=v; renderConsole(true); if(v===cap&&cap<99999) flashCap(); }); }
-function openTyper(){ if(!$('typer').hidden) return; $('typer').hidden=false; for(const d of D) $('t'+d).value=amt[d]||''; const f=$('t'+D[0]); f.focus(); f.select&&f.select(); }
-function closeTyper(){ $('typer').hidden=true; }
+function openTyper(){ if(!$('typer').hidden) return; $('typer').hidden=false; $('typeBtn').setAttribute('aria-expanded','true'); for(const d of D) $('t'+d).value=amt[d]||''; const f=$('t'+D[0]); f.focus(); f.select&&f.select(); }
+function closeTyper(){ $('typer').hidden=true; $('typeBtn').setAttribute('aria-expanded','false'); }
 $('typeBtn').addEventListener('click',()=>$('typer').hidden?openTyper():closeTyper());
 $('big').addEventListener('click',openTyper);
 $('typer').addEventListener('submit',e=>{ e.preventDefault(); closeTyper(); if(total(amt)) chink(D[0]); });
-$('clearBtn').addEventListener('click',()=>{ potShare=false; amt=blank(); for(const d of D) $('t'+d).value=''; tick(); renderConsole(false); });
+$('clearBtn').addEventListener('click',()=>{ amt=blank(); for(const d of D) $('t'+d).value=''; tick(); renderConsole(false); });
 /* note */
 /* "For": what it's for, and to/from whom when the other side is an NPC */
+const potSplit=()=>{ const c=cur(); return !!(c.pot&&recip==='split'&&mode()==='pay'); };
 const withNpc=()=>cur().gm||mode()==='get'||!recip;   /* the other side is someone in the story, not a player */
 function syncNote(){
   const box=$('notebox'), open=!box.hidden, npcSide=withNpc();
   const G=cur().gm, get=mode()==='get';
-  $('noteToRow').hidden=G&&gmTake; $('toTags').hidden=G||get; $('noteTo').hidden=!npcSide;
+  /* players and the party purse: who gets it (NPC by default), which NPC, then what for.
+     Receiving and the GM: from who or what, the GM's quick picks, then what for. */
+  $('toTagRow').hidden=G||get; $('noteToRow').hidden=(G&&gmTake)||!npcSide;
+  $('toHint').textContent=recip?'':tx('{npc} unless you pick someone',{npc:npc()});
   /* the GM's quick picks for what a payout is */
   $('quickRow').hidden=!G;
   if(G){ const v=$('note').value.trim().toLowerCase();
-    $('quickFor').innerHTML=(gmTake?['Tax','Fine','Toll','Theft']:['Treasure','Loot','Reward','Bounty']).map(q=>`<button type="button" data-q="${q.toLowerCase()}" aria-pressed="${v===q.toLowerCase()}">${q}</button>`).join(''); }
-  $('noteToLbl').textContent=(G||get)?'From who or what?':'To whom?';
-  $('noteTo').placeholder=G?'Optional, e.g. the noble knight or a chest':get?'Optional, e.g. the innkeeper or a chest':'Optional, e.g. the blacksmith';
-  $('note').placeholder=G?(gmTake?'Optional, e.g. a fine for brawling':'Optional, e.g. treasure from the crypt'):get?'Optional, e.g. odd jobs':'Optional, e.g. a longsword';
+    $('quickFor').innerHTML=(gmTake?['Tax','Fine','Toll','Theft']:['Treasure','Loot','Reward','Bounty']).map(tx).map(q=>`<button type="button" data-q="${esc(q.toLowerCase())}" aria-pressed="${v===q.toLowerCase()}">${esc(q)}</button>`).join(''); }
+  $('noteToLbl').textContent=tx((G||get)?'From who or what?':'Which NPC?');
+  $('noteTo').placeholder=tx(G?'Optional, e.g. a noble knight':get?'Optional, e.g. the innkeeper':'Optional, e.g. the blacksmith');
+  $('note').placeholder=tx(G?(gmTake?'Optional, e.g. a fine for brawling':'Optional, e.g. crypt treasure'):get?'Optional, e.g. odd jobs':'Optional, e.g. a longsword');
   $('noteBtn').setAttribute('aria-expanded',open);
   $('noteBtn').classList.toggle('has',!!($('note').value.trim()||(npcSide&&$('noteTo').value.trim())||(!G&&!get&&recip))); }
 function clearNote(){ $('note').value=''; $('noteTo').value=''; $('notebox').hidden=true; syncNote(); }
 $('quickFor').addEventListener('click',e=>{ const b=e.target.closest('[data-q]'); if(!b) return;
   $('note').value=$('note').value.trim().toLowerCase()===b.dataset.q?'':b.dataset.q; chink(D[0]); syncNote(); });
-$('noteBtn').addEventListener('click',()=>{ const box=$('notebox'); box.hidden=!box.hidden; syncNote(); if(!box.hidden) $('note').focus(); });
+$('noteBtn').addEventListener('click',()=>{ const box=$('notebox'); box.hidden=!box.hidden; tick(); syncNote(); });
 ['note','noteTo'].forEach(id=>{ $(id).addEventListener('input',syncNote);
-  $(id).addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); if(id==='note'&&!$('noteTo').hidden) $('noteTo').focus(); else $(id).blur(); } }); });
+  $(id).addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); if(id==='noteTo') $('note').focus(); else $(id).blur(); } }); });
 /* who gets it, choosing a character, renaming from the header */
 /* GM only: hold a name to add it to (or remove it from) the chosen players */
 let heldTag=false, holdTimer=null;
@@ -1236,8 +1415,11 @@ $('recips').addEventListener('pointerdown',e=>{ const b=e.target.closest('[data-
 ['pointerup','pointerleave','pointercancel'].forEach(t=>$('recips').addEventListener(t,()=>clearTimeout(holdTimer)));
 $('recips').addEventListener('contextmenu',e=>{ if(cur().gm&&e.target.closest('[data-to]')) e.preventDefault(); });
 $('toTags').addEventListener('click',e=>{ const b=e.target.closest('[data-to]'); if(!b) return;
-  recip=b.dataset.to||null; tick(); renderMode(); renderReadout(false); renderSlider();
-  if(!recip) setTimeout(()=>$('noteTo').focus(),0); });
+  recip=b.dataset.to||null;
+  /* party purse, whole party, nothing counted yet: fill in everything it holds (tap coins down to share less) */
+  if(recip==='split'&&!total(amt)&&cur().pot){ const c=cur(); for(const d of D) amt[d]=c.coins[d]; if(total(amt)){ chink(D[0]); renderConsole(true); } }
+  tick(); renderMode(); renderReadout(false); renderSlider();
+  });
 $('recips').addEventListener('click',e=>{
   if(e.target.closest('[data-mix]')){ heldTag=false; S.gmMixed=!S.gmMixed; save(); S.gmMixed?chink(D[D.length-1]):tick(); renderMode(); renderReadout(false); renderSlider(); return; }
   const sw=e.target.closest('[data-each]');
@@ -1251,7 +1433,7 @@ $('recips').addEventListener('click',e=>{
   tick(); renderMode(); renderReadout(false); renderSlider(); });
 $('party').addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!b) return;
   if(b.id==='addChip'){ openPanel('partyPanel'); $('newName').focus(); return; }
-  if(b.dataset.id===S.active) return; S.active=b.dataset.id; recip=null; potShare=false; rustle(); save(); renderAll(false); });
+  if(b.dataset.id===S.active) return; S.active=b.dataset.id; recip=null; rustle(); save(); renderAll(false); });
 (()=>{ const el=$('pName');
   el.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); el.blur(); } if(e.key==='Escape'){ el.textContent=cur().name; el.blur(); } });
   el.addEventListener('blur',()=>{ if(rename(cur().id,el.textContent)){ renderPartyRows(); renderParty(); renderMode(); renderLedger(); } else el.textContent=cur().name; }); })();
@@ -1270,59 +1452,59 @@ function rename(id,name){
 function renderPartyRows(){
   $('addPot').hidden=!!pot();
   $('partyRows').innerHTML=S.chars.map(c=>`<div class="prow${c.gm?' gm':''}${c.pot?' pot':''}" data-id="${c.id}"><span class="av">${esc(initialOf(c))}</span>
-    <input class="field" data-pname value="${esc(c.name)}" maxlength="24" aria-label="Name of ${esc(c.name)}">
-    ${c.gm?'<span class="keep">Always here</span>':`<button class="btn" type="button" data-prm="${c.id}">Remove</button>`}</div>`).join(''); }
+    <input class="field" data-pname value="${esc(c.name)}" maxlength="24" aria-label="${esc(tx('Name of {name}',{name:c.name}))}">
+    ${c.gm?`<span class="keep">${tx('Always here')}</span>`:`<button class="btn" type="button" data-prm="${c.id}">${tx('Remove')}</button>`}</div>`).join(''); }
 $('addPot').addEventListener('click',()=>{ if(pot()) return;
-  const id='pot'+Date.now().toString(36); S.chars.splice(S.chars.findIndex(c=>c.gm),0,{id,name:'Party purse',pot:true,coins:blank(),ach:[]});
+  const id='pot'+Date.now().toString(36); S.chars.splice(S.chars.findIndex(c=>c.gm),0,{id,name:tx('Party purse'),pot:true,coins:blank(),ach:[]});
   save(); renderPartyRows(); renderAll(false); chink(D[0]);
-  toast('Party purse added. It gets no share of "Whole party" payouts and no starting purse.'); });
+  toast(esc(tx('Party purse added. It gets no share of "Whole party" payouts and no starting purse.'))); });
 $('partyRows').addEventListener('change',e=>{ const row=e.target.closest('.prow'); if(!row) return;
   if(!rename(row.dataset.id,e.target.value)) e.target.value=byId(row.dataset.id).name; renderPartyRows(); renderAll(false); });
 let armedPlayer=null, armT;
 $('partyRows').addEventListener('click',e=>{ const b=e.target.closest('[data-prm]'); if(!b) return; const c=byId(b.dataset.prm);
-  if(armedPlayer!==c.id){ armedPlayer=c.id; renderPartyRows(); const nb=document.querySelector(`[data-prm="${c.id}"]`); nb.classList.add('armed'); nb.textContent='Tap again to remove';
+  if(armedPlayer!==c.id){ armedPlayer=c.id; renderPartyRows(); const nb=document.querySelector(`[data-prm="${c.id}"]`); nb.classList.add('armed'); nb.textContent=tx('Tap again to remove');
     clearTimeout(armT); armT=setTimeout(()=>{ armedPlayer=null; renderPartyRows(); },3000); return; }
   armedPlayer=null; S.chars=S.chars.filter(x=>x.id!==c.id); if(S.active===c.id) S.active=(players()[0]||S.chars[0]).id; if(recip===c.id) recip=null;
-  UNDO.length=0; save(); renderPartyRows(); renderAll(false); toast(`${esc(c.name)} leaves the party. Their entries stay in the ledger.`); });
+  UNDO.length=0; save(); renderPartyRows(); renderAll(false); toast(esc(tx('{name} leaves the party. Their entries stay in the ledger.',{name:c.name}))); });
 /* the starting purse is written in gold/silver/copper slots; if those coins were changed, it is converted by value */
 /* the starting purse is a count of each coin; only coins in use count */
 function startPurse(){ const o=blank(); for(const d of D) o[d]=S.startPurse[d]||0; return o; }
 $('addForm').addEventListener('submit',e=>{ e.preventDefault();
-  let n=$('newName').value.trim(); if(!n){ let k=players().length+1; while(S.chars.some(c=>c.name==='Player '+k)) k++; n='Player '+k; }
+  let n=$('newName').value.trim(); if(!n){ let k=players().length+1; while(S.chars.some(c=>c.name===pname(k))) k++; n=pname(k); }
   const id='c'+Date.now().toString(36); S.chars.splice(S.chars.findIndex(c=>c.gm),0,{id,name:n,coins:startPurse(),ach:[]});
-  S.active=id; $('newName').value=''; save(); renderPartyRows(); renderAll(false); toast(total(startPurse())?`${esc(n)} joins the party with ${fmt(total(startPurse()))}.`:`${esc(n)} joins the party with an empty purse.`); });
+  S.active=id; $('newName').value=''; save(); renderPartyRows(); renderAll(false); toast(esc(total(startPurse())?tx('{name} joins the party with {amt}.',{name:n,amt:fmt(total(startPurse()))}):tx('{name} joins the party with an empty purse.',{name:n}))); });
 $('npcName').addEventListener('input',e=>{ S.npcName=e.target.value.trim(); save(); renderMode(); });
 
 /* --- starting purse --- */
 function renderStartPurse(){
-  $('startFields').innerHTML=D.map(d=>`<label>${esc(COINS[d].name)}<span class="f"><span class="mc d-${d}"></span><input data-sp="${d}" type="number" inputmode="numeric" min="0" value="${S.startPurse[d]||0}" aria-label="Starting ${esc(COINS[d].name)}"></span></label>`).join('');
+  $('startFields').innerHTML=D.map(d=>`<label>${esc(COINS[d].name)}<span class="f"><span class="mc d-${d}"></span><input data-sp="${d}" type="number" inputmode="numeric" min="0" value="${S.startPurse[d]||0}" aria-label="${esc(tx('Starting {name}',{name:COINS[d].name}))}"></span></label>`).join('');
   const w=total(startPurse());
-  $('startNote').textContent=w?`New players start with ${fmt(w)}. Set everything to 0 for empty purses.`:'New players start with an empty purse.'; }
+  $('startNote').textContent=w?tx('New players start with {amt}. Set everything to 0 for empty purses.',{amt:fmt(w)}):tx('New players start with an empty purse.'); }
 $('startFields').addEventListener('change',e=>{ const d=e.target.dataset.sp; if(!d) return;
   S.startPurse[d]=Math.max(0,Math.min(99999,parseInt(e.target.value,10)||0)); save(); renderStartPurse(); chink(d); });
 const startGuard=guard($('giveStart'),'Tap again to set every purse',()=>$('startWarn').hidden=false,()=>$('startWarn').hidden=true);
 $('giveStart').addEventListener('click',()=>startGuard(()=>{
-  snapshot('Starting purse for everyone');
+  snapshot(tx('Starting purse for everyone'));
   const sp=startPurse(); players().forEach(pl=>{ pl.coins={...sp}; });
   log({k:'start',who:(S.chars.find(c=>c.gm)||{}).name||'GM',amt:total(sp),n:players().length});
-  rustle(); jingle(sp,0.2); save(); renderAll(true); toast(`Every player now holds ${fmt(total(sp))}.`,'',4000,{label:'Undo',run:undo}); }));
+  rustle(); jingle(sp,0.2); save(); renderAll(true); toast(esc(tx('Every player now holds {amt}.',{amt:fmt(total(sp))})),'',4000,{label:tx('Undo'),run:undo}); }));
 
 /* --- coins --- */
 function renderCoinRows(){
   const list=[...S.coinset].sort((a,b)=>b.value-a.value), base=list[list.length-1], imp=W().unit==='imperial';
-  $('coinSummary').textContent=list.map(c=>c.name).join(' · ');
+  $('coinSummary').textContent=list.map(c=>c.name).join(', ');
   $('coinRows').innerHTML=list.map(c=>`<div class="crow" data-id="${c.id}">
-    <button type="button" class="mc d-${c.id}" data-cycle="${c.id}" title="Tap to change colour" aria-label="Change colour, now ${METALS[c.metal].label}"></button>
-    <input class="field" data-f="name" value="${esc(c.name)}" maxlength="16" aria-label="Coin name" placeholder="Name">
-    <input class="field" data-f="tag" value="${esc(c.tag)}" maxlength="3" aria-label="Short name" placeholder="Short">
-    ${list.length>1?`<button class="x" type="button" data-rm="${c.id}" aria-label="Remove ${esc(c.name)}">×</button>`:'<span class="xs"></span>'}
+    <button type="button" class="mc d-${c.id}" data-cycle="${c.id}" title="${tx('Tap to change colour')}" aria-label="${esc(tx('Change colour, now {c}',{c:tx(METALS[c.metal].label)}))}"></button>
+    <input class="field" data-f="name" value="${esc(c.name)}" maxlength="16" aria-label="${tx('Coin name')}" placeholder="${tx('Name')}">
+    <input class="field" data-f="tag" value="${esc(c.tag)}" maxlength="3" aria-label="${tx('Short name')}" placeholder="${tx('Short')}">
+    ${list.length>1?`<button class="x" type="button" data-rm="${c.id}" aria-label="${esc(tx('Remove {name}',{name:c.name}))}">×</button>`:'<span class="xs"></span>'}
     <div class="opt">
-      <select class="field" data-f="metal" aria-label="Colour">${Object.entries(METALS).map(([k,m])=>`<option value="${k}"${k===c.metal?' selected':''}>${m.label}</option>`).join('')}</select>
-      <select class="field" data-f="shape" aria-label="Shape">${Object.entries(SHAPES).map(([k,v])=>`<option value="${k}"${k===(c.shape||'round')?' selected':''}>${v.label}</option>`).join('')}</select>
-      <span class="val">Weighs <input class="field" data-f="grams" type="number" inputmode="decimal" min="0" step="${imp?0.01:0.5}" value="${imp?+(gramsOf(c.id)/OZ).toFixed(2):gramsOf(c.id)}" aria-label="Weight of one ${esc(c.name)}"><span>${imp?'oz':'g'}</span></span>
-      ${c===base?`<span class="base">Base coin · worth 1</span>`:`<span class="val">Worth <input class="field" data-f="value" type="number" inputmode="numeric" min="2" value="${c.value}" aria-label="Worth in ${esc(base.name)}"><span>${esc(base.tag)}</span></span>`}
+      <select class="field" data-f="metal" aria-label="${tx('Colour')}">${Object.entries(METALS).map(([k,m])=>`<option value="${k}"${k===c.metal?' selected':''}>${tx(m.label)}</option>`).join('')}</select>
+      <select class="field" data-f="shape" aria-label="${tx('Shape')}">${Object.entries(SHAPES).map(([k,v])=>`<option value="${k}"${k===(c.shape||'round')?' selected':''}>${tx(v.label)}</option>`).join('')}</select>
+      ${W().show?`<span class="val">${tx('Weighs')} <input class="field" data-f="grams" type="number" inputmode="decimal" min="0" step="${imp?0.01:0.5}" value="${imp?+(gramsOf(c.id)/OZ).toFixed(2):gramsOf(c.id)}" aria-label="${esc(tx('Weight of one {name}',{name:c.name}))}"><span>${imp?'oz':'g'}</span></span>`:''}
+      ${c===base?`<span class="base">${tx('Base coin · worth 1')}</span>`:`<span class="val">${tx('Worth')} <input class="field" data-f="value" type="number" inputmode="numeric" min="2" value="${c.value}" aria-label="${esc(tx('Worth in {name}',{name:base.name}))}"><span>${esc(base.tag)}</span></span>`}
     </div></div>`).join('');
-  const full=list.length>=MAXC; $('addCoin').disabled=full; $('addCoin').textContent=full?`+ Add a coin (${MAXC} is the maximum)`:'+ Add a coin'; }
+  const full=list.length>=MAXC; $('addCoin').disabled=full; $('addCoin').textContent=full?tx('+ Add a coin ({n} is the maximum)',{n:MAXC}):tx('+ Add a coin'); }
 /* anything about the coins changed: rebuild what depends on them */
 function coinsChanged(){ applyCoins(); $('dials').innerHTML=''; buildTyper(); amt=blank(); UNDO.length=0; save(); renderCoinRows(); renderLadder(); renderStartPurse(); renderAll(false); }
 $('coinRows').addEventListener('change',e=>{
@@ -1333,7 +1515,7 @@ $('coinRows').addEventListener('change',e=>{
   else if(f==='shape') c.shape=e.target.value;
   else if(f==='grams'){ const v=parseFloat(String(e.target.value).replace(',','.')); if(!(v>=0)){ renderCoinRows(); return; } c.grams=W().unit==='imperial'?Math.round(v*OZ*10)/10:v; }
   else if(f==='value'){ const v=parseInt(e.target.value,10);
-    if(!(v>=2)||S.coinset.some(x=>x!==c&&x.value===v)){ $('csErr').textContent='Each coin needs its own worth of at least 2 base coins.'; e.target.value=c.value; return; }
+    if(!(v>=2)||S.coinset.some(x=>x!==c&&x.value===v)){ $('csErr').textContent=tx('Each coin needs its own worth of at least 2 base coins.'); e.target.value=c.value; return; }
     c.value=v; }
   coinsChanged(); });
 $('coinRows').addEventListener('click',e=>{
@@ -1355,19 +1537,19 @@ function addCoinType(){ if(S.coinset.length>=MAXC) return null;
   const free=SLOTS.find(id=>!S.coinset.some(c=>c.id===id)), maxV=Math.max(...S.coinset.map(c=>c.value));
   const used=new Set(S.coinset.map(c=>c.metal)), metal=Object.keys(METALS).find(m=>!used.has(m))||'gold';
   let k=1; while(S.coinset.some(c=>c.tag==='n'+k)) k++;
-  S.coinset.push({id:free,name:'New coin '+k,tag:'n'+k,metal,value:maxV*10}); coinsChanged(); chink(free); return free; }
+  S.coinset.push({id:free,name:tx('New coin {n}',{n:k}),tag:'n'+k,metal,value:maxV*10}); coinsChanged(); chink(free); return free; }
 $('addCoin').addEventListener('click',addCoinType);
 /* the quick + by the big coins: add a coin type, then jump to its settings to name it */
 function openCoinSettings(focusId){
   openPanel('customPanel'); const g=document.querySelector('#customPanel .sgroup'); g.open=true;
   const f=focusId?document.querySelector(`.crow[data-id="${focusId}"] [data-f="name"]`):g;
   setTimeout(()=>{ f.scrollIntoView({block:focusId?'center':'start',behavior:reduce?'auto':'smooth'}); if(focusId){ f.focus(); f.select(); } },60); }
-$('editCoins').addEventListener('click',()=>{ tick(); openCoinSettings(); });
+$('editCoins').addEventListener('click',()=>{ tick(); if(!$('customPanel').hidden) openPanel(null); else openCoinSettings(); });
 /* two-tap guard for anything destructive */
 function guard(btn,armedText,onArm,onDisarm,ms=6000){
-  let armed=false, t; const normal=btn.textContent;
-  const disarm=()=>{ armed=false; clearTimeout(t); btn.classList.remove('armed'); btn.textContent=normal; onDisarm&&onDisarm(); };
-  return run=>{ if(!armed){ armed=true; btn.classList.add('armed'); btn.textContent=armedText; onArm&&onArm(); t=setTimeout(disarm,ms); return; } disarm(); run(); }; }
+  let armed=false, tm; const normal=btn.textContent.trim();   /* English key, shown in the current language */
+  const disarm=()=>{ armed=false; clearTimeout(tm); btn.classList.remove('armed'); btn.textContent=tx(normal); onDisarm&&onDisarm(); };
+  return run=>{ if(!armed){ armed=true; btn.classList.add('armed'); btn.textContent=tx(armedText); onArm&&onArm(); tm=setTimeout(disarm,ms); return; } disarm(); run(); }; }
 const coinReset=guard($('resetCoins'),'Tap again to reset the coins',()=>$('coinWarn').hidden=false,()=>$('coinWarn').hidden=true);
 $('resetCoins').addEventListener('click',()=>coinReset(()=>{
   /* everyone keeps their wealth; the base coin stays the base coin (1 penny becomes 1 copper) */
@@ -1375,13 +1557,13 @@ $('resetCoins').addEventListener('click',()=>coinReset(()=>{
   S.coinset=defaultCoins(); applyCoins();
   S.chars.forEach((ch,i)=>{ ch.coins=ch.gm?{...blank(),...GM_PURSE}:brk(worth[i]); });
   S.startPurse=brk(startWorth);
-  coinsChanged(); chink(D[0]); toast('Coins reset to Gold, Silver and Copper. Everyone kept their wealth.'); }));
+  coinsChanged(); chink(D[0]); toast(esc(tx('Coins reset to Gold, Silver and Copper. Everyone kept their wealth.'))); }));
 
 /* --- extras: deeds, sound, weight, wealth titles --- */
 function syncDeedsUI(){ $('dOn').checked=!!S.deeds; $('sDeedsRow').hidden=!S.deeds; }
 $('dOn').addEventListener('change',e=>{ S.deeds=e.target.checked; save(); syncDeedsUI(); renderLedger(); if(S.deeds&&S.sound) playMotif('first'); });
 function syncSoundUI(){
-  $('soundBtn').setAttribute('aria-pressed',S.sound); $('soundBtn').textContent=S.sound?'Sound on':'Sound off';
+  $('soundBtn').setAttribute('aria-pressed',S.sound); $('soundBtn').textContent=tx(S.sound?'Sound on':'Sound off');
   $('sOn').checked=!!S.sound; $('sVol').value=Math.round((S.vol??.8)*100);
   $('sCount').checked=SFX().count; $('sPay').checked=SFX().pay; $('sDeeds').checked=SFX().deeds; $('sReward').checked=SFX().reward!==false; $('sHap').checked=S.haptics!==false;
   $('sndOpts').classList.toggle('dim',!S.sound); }
@@ -1392,20 +1574,20 @@ const SAMPLES={count:()=>chink(D[0]), pay:()=>jingle({[D[0]]:2}), deeds:()=>play
 [['sCount','count'],['sPay','pay'],['sDeeds','deeds'],['sReward','reward']].forEach(([id,k])=>$(id).addEventListener('change',e=>{ SFX()[k]=e.target.checked; save(); if(e.target.checked&&S.sound) SAMPLES[k](); }));
 $('sHap').addEventListener('change',e=>{ S.haptics=e.target.checked; save(); buzz(20); });
 function syncWeightUI(){ const imp=W().unit==='imperial';
-  $('wShow').checked=W().show; $('wUnit').value=W().unit; $('wMaxU').textContent=imp?'lb':'kg'; $('wMax').value=+(imp?W().maxKg/LB:W().maxKg).toFixed(1); }
-$('wShow').addEventListener('change',e=>{ W().show=e.target.checked; save(); renderHeader(); });
+  $('wShow').checked=W().show; $('weightOpts').hidden=!W().show; $('wUnit').value=W().unit; $('wMaxU').textContent=imp?'lb':'kg'; $('wMax').value=+(imp?W().maxKg/LB:W().maxKg).toFixed(1); }
+$('wShow').addEventListener('change',e=>{ W().show=e.target.checked; save(); syncWeightUI(); renderCoinRows(); renderHeader(); renderLedger(); });
 $('wUnit').addEventListener('change',e=>{ W().unit=e.target.value; save(); syncWeightUI(); renderCoinRows(); renderHeader(); });
 $('wMax').addEventListener('change',e=>{ const v=parseFloat(String(e.target.value).replace(',','.')); if(!(v>0)){ syncWeightUI(); return; }
   W().maxKg=W().unit==='imperial'?v*LB:v; save(); renderHeader(); });
 function renderLadder(){
   const on=S.titles.mode!=='off'; $('tOn').checked=on;
-  $('ladder').hidden=!on; $('ladderBtns').hidden=!on; $('ladderNote').hidden=!on;
+  $('ladderOpts').hidden=!on;
   const st=S.titles.steps.map((x,i)=>({...x,i})).sort((a,b)=>a.from-b.from);
   $('ladder').innerHTML=st.map((x,k)=>{ const coin=COINS[x.coin]?x.coin:D[D.length-1], amount=+(x.from/val(coin)).toFixed(2);
-    return `<div class="lrow" data-i="${x.i}"><input class="field" data-l="label" value="${esc(x.label)}" maxlength="24" aria-label="Title"><span class="from">from</span>
-      ${k===0?'<span class="zero">nothing at all</span>':`<input class="field" data-l="amt" type="number" inputmode="decimal" min="0" step="any" value="${amount}" aria-label="Starts at">
-      <select class="field" data-l="coin" aria-label="Coin">${D.map(d=>`<option value="${d}"${d===coin?' selected':''}>${esc(COINS[d].name)}</option>`).join('')}</select>`}
-      ${st.length>1&&k>0?`<button class="x" type="button" data-lrm="${x.i}" aria-label="Remove step">×</button>`:'<span></span>'}</div>`; }).join(''); }
+    return `<div class="lrow" data-i="${x.i}"><input class="field" data-l="label" value="${esc(x.label)}" maxlength="24" aria-label="${tx('Title')}"><span class="from">${tx('from')}</span>
+      ${k===0?`<span class="zero">${tx('nothing at all')}</span>`:`<input class="field" data-l="amt" type="number" inputmode="decimal" min="0" step="any" value="${amount}" aria-label="${tx('Starts at')}">
+      <select class="field" data-l="coin" aria-label="${tx('Coin')}">${D.map(d=>`<option value="${d}"${d===coin?' selected':''}>${esc(COINS[d].name)}</option>`).join('')}</select>`}
+      ${st.length>1&&k>0?`<button class="x" type="button" data-lrm="${x.i}" aria-label="${tx('Remove step')}">×</button>`:'<span></span>'}</div>`; }).join(''); }
 const ladderChanged=()=>{ save(); renderLadder(); renderHeader(); };
 $('tOn').addEventListener('change',e=>{ S.titles.mode=e.target.checked?'ladder':'off'; ladderChanged(); });
 $('ladder').addEventListener('change',e=>{ const row=e.target.closest('.lrow'); if(!row) return; const x=S.titles.steps[+row.dataset.i];
@@ -1414,7 +1596,7 @@ $('ladder').addEventListener('change',e=>{ const row=e.target.closest('.lrow'); 
     if(!(a>=0)){ renderLadder(); return; } x.coin=coin; x.from=Math.round(a*val(coin)); }
   ladderChanged(); });
 $('ladder').addEventListener('click',e=>{ const b=e.target.closest('[data-lrm]'); if(!b) return; S.titles.steps.splice(+b.dataset.lrm,1); ladderChanged(); });
-$('addStep').addEventListener('click',()=>{ const max=Math.max(...S.titles.steps.map(x=>x.from)); S.titles.steps.push({label:'New title',from:Math.max(1,max*2),coin:D[0]}); ladderChanged(); });
+$('addStep').addEventListener('click',()=>{ const max=Math.max(...S.titles.steps.map(x=>x.from)); S.titles.steps.push({label:tx('New title'),from:Math.max(1,max*2),coin:D[0]}); ladderChanged(); });
 $('resetSteps').addEventListener('click',()=>{ S.titles.steps=defaultLadder(); ladderChanged(); });
 
 /* =====================================================================
@@ -1430,9 +1612,9 @@ async function encode(data){ const bytes=new TextEncoder().encode(JSON.stringify
   if(window.CompressionStream){ try{ return 'AP1.'+toB64(await pipe(bytes,new CompressionStream('deflate-raw'))); }catch(e){} }
   return 'AP0.'+toB64(bytes); }
 async function decode(code){
-  code=code.replace(/\s+/g,''); const m=code.match(/^AP([01])\.([A-Za-z0-9_-]+)$/); if(!m) throw new Error('That is not a QuestPouch save code.');
+  code=code.replace(/\s+/g,''); const m=code.match(/^AP([01])\.([A-Za-z0-9_-]+)$/); if(!m) throw new Error(tx('That is not a LootPal save code.'));
   let bytes=fromB64(m[2]);
-  if(m[1]==='1'){ if(!window.DecompressionStream) throw new Error('This browser cannot read compressed codes.'); bytes=await pipe(bytes,new DecompressionStream('deflate-raw')); }
+  if(m[1]==='1'){ if(!window.DecompressionStream) throw new Error(tx('This browser cannot read compressed codes.')); bytes=await pipe(bytes,new DecompressionStream('deflate-raw')); }
   return JSON.parse(new TextDecoder().decode(bytes)); }
 function looksLikeTable(d){ return d&&typeof d==='object'&&Array.isArray(d.chars)&&d.chars.length&&Array.isArray(d.coinset)&&d.coinset.length; }
 /* replace the whole table (load, reset) and refresh everything */
@@ -1444,43 +1626,44 @@ const msg=(t,bad)=>{ $('saveMsg').textContent=t; $('saveMsg').style.color=bad?'v
 $('makeCode').addEventListener('click',async()=>{
   const code=await encode(tableData($('codeLedger').checked));
   $('codeOut').value=code; $('codeOut').hidden=false; $('copyCode').hidden=false;
-  $('codeLen').textContent=`${code.length} characters`; msg(''); chink(D[0]); });
+  $('codeLen').textContent=tx('{n} characters',{n:code.length}); msg(''); chink(D[0]); });
 $('copyCode').addEventListener('click',async()=>{
-  try{ await navigator.clipboard.writeText($('codeOut').value); msg('Copied. Keep it somewhere safe, like a note or a message to yourself.'); }
-  catch(e){ $('codeOut').focus(); $('codeOut').select(); msg('Selected. Copy it with your device\'s copy command.'); } });
+  try{ await navigator.clipboard.writeText($('codeOut').value); msg(tx('Copied. Keep it somewhere safe, like a note or a message to yourself.')); }
+  catch(e){ $('codeOut').focus(); $('codeOut').select(); msg(tx("Selected. Copy it with your device's copy command.")); } });
 /* loading always asks twice: it replaces the whole table */
 let pending=null;
 const loadGuard=guard($('loadCode'),'Tap again to replace this table',null,()=>{ $('loadWarn').hidden=true; });
-function preview(d){ const names=d.chars.filter(c=>!c.gm).map(c=>c.name).join(', ')||'no players';
-  $('loadWarn').innerHTML=`This replaces the current table with: <b>${esc(names)}</b>, ${d.coinset.length} coin types, ${(d.log||[]).length} ledger entries.`; $('loadWarn').hidden=false; }
+function preview(d){ const names=d.chars.filter(c=>!c.gm).map(c=>c.name).join(', ')||tx('no players');
+  $('loadWarn').innerHTML=tx('This replaces the current table with: {names}, {c} coin types, {l} ledger entries.',{names:`<b>${esc(names)}</b>`,c:d.coinset.length,l:(d.log||[]).length}); $('loadWarn').hidden=false; }
 $('loadCode').addEventListener('click',async()=>{
   if(!$('loadCode').classList.contains('armed')){
-    try{ const d=await decode($('codeIn').value); if(!looksLikeTable(d)) throw new Error('The code is readable, but it holds no table.'); pending=d; preview(d); msg(''); }
-    catch(e){ pending=null; msg(e.message||'That code could not be read. Check that it was copied completely.',true); thud(); return; } }
-  loadGuard(()=>{ if(!pending) return; replaceTable(pending); pending=null; $('codeIn').value=''; $('loadWarn').hidden=true; msg('Table loaded.'); jingle({[D[0]]:3}); }); });
+    try{ const d=await decode($('codeIn').value); if(!looksLikeTable(d)) throw new Error(tx('The code is readable, but it holds no table.')); pending=d; preview(d); msg(''); }
+    catch(e){ pending=null; msg(e.message||tx('That code could not be read. Check that it was copied completely.'),true); thud(); return; } }
+  loadGuard(()=>{ if(!pending) return; replaceTable(pending); pending=null; $('codeIn').value=''; $('loadWarn').hidden=true; msg(tx('Table loaded.')); jingle({[D[0]]:3}); }); });
 /* files: a plain .json of the table */
 $('saveFile').addEventListener('click',async()=>{
-  const text=JSON.stringify(tableData(true),null,1), name=`questpouch-${new Date().toLocaleDateString('sv-SE')}.json`;
+  const text=JSON.stringify(tableData(true),null,1), name=`lootpal-${new Date().toLocaleDateString('sv-SE')}.json`;
   try{
     const dl=window.claude?.use?await window.claude.use('downloads'):null;
-    if(dl){ await dl.save({filename:name,data:text}); msg('Saved.'); return; }
+    if(dl){ await dl.save({filename:name,data:text}); msg(tx('Saved.')); return; }
     const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:'application/json'})); a.download=name;
-    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000); msg('Saved to your downloads.');
-  }catch(e){ if(e&&e.code==='declined') msg('Not saved.',true); else msg('Saving a file does not work here. Use a save code instead.',true); } });
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000); msg(tx('Saved to your downloads.'));
+  }catch(e){ if(e&&e.code==='declined') msg(tx('Not saved.'),true); else msg(tx('Saving a file does not work here. Use a save code instead.'),true); } });
 $('loadFile').addEventListener('change',async e=>{
   const f=e.target.files[0]; e.target.value=''; if(!f) return;
   try{ const d=JSON.parse(await f.text()); if(!looksLikeTable(d)) throw 0; pending=d; preview(d);
-    $('loadWarn').innerHTML+=` <button class="btn armed" type="button" id="confirmFile">Replace this table</button>`;
-    $('confirmFile').onclick=()=>{ replaceTable(pending); pending=null; $('loadWarn').hidden=true; msg('Table loaded.'); jingle({[D[0]]:3}); };
+    $('loadWarn').innerHTML+=` <button class="btn armed" type="button" id="confirmFile">${tx('Replace this table')}</button>`;
+    $('confirmFile').onclick=()=>{ replaceTable(pending); pending=null; $('loadWarn').hidden=true; msg(tx('Table loaded.')); jingle({[D[0]]:3}); };
     msg(''); }
-  catch(err){ msg('That file is not a QuestPouch save.',true); thud(); } });
+  catch(err){ msg(tx('That file is not a LootPal save.'),true); thud(); } });
 
 /* --- reset the example table --- */
 const fullReset=guard($('resetBtn'),'Tap again to reset everything',null,null,3000);
-$('resetBtn').addEventListener('click',()=>fullReset(()=>{ replaceTable(example()); toast('Back to the example table.'); }));
+$('resetBtn').addEventListener('click',()=>fullReset(()=>{ replaceTable(example()); toast(esc(tx('Back to the example table.'))); }));
 
 /* bottom tabs */
-function openPanel(id){ document.querySelectorAll('.ptab').forEach(t=>{ const on=t.dataset.panel===id; t.setAttribute('aria-selected',on); $(t.dataset.panel).hidden=!on; }); }
+function openPanel(id){ document.querySelectorAll('.ptab').forEach(t=>{ const on=t.dataset.panel===id; t.setAttribute('aria-selected',on); $(t.dataset.panel).hidden=!on; });
+  $('editCoins').setAttribute('aria-expanded',id==='customPanel'); }
 document.querySelector('.ptabs').addEventListener('click',e=>{ const t=e.target.closest('.ptab'); if(!t) return; tick();
   openPanel(t.getAttribute('aria-selected')==='true'?null:t.dataset.panel); if(!$(t.dataset.panel).hidden) t.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'}); });
 
@@ -1488,9 +1671,37 @@ document.querySelector('.ptabs').addEventListener('click',e=>{ const t=e.target.
    11. Start
    ===================================================================== */
 function syncSettings(){ $('npcName').value=S.npcName||''; renderPartyRows(); renderStartPurse(); renderCoinRows(); syncDeedsUI(); syncSoundUI(); syncWeightUI(); renderLadder(); }
-buildTyper(); syncSettings(); renderAll(false);
+/* --- language --- */
+/* the page's own labels: remember each English original once, then show it in the current language */
+const STATIC=[];
+(function collect(root){
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest('script,style,#pName')||!n.nodeValue.trim()?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  for(let n;(n=w.nextNode());){ const v=n.nodeValue, key=v.replace(/\s+/g,' ').trim(); STATIC.push({n,key,pre:v.match(/^\s*/)[0],post:v.match(/\s*$/)[0]}); }
+  root.querySelectorAll('[placeholder],[aria-label],[title],img[alt]').forEach(el=>['placeholder','aria-label','title','alt'].forEach(a=>{ if(el.hasAttribute(a)&&el.getAttribute(a).trim()) STATIC.push({el,a,key:el.getAttribute(a).trim()}); }));
+})(document.querySelector('.wrap'));
+function applyStatic(){ for(const s of STATIC){ if(s.el){ if(s.el.isConnected) s.el.setAttribute(s.a,tx(s.key)); } else if(s.n.isConnected) s.n.nodeValue=s.pre+tx(s.key)+s.post; }
+  document.documentElement.lang=LANG; }
+/* names the app gave (Player 1, Game Master, Gold...) follow the language; names the table chose stay */
+function localizeDefaults(from,to){
+  const pat=new RegExp('^'+trIn('Player {n}',from).replace('{n}','(\\d+)')+'$');
+  for(const c of S.chars){ let n=null, m;
+    for(const k of ['Game Master','Party purse']) if(c.name===trIn(k,from)) n=trIn(k,to);
+    if(!n&&(m=pat.exec(c.name))) n=trIn('Player {n}',to).replace('{n}',m[1]);
+    if(n) rename(c.id,n); }
+  const nc=new RegExp('^'+trIn('New coin {n}',from).replace('{n}','(\\d+)')+'$');
+  for(const c of S.coinset){ let m;
+    for(const k of ['Gold','Silver','Copper']) if(c.name===trIn(k,from)){ c.name=trIn(k,to); if(k==='Copper'&&c.tag===(from==='de'?'k':'c')) c.tag=to==='de'?'k':'c'; }
+    if((m=nc.exec(c.name))) c.name=trIn('New coin {n}',to).replace('{n}',m[1]); }
+  for(const x of S.titles.steps) for(const k of LADDER_KEYS) if(x.label===trIn(k,from)){ x.label=trIn(k,to); break; } }
+function setLang(l){ if(!LANGS[l]||l===LANG) return; const from=LANG; LANG=l; try{ localStorage.setItem(LKEY,l); }catch(e){}
+  localizeDefaults(from,l); applyCoins(); save(); applyStatic();
+  $('dials').innerHTML=''; buildTyper(); closeTyper(); syncSettings(); renderAll(false); syncNote(); chink(D[0]); }
+$('langSel').innerHTML=Object.entries(LANGS).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');
+$('langSel').value=LANG;
+$('langSel').addEventListener('change',e=>setLang(e.target.value));
+
+applyStatic(); buildTyper(); syncSettings(); renderAll(false);
 })();
 </script>
-
 </body>
 </html>
