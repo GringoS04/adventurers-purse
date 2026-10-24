@@ -6,6 +6,25 @@ LootPal is in **early alpha**. The middle number marks milestones (for example s
 
 ---
 
+## 0.2.20 · 2026-10-24
+
+### Added
+- **Players can pay several companions at once.** In the receipt, tap **Everyone else** or hold a name to add more players. **Split** shares the amount (what doesn't divide evenly stays in your purse), **Each** gives the full amount to every one of them. Only players can be picked together, not the GM or the party purse.
+- **Mixed bag for players.** When paying companions, pay with a random mix of your own coins worth exactly the amount, without change when possible.
+- **The Game Master's book folds away** with a tap on its title. Each device remembers it.
+
+### Changed
+- The GM's **Whole party** tag is now called **All players**.
+
+---
+
+## 0.2.19 · 2026-10-24
+
+### Added
+- **Mixed bag when taking.** The GM's Mixed bag switch now also shows on **Take**, in the same place as on Give. It takes a random mix of the coins each player holds, worth exactly the amount, without change. If no exact mix is possible (for example 5 copper from someone with only silver), LootPal takes it the usual way, with change. The ledger shows which coins were taken.
+
+---
+
 ## 0.2.18 · 2026-10-23
 
 ### Added

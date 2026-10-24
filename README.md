@@ -62,7 +62,7 @@ Players pay an NPC by default. To pay another player instead, see [The receipt](
 Tap **Game Master** in the character row. The GM's coffers are **unlimited**, so coins go straight to the players.
 
 - **Give or Take.** The switch at the top. *Give* hands out treasure and rewards. *Take* collects fines, taxes or tolls, and LootPal checks that everyone can pay.
-- **Who gets it.** The tags under the coins. **Whole party** is the default and shares the amount between all players. Tap a single player to give only to them.
+- **Who gets it.** The tags under the coins. **All players** is the default and shares the amount between all players (not the party purse). Tap a single player to give only to them.
 - Count the amount and slide, as with a player.
 
 More GM tools (Split or Each, Mixed bag, Repeat, the GM's book) are described in [More for the Game Master](#more-for-the-game-master).
@@ -91,7 +91,8 @@ The round button with the character and pouch (left of the amount) opens the rec
 
 **When a player pays:**
 
-1. **To whom?** NPC is the default. Tap another player to pay a companion, and the coins go straight into their purse.
+1. **To whom?** NPC is the default. Tap another player to pay a companion, and the coins go straight into their purse. To pay several companions, tap **Everyone else**, or hold a name to add or remove players. Then choose **Split** (the amount is shared, what doesn't divide evenly stays in your purse) or **Each** (every one of them gets the full amount). Only players can be picked together, not the GM or the party purse.
+   **Mixed bag** (shown once you pick a companion) pays with a random mix of your own coins worth exactly the amount, without change, when such a mix exists.
 2. **Which NPC?** For example *the blacksmith*. Only shown when paying an NPC.
 3. **For what?** For example *a longsword*.
 
@@ -107,16 +108,16 @@ When the receipt is closed but something is filled in, its button shows a pale r
 
 - **Several players.** Hold a name in the tags to add or remove more players.
 - **Split or Each.** A switch next to Mixed bag. With several players chosen, *Split* divides the amount between them and *Each* gives the full amount to every one of them. What doesn't divide evenly stays in the coffers.
-- **Mixed bag.** Pays treasure out as a random mix of coin types with exactly the same value, like a real hoard. Off by default.
+- **Mixed bag.** On Give, pays treasure out as a random mix of coin types with exactly the same value, like a real hoard. On Take, takes a random mix of the coins each player holds, without change (or with change if no exact mix is possible). Off by default.
 - **Repeat.** After a payout, a **↻ Repeat** button appears under the empty amount. One tap sets up the same payout again.
-- **The Game Master's book.** Shown under the GM's purse and in the ledger: how much the players paid in, how much the GM paid out, and every player's current purse.
+- **The Game Master's book.** Shown under the GM's purse and in the ledger. Tap its title to fold it away; each device remembers. It shows how much the players paid in, how much the GM paid out, and every player's current purse.
 
 ## 6. The party purse
 
 A shared purse for the group. Add it under **Party → + Add a party purse**.
 
 - Players pay into it like paying a companion.
-- It gets no share of "Whole party" payouts from the GM, and no starting purse.
+- It gets no share of "All players" payouts from the GM, and no starting purse.
 - **To share it out**, open the receipt on the party purse and tap **Split in party**. With no amount counted, it fills in everything in the purse. Tap coins down to share less. What doesn't divide evenly stays in the purse.
 - It can also pay an NPC, like a player.
 
